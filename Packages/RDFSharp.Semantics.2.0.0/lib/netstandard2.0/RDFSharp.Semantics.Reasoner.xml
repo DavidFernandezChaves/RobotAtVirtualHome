@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDFSharp.Semantics.Reasoner</name>
+    </assembly>
+    <members>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner">
+            <summary>
+            RDFOntologyReasoner represents an inference engine applied on a given ontology
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.RulesCount">
+            <summary>
+            Count of the rules composing the reasoner
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.RulesEnumerator">
+            <summary>
+            Gets the enumerator on the reasoner's rules for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.Rules">
+            <summary>
+            List of rules applied by the reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#Reasoner#RDFOntologyReasonerRule}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the reasoner's rules
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the reasoner's rules
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.CreateNew">
+            <summary>
+            Creates a new reasoner with the given description
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.WithRule(RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule)">
+            <summary>
+            Adds the given rule to the reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.SelectRule(System.String)">
+            <summary>
+            Selects the given rule from the resoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasoner.ApplyToOntology(RDFSharp.Semantics.RDFOntology@)">
+            <summary>
+            Applies the reasoner on the given ontology, producing a reasoning report.
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence">
+            <summary>
+            RDFOntologyReasonerEvidence represents an inference evidence generated during execution of a rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence.EvidenceCategory">
+            <summary>
+            Category of the evidence
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence.EvidenceProvenance">
+            <summary>
+            Provenance rule of the evidence
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence.EvidenceContent">
+            <summary>
+            Content of the evidence
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence.#ctor(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory,System.String,RDFSharp.Semantics.RDFOntologyTaxonomyEntry)">
+            <summary>
+            Default-ctor to build an evidence with given category, provenance and message
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport">
+            <summary>
+            RDFOntologyReasonerReport represents a detailed report of an ontology reasoner's activity.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.EvidencesCount">
+            <summary>
+            Counter of the evidences
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.EvidencesEnumerator">
+            <summary>
+            Gets an enumerator on the evidences for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.Evidences">
+            <summary>
+            Dictionary of evidences
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SyncLock">
+            <summary>
+            SyncLock for evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.#ctor">
+            <summary>
+            Default-ctor to build an empty reasoner report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#Reasoner#RDFOntologyReasonerEvidence}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the reasoner report's evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the reasoner report's evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.AddEvidence(RDFSharp.Semantics.Reasoner.RDFOntologyReasonerEvidence)">
+            <summary>
+            Adds the given evidence to the reasoner report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.Merge(RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport)">
+            <summary>
+            Merges the evidences of the given report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SelectEvidencesByCategory(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory)">
+            <summary>
+            Gets the evidences having the given category
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SelectEvidencesByProvenance(System.String)">
+            <summary>
+            Gets the evidences having the given provenance rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SelectEvidencesByContentSubject(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets the evidences having the given content subject
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SelectEvidencesByContentPredicate(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets the evidences having the given content predicate
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerReport.SelectEvidencesByContentObject(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets the evidences having the given content object
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule">
+            <summary>
+            RDFOntologyReasonerRule represents an inference rule executed by a reasoner
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.RuleName">
+            <summary>
+            Name of the rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.RuleDescription">
+            <summary>
+            Description of the rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.RulePriority">
+            <summary>
+            Execution priority of the rule (less is more priority)
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.ReasonerRuleDelegate">
+            <summary>
+            Delegate for the function which will be executed as body of the rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.ExecuteRule">
+            <summary>
+            Function which will be executed as body of the rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.#ctor(System.String,System.String,System.UInt32,RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.ReasonerRuleDelegate)">
+            <summary>
+            Default-ctor to build a reasoner rule with the given name, description and priority (lower is better)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.ToString">
+            <summary>
+            Gives the name of the reasoner rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.ToFullString">
+            <summary>
+            Gives the full representation of the reasoner rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRule.SetPriority(System.UInt32)">
+            <summary>
+            Redefines the execution priority of the reasoner rule
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset">
+            <summary>
+            RDFOntologyReasonerRuleset implements a subset of RDFS/OWL-DL entailment rules
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.RulesCount">
+            <summary>
+            Counter of rules contained in the BASE ruleset
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SubClassTransitivity">
+            <summary>
+            SubClassTransitivity (rdfs11) implements structural entailments based on 'rdfs:subClassOf' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SubPropertyTransitivity">
+            <summary>
+            SubPropertyTransitivity (rdfs5) implements structural entailments based on 'rdfs:subPropertyOf' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.ClassTypeEntailment">
+            <summary>
+            ClassTypeEntailment (rdfs9) implements data entailments based on 'rdf:type' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.PropertyEntailment">
+            <summary>
+            PropertyEntailment (rdfs7) implements structural entailments based on 'rdfs:subPropertyOf' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DomainEntailment">
+            <summary>
+            DomainEntailment (rdfs2) implements structural entailments based on 'rdfs:domain' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.RangeEntailment">
+            <summary>
+            RangeEntailment (rdfs3) implements structural entailments based on 'rdfs:range' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.EquivalentClassTransitivity">
+            <summary>
+            EquivalentClassTransitivity implements structural entailments based on 'owl:EquivalentClass' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DisjointWithEntailment">
+            <summary>
+            DisjointWithEntailment implements structural entailments based on 'owl:DisjointWith' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.EquivalentPropertyTransitivity">
+            <summary>
+            EquivalentPropertyTransitivity implements structural entailments based on 'owl:EquivalentProperty' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SameAsTransitivity">
+            <summary>
+            SameAsTransitivity implements structural entailments based on 'owl:SameAs' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DifferentFromEntailment">
+            <summary>
+            DifferentFromEntailment implements structural entailments based on 'owl:DifferentFrom' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.InverseOfEntailment">
+            <summary>
+            InverseOfEntailment implements data entailments based on 'owl:inverseOf' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SameAsEntailment">
+            <summary>
+            SameAsEntailment implements data entailments based on 'owl:SameAs' taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SymmetricPropertyEntailment">
+            <summary>
+            SymmetricPropertyEntailment implements data entailments based on 'owl:SymmetricProperty' axiom
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.TransitivePropertyEntailment">
+            <summary>
+            TransitivePropertyEntailment implements data entailments based on 'owl:TransitiveProperty' axiom
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.#cctor">
+            <summary>
+            Static-ctor to initialize the BASE ruleset
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SubClassTransitivityExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            SubClassTransitivity (rdfs11) implements structural entailments based on 'rdfs:subClassOf' taxonomy:
+            ((C1 SUBCLASSOF C2)      AND (C2 SUBCLASSOF C3))      => (C1 SUBCLASSOF C3);
+            ((C1 SUBCLASSOF C2)      AND (C2 EQUIVALENTCLASS C3)) => (C1 SUBCLASSOF C3);
+            ((C1 EQUIVALENTCLASS C2) AND (C2 SUBCLASSOF C3))      => (C1 SUBCLASSOF C3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SubPropertyTransitivityExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            SubPropertyTransitivity (rdfs5) implements structural entailments based on 'rdfs:subPropertyOf' taxonomy:
+            ((P1 SUBPROPERTYOF P2)      AND (P2 SUBPROPERTYOF P3))      => (P1 SUBPROPERTYOF P3)
+            ((P1 SUBPROPERTYOF P2)      AND (P2 EQUIVALENTPROPERTY P3)) => (P1 SUBPROPERTYOF P3)
+            ((P1 EQUIVALENTPROPERTY P2) AND (P2 SUBPROPERTYOF P3))      => (P1 SUBPROPERTYOF P3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.ClassTypeEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            ClassTypeEntailment (rdfs9) implements structural entailments based on 'rdf:type' taxonomy:
+            ((F TYPE C1) AND (C1 SUBCLASSOF C2))      => (F TYPE C2)
+            ((F TYPE C1) AND (C1 EQUIVALENTCLASS C2)) => (F TYPE C2)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.PropertyEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            "PropertyEntailment (rdfs7) implements data entailments based on 'rdfs:subPropertyOf' taxonomy:"
+            "((F1 P1 F2) AND (P1 SUBPROPERTYOF P2))      => (F1 P2 F2)"
+            "((F1 P1 F2) AND (P1 EQUIVALENTPROPERTY P2)) => (F1 P2 F2)"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DomainEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            "DomainEntailment (rdfs2) implements structural entailments based on 'rdfs:domain' taxonomy:"
+            "((F1 P F2) AND (P RDFS:DOMAIN C)) => (F1 RDF:TYPE C)"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.RangeEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            "RangeEntailment (rdfs3) implements structural entailments based on 'rdfs:range' taxonomy:"
+            "((F1 P F2) AND (P RDFS:RANGE C)) => (F2 RDF:TYPE C)"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.EquivalentClassTransitivityExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            EquivalentClassTransitivity implements structural entailments based on 'owl:EquivalentClass' taxonomy:
+            ((C1 EQUIVALENTCLASS C2) AND (C2 EQUIVALENTCLASS C3)) => (C1 EQUIVALENTCLASS C3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DisjointWithEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            DisjointWithEntailment implements structural entailments based on 'owl:DisjointWith' taxonomy:
+            ((C1 EQUIVALENTCLASS C2) AND (C2 DISJOINTWITH C3))    => (C1 DISJOINTWITH C3)
+            ((C1 SUBCLASSOF C2)      AND (C2 DISJOINTWITH C3))    => (C1 DISJOINTWITH C3)
+            ((C1 DISJOINTWITH C2)    AND (C2 EQUIVALENTCLASS C3)) => (C1 DISJOINTWITH C3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.EquivalentPropertyTransitivityExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            EquivalentPropertyTransitivity implements structural entailments based on 'owl:EquivalentProperty' taxonomy:
+            ((P1 EQUIVALENTPROPERTY P2) AND (P2 EQUIVALENTPROPERTY P3)) => (P1 EQUIVALENTPROPERTY P3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SameAsTransitivityExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            SameAsTransitivity implements structural entailments based on 'owl:sameAs' taxonomy:
+            ((F1 SAMEAS F2) AND (F2 SAMEAS F3)) => (F1 SAMEAS F3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.DifferentFromEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            DifferentFromEntailment implements structural entailments based on 'owl:DifferentFrom' taxonomy:
+            ((F1 SAMEAS F2)        AND (F2 DIFFERENTFROM F3)) => (F1 DIFFERENTFROM F3)
+            ((F1 DIFFERENTFROM F2) AND (F2 SAMEAS F3))        => (F1 DIFFERENTFROM F3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.InverseOfEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            InverseOfEntailment implements data entailments based on 'owl:inverseOf' taxonomy:
+            ((F1 P1 F2) AND (P1 INVERSEOF P2)) => (F2 P2 F1)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SameAsEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            SameAsEntailment implements data entailments based on 'owl:sameAs' taxonomy:
+            ((F1 P F2) AND (F1 SAMEAS F3)) => (F3 P F2)
+            ((F1 P F2) AND (F2 SAMEAS F3)) => (F1 P F3)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.SymmetricPropertyEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            SymmetricPropertyEntailment implements data entailments based on 'owl:SymmetricProperty' axiom:
+            ((F1 P F2) AND (P TYPE SYMMETRICPROPERTY)) => (F2 P F1)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Reasoner.RDFOntologyReasonerRuleset.TransitivePropertyEntailmentExec(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            TransitivePropertyEntailment implements data entailments based on 'owl:TransitiveProperty' axiom:
+            ((F1 P F2) AND (F2 P F3) AND (P TYPE TRANSITIVEPROPERTY)) => (F1 P F3)
+            </summary>
+        </member>
+    </members>
+</doc>

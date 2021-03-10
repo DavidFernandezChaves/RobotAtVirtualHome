@@ -1,0 +1,6 @@
+[submodule "Assets/ROSUnityCore"]
+	path = Assets/ROSUnityCore
+	url = https://github.com/DavidFernandezChaves/ROSUnityCore.git
+[submodule "Assets/ViMantic"]
+	path = Assets/ViMantic
+	url = https://github.com/DavidFernandezChaves/ViMantic-Unity3DNode.git

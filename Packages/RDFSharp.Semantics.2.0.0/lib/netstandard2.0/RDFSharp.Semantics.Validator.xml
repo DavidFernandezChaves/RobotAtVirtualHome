@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDFSharp.Semantics.Validator</name>
+    </assembly>
+    <members>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidator">
+            <summary>
+            RDFOntologyValidator analyzes a given ontology through a set of RDFS/OWL-DL rules
+            in order to find error and inconsistency evidences affecting its model and data.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidator.Rules">
+            <summary>
+            List of rules applied by the ontology validator
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidator.#cctor">
+            <summary>
+            Static-ctor to build an ontology validator
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidator.Validate(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validate the given ontology against a set of RDFS/OWL-DL rules, detecting errors and inconsistencies affecting its model and data.
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence">
+            <summary>
+            RDFOntologyValidatorEvidence represents an evidence reported by a validation rule.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence.EvidenceCategory">
+            <summary>
+            Category of this evidence
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence.EvidenceProvenance">
+            <summary>
+            Rule which has reported this evidence
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence.EvidenceMessage">
+            <summary>
+            Message of the evidence
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence.EvidenceSuggestion">
+            <summary>
+            Proposed action for solving or mitigating the evidence
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence.#ctor(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyValidatorEvidenceCategory,System.String,System.String,System.String)">
+            <summary>
+            Default-ctor to build an evidence with given category, provenance, message and suggestion
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport">
+            <summary>
+            RDFOntologyValidatorReport represents a detailed report of an ontology analysis.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.EvidencesCount">
+            <summary>
+            Counter of the evidences
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.EvidencesEnumerator">
+            <summary>
+            Gets an enumerator on the evidences for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.Evidences">
+            <summary>
+            List of evidences
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.SyncLock">
+            <summary>
+            SyncLock for evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.#ctor">
+            <summary>
+            Default-ctor to build an empty report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#Validator#RDFOntologyValidatorEvidence}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the validation report's evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the validation report's evidences
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.AddEvidence(RDFSharp.Semantics.Validator.RDFOntologyValidatorEvidence)">
+            <summary>
+            Adds the given evidence to the validation report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.MergeEvidences(RDFSharp.Semantics.Validator.RDFOntologyValidatorReport)">
+            <summary>
+            Merges the evidences of the given report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.EnlistRuleNames">
+            <summary>
+            Enlist the names of the rules applied by the validator
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.SelectWarnings">
+            <summary>
+            Gets the warning evidences from the validation report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.SelectWarningsByRule(System.String)">
+            <summary>
+            Gets the warning evidences of the given validation rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.SelectErrors">
+            <summary>
+            Gets the error evidences from the validation report
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorReport.SelectErrorsByRule(System.String)">
+            <summary>
+            Gets the error evidences of the given validation rule
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule">
+            <summary>
+            RDFOntologyValidatorRule represents a rule which analyzes a specific syntactic/semantic aspect of an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.RuleName">
+            <summary>
+            Name of the rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.RuleDescription">
+            <summary>
+            Description of the rule
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.ValidationRuleDelegate">
+            <summary>
+            Delegate for the function which will be executed as body of the rule
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.ExecuteRule">
+            <summary>
+            Function which will be executed as body of the rule
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.#ctor(System.String,System.String,RDFSharp.Semantics.Validator.RDFOntologyValidatorRule.ValidationRuleDelegate)">
+            <summary>
+            Default-ctor to build an empty validation rule with given name, description and delegate
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset">
+            <summary>
+            RDFOntologyValidatorRuleset implements a subset of RDFS/OWL-DL validation rules
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.Vocabulary_Disjointness(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for disjointness of vocabulary of classes, properties and facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.Vocabulary_Declaration(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for declaration of classes, properties and facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.Domain_Range(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for consistency of rdfs:domain and rdfs:range axioms
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.InverseOf(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for consistency of owl:inverseOf axioms
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.SymmetricProperty(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for consistency of owl:SymmetricProperty axioms
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.ClassType(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for consistency of rdf:type axioms
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.GlobalCardinalityConstraint(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking consistency of global cardinality constraints
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.LocalCardinalityConstraint(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking consistency of local cardinality constraints
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.Validator.RDFOntologyValidatorRuleset.Deprecation(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Validation rule checking for usage of deprecated classes and properties
+            </summary>
+        </member>
+    </members>
+</doc>
