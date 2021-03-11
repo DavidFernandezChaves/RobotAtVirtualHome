@@ -27,6 +27,7 @@ namespace RobotAtVirtualHome {
         #region Unity Functions
 
         void Start() {
+            filePath = FindObjectOfType<VirtualEnvironment>().path;
 
             if (minRange[0] >= maxRange[0] || minRange[1] >= maxRange[1]) {
                 LogWarning("Incorrect ranges");
@@ -75,7 +76,7 @@ namespace RobotAtVirtualHome {
         }
 
         private void OnDestroy() {
-            if (this.enabled) {
+            if (this.enabled && record) {
                 writer.Close();
             }
         }

@@ -83,7 +83,7 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  sendMapToROS: 0
+  sendMapToROS: 1
   cyclicalBehaviour: 0
   randomSecuence: 0
   frequencyCapture: 0
@@ -111,11 +111,11 @@ MonoBehaviour:
   minRange: {x: -100, y: -100}
   maxRange: {x: 100, y: 100}
   cellSize: 0.5
-  exactRoute: 0
+  exactRoute: 1
   photosPerPoint: 10
-  captureRGB: 1
-  captureDepth: 1
-  captureSemanticMask: 1
+  captureRGB: 0
+  captureDepth: 0
+  captureSemanticMask: 0
 --- !u!195 &931527486158493160
 NavMeshAgent:
   m_ObjectHideFlags: 0

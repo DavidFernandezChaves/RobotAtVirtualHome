@@ -31,17 +31,9 @@ namespace RobotAtVirtualHome {
         private int index2 = 0;
 
         #region Unity Functions
-        private void Awake() {
-            VisitPoints = new List<Vector3>();
-            agent = GetComponent<NavMeshAgent>();
-            smartCamera = GetComponentInChildren<SmartCamera>();
-            if (smartCamera == null) {
-                LogWarning("Smart camera not found");
-            }
-            state = StatusMode.Loading;
-        }
-
         void Start() {
+            filePath = FindObjectOfType<VirtualEnvironment>().path;
+            VisitPoints = new List<Vector3>();
 
             var rooms = FindObjectsOfType<Room>();
 

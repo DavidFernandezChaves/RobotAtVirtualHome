@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfd9c59273188c46ae4a23c880a5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 2
+  verbose: 1
   recordTimes: 0
   maxDistance: 2
   minSize: 0.05
