@@ -154,9 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 0
-  virtualRobotPrefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023,
-    type: 3}
+  houseSelected: 1
   recordHierarchy: 0
   transparentRoof: 1
   initialStateDoor: 3
@@ -167,7 +165,6 @@ MonoBehaviour:
   forceSeed: 1
   seedForced: 0
   path: D:\RobotAtVirtualHouse
-  ip: 192.168.0.23
 --- !u!4 &238323567
 Transform:
   m_ObjectHideFlags: 0
@@ -175,7 +172,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238323565}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -415,8 +412,8 @@ GameObject:
   - component: {fileID: 1701356815}
   - component: {fileID: 1701356814}
   m_Layer: 9
-  m_Name: General
-  m_TagString: Untagged
+  m_Name: General Scripts
+  m_TagString: GeneralScripts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,7 +439,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701356808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.573242, y: 0.4658203, z: 0.71972656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -461,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfd9c59273188c46ae4a23c880a5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
+  verbose: 2
   recordTimes: 0
   maxDistance: 2
   minSize: 0.05
@@ -470,7 +467,6 @@ MonoBehaviour:
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
-  nDetections: 0
 --- !u!114 &1701356812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
+  ip: 192.168.0.23
+  virtualRobotPrefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023,
+    type: 3}
 --- !u!114 &1701356813
 MonoBehaviour:
   m_ObjectHideFlags: 0

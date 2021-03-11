@@ -33,7 +33,6 @@ namespace RobotAtVirtualHome {
         protected SmartCamera smartCamera;
         protected NavMeshAgent agent;
         protected StreamWriter writer;
-        protected ROS ros;
 
         #region Unity Functions
         private void Awake() {
@@ -46,19 +45,22 @@ namespace RobotAtVirtualHome {
 
         void Start() {
             filePath = FindObjectOfType<VirtualEnvironment>().path;
+        }
 
-            if (ros == null) {
-                ros = transform.root.GetComponentInChildren<ROS>();
-            }
+        #endregion
+
+        #region Public Functions
+
+        public void Connected(ROS ros) {
 
             if (sendPathToROS && ros != null) {
                 Log("Send path to ros: Ok");
                 ros.RegisterPubPackage("Path_pub");
-                if(pathType == PathType.Beacons) {
-                    StartCoroutine(SendPathToROS());
+                if (pathType == PathType.Beacons) {
+                    StartCoroutine(SendPathToROS(ros));
                 } else {
-                    StartCoroutine(SendInterpolatedPathToROS());
-                }                
+                    StartCoroutine(SendInterpolatedPathToROS(ros));
+                }
             } else {
                 Log("Send path to ros: False");
             }
@@ -66,30 +68,28 @@ namespace RobotAtVirtualHome {
             if (sendMapToROS) {
                 Log("Send map to ros: Ok");
                 ros.RegisterPubPackage("Map_pub");
+                StartCoroutine(SendMapToROS(ros));
             }
+
         }
 
         #endregion
 
-        #region Public Functions
-
-        public void Connected() {
-            if (sendMapToROS) {
+        #region Private Functions  
+        private IEnumerator SendMapToROS(ROS ros) {
+            if (ros.IsConnected()) {
                 int house = FindObjectOfType<VirtualEnvironment>().houseSelected;
-                TextAsset map = (TextAsset) Resources.Load("RobotAtVirtualHome/Maps/House" + house);
-                OccupancyGridMsg occupancyGrid = new OccupancyGridMsg(new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), ""),map,0.05f,new Vector3(-20,-20,0));
+                TextAsset map = (TextAsset)Resources.Load("RobotAtVirtualHome/Maps/House" + house);
+                OccupancyGridMsg occupancyGrid = new OccupancyGridMsg(new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), ""), map, 0.05f, new Vector3(-10, -10, 0));
                 if (ros == null) {
                     ros = transform.root.GetComponentInChildren<ROS>();
                 }
-                Debug.Log(occupancyGrid.GetData().Length);
                 ros.Publish(Map_pub.GetMessageTopic(), occupancyGrid);
             }
+            return null;
         }
 
-        #endregion
-
-        #region Private Functions      
-        private IEnumerator SendPathToROS() {
+        private IEnumerator SendPathToROS(ROS ros) {
             while (Application.isPlaying) {
                 if (ros.IsConnected()) {
                     Vector3[] points = agent.path.corners;
@@ -114,7 +114,7 @@ namespace RobotAtVirtualHome {
         }
 
         // This function was design by: Jose Luiz Matez
-        private IEnumerator SendInterpolatedPathToROS() {
+        private IEnumerator SendInterpolatedPathToROS(ROS ros) {
             while (Application.isPlaying) {
                 if (ros.IsConnected()) {
                     Vector3[] points = agent.path.corners;

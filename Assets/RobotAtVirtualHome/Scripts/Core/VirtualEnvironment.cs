@@ -13,7 +13,7 @@ namespace RobotAtVirtualHome {
 
         public int verbose;
         public int houseSelected = 0;
-        public GameObject virtualRobotPrefab;
+        
         public bool recordHierarchy;
         public bool transparentRoof;
         public mode initialStateDoor;
@@ -25,10 +25,8 @@ namespace RobotAtVirtualHome {
         public int seedForced;
 
         public string path = @"D:\";
-        public string ip = "192.168.0.12";
-
         private House house;
-        private Transform virtualRobot;
+        
         private StreamWriter writer;
 
         #region Unity Functions
@@ -37,7 +35,7 @@ namespace RobotAtVirtualHome {
             if (houses != null && houses.Count > 0) {
 
                 if (houseSelected == 0) {
-                    houseSelected = UnityEngine.Random.Range(0, houses.Count);
+                    houseSelected = UnityEngine.Random.Range(1, houses.Count);
                 }              
 
                 if (house = Instantiate(houses[houseSelected-1], transform).GetComponent<House>()) {
@@ -67,7 +65,7 @@ namespace RobotAtVirtualHome {
                         }
                             
                     }
-                    Invoke("StartSimulation", 0.1f);
+                    Invoke("StartSimulation", 0.2f);
                 } else {
                     LogWarning("The gameObject " + (houseSelected-1) + " does not have the 'House' component.");
                 }
@@ -76,7 +74,6 @@ namespace RobotAtVirtualHome {
         }        
 
         private void StartSimulation() {
-            FindObjectOfType<GeneralManager>().transform.SendMessage("OnVirtualEnviromentLoaded");
             if (recordHierarchy) {
                 writer = new StreamWriter(path + "/VirtualObjects.csv", true);
                 writer.WriteLine("id;color;room;roomType;type;globalPosition;rotation;seed");
@@ -90,11 +87,11 @@ namespace RobotAtVirtualHome {
                         + obj.Value.transform.rotation.eulerAngles.ToString() + ";"
                         + obj.Value.seed.ToString());
                 }
-
                 writer.Close();
             }
+            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
+            GameObject.FindGameObjectsWithTag("GeneralScripts").ToList().ForEach(G=>G.SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver));
 
-            CreateVirtualRobot();
         }
         #endregion
 
@@ -109,15 +106,6 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void CreateVirtualRobot() {
-            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-            if (house.virtualObjects.ContainsKey("Station_0")) {
-                virtualRobot = Instantiate(virtualRobotPrefab, house.virtualObjects["Station_0"].transform.position, Quaternion.identity, transform).transform;
-                virtualRobot.GetComponent<ROS>().Connect(ip);
-            } else { LogWarning("This house don't have robot station"); }
-                
-        }
-
         private void Log(string _msg) {
             if (verbose > 1)
                 Debug.Log("[Virtual Environment]: " + _msg);
