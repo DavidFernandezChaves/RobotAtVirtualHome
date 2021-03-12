@@ -44,16 +44,14 @@ namespace RobotAtVirtualHome {
 
         #region Public Functions
         public void Connected(ROS ros) {
-            if (sendPathToROS && ros != null) {
-                Log("Send path to ros: Ok");
+            if (enabled && sendPathToROS) {
+                Log("Sending path to ROS.");
                 ros.RegisterPubPackage("Path_pub");
                 if (pathType == PathType.Beacons) {
                     StartCoroutine(SendPathToROS(ros));
                 } else {
                     StartCoroutine(SendInterpolatedPathToROS(ros));
                 }
-            } else {
-                Log("Send path to ros: False");
             }
         }
         #endregion

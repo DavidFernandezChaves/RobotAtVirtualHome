@@ -83,10 +83,9 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  sendMapToROS: 1
   cyclicalBehaviour: 0
   randomSecuence: 0
-  frequencyCapture: 0
+  frequencyCapture: 1
   captureRGB: 0
   captureDepth: 0
   captureSemanticMask: 0
@@ -107,7 +106,6 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  sendMapToROS: 0
   minRange: {x: -100, y: -100}
   maxRange: {x: 100, y: 100}
   cellSize: 0.5
@@ -605,7 +603,7 @@ PrefabInstance:
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
@@ -615,7 +613,7 @@ PrefabInstance:
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
@@ -630,7 +628,7 @@ PrefabInstance:
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 1
+  houseSelected: 0
   recordHierarchy: 0
   transparentRoof: 1
   initialStateDoor: 3
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1701356814}
   m_Layer: 9
   m_Name: General Scripts
-  m_TagString: GeneralScripts
+  m_TagString: ROSListener
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,12 +458,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfd9c59273188c46ae4a23c880a5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
+  verbose: 2
   recordTimes: 0
-  maxDistance: 2
+  maxDistance: 4
   minSize: 0.05
-  maxSizeZ: 1
-  minimunConfidenceScore: 0.8
+  maxSizeZ: 1.2
+  minimunConfidenceScore: 0
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}

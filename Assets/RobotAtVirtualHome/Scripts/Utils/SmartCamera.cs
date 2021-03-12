@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public class SmartCamera : MonoBehaviour
 {
-    public bool debug;
+    public bool mouseInteractive;
     public int verbose;
     public Vector2Int imageSize = new Vector2Int(640,480);
     public float ROSFrecuency = 1;
@@ -20,7 +20,6 @@ public class SmartCamera : MonoBehaviour
     public Texture2D ImageDepth { get; private set; }
     public Texture2D imageSemanticMask { get; private set; }
 
-    public ROS ros;
     private Camera cameraRgb;
     private Camera cameraDepth;
     private VirtualEnvironment virtualEnvironment;
@@ -46,21 +45,21 @@ public class SmartCamera : MonoBehaviour
     }
 
     void Start() {
-        if(ros == null) {
-            ros = transform.root.GetComponentInChildren<ROS>();
-        }
-        if (ros != null && sendImagesToROS) {
-            ros.RegisterPubPackage("CameraRGB_pub");
-            StartCoroutine("SendImages");
-        }
-        StartCoroutine("UpdateImages");
+        StartCoroutine(UpdateImages());
     }
 
     void Update() {
-        if (debug && Input.GetMouseButtonDown(0)) {
+        if (mouseInteractive && Input.GetMouseButtonDown(0)) {
             Vector3 screenPoint = Input.mousePosition;
             Log("Data of " + screenPoint.ToString() + ": " + GetSemanticType(screenPoint));
             Log("Depth: " + ImageDepth.GetPixel((int)screenPoint.x, (int)screenPoint.y).ToString());
+        }
+    }
+
+    public void Connected(ROS ros) {
+        if (sendImagesToROS) {
+            ros.RegisterPubPackage("CameraRGB_pub");
+            StartCoroutine(SendImages(ros));
         }
     }
 
@@ -121,12 +120,12 @@ public class SmartCamera : MonoBehaviour
             RenderTexture.active = null; //Clean
             Destroy(renderTextureRGB); //Free memory
             Destroy(renderTextureDepth); //Free memory
-
         }
     }
 
-    IEnumerator SendImages() {
+    IEnumerator SendImages(ROS ros) {
         while (Application.isPlaying) {
+            Log("Sending images to ros.");
             if (ros.IsConnected()) {
                 Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
 

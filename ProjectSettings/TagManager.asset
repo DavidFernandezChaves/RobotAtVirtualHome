@@ -7,7 +7,7 @@ TagManager:
   - Robot
   - VirtualObject
   - Object
-  - GeneralScripts
+  - ROSListener
   layers:
   - Default
   - TransparentFX

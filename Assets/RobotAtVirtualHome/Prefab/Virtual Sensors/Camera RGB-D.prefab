@@ -351,13 +351,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c703868f3cb554e8779d6d9e2ccf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
-  verbose: 0
+  mouseInteractive: 0
+  verbose: 1
   imageSize: {x: 640, y: 480}
-  imageMaskSize: {x: 640, y: 480}
   ROSFrecuency: 1
   sendImagesToROS: 1
-  ros: {fileID: 0}
 --- !u!114 &8029640737421032612
 MonoBehaviour:
   m_ObjectHideFlags: 0

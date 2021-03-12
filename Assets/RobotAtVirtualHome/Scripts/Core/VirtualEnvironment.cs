@@ -90,7 +90,7 @@ namespace RobotAtVirtualHome {
                 writer.Close();
             }
             transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-            GameObject.FindGameObjectsWithTag("GeneralScripts").ToList().ForEach(G=>G.SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver));
+            GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
 
         }
         #endregion
