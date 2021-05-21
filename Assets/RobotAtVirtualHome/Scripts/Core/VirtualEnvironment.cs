@@ -39,6 +39,7 @@ namespace RobotAtVirtualHome {
                 }              
 
                 if (house = Instantiate(houses[houseSelected-1], transform).GetComponent<House>()) {
+                    house.transform.position = house.transform.position + new Vector3(0, 1.1f, 0);
                     path = Path.Combine(path, "House" + (houseSelected));
                     if (recordHierarchy) {                        
                         if (!Directory.Exists(path)) {
@@ -90,7 +91,7 @@ namespace RobotAtVirtualHome {
                 writer.Close();
             }
             transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-            GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
+            GameObject.FindGameObjectsWithTag("GeneralScripts").ToList().ForEach(G=>G.SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver));
 
         }
         #endregion

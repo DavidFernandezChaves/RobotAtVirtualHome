@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿using ROSUnityCore;
+using ROSUnityCore.ROSBridgeLib.geometry_msgs;
+using ROSUnityCore.ROSBridgeLib.nav_msgs;
+using ROSUnityCore.ROSBridgeLib.std_msgs;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -26,9 +31,17 @@ namespace RobotAtVirtualHome {
         private int index2 = 0;
 
         #region Unity Functions
-        void Start() {
-            filePath = FindObjectOfType<VirtualEnvironment>().path;
+        private void Awake() {
             VisitPoints = new List<Vector3>();
+            agent = GetComponent<NavMeshAgent>();
+            smartCamera = GetComponentInChildren<SmartCamera>();
+            if (smartCamera == null) {
+                LogWarning("Smart camera not found");
+            }
+            state = StatusMode.Loading;
+        }
+
+        void Start() {
 
             var rooms = FindObjectsOfType<Room>();
 

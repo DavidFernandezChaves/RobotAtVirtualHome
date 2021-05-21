@@ -27,36 +27,68 @@ namespace RobotAtVirtualHome {
         public PathType pathType = PathType.Beacons;
         public float rOSFrecuency = 1;
 
+        public bool sendMapToROS;
+
         public string filePath { get; protected set; }
         protected SmartCamera smartCamera;
         protected NavMeshAgent agent;
         protected StreamWriter writer;
 
         #region Unity Functions
-        protected void Awake() {
+        private void Awake() {
             agent = GetComponent<NavMeshAgent>();
             smartCamera = GetComponentInChildren<SmartCamera>();
             if (smartCamera == null) {
                 LogWarning("Smart camera not found");
             }
         }
+
+        void Start() {
+            filePath = FindObjectOfType<VirtualEnvironment>().path;
+        }
+
         #endregion
 
         #region Public Functions
+
         public void Connected(ROS ros) {
-            if (enabled && sendPathToROS) {
-                Log("Sending path to ROS.");
+
+            if (sendPathToROS && ros != null) {
+                Log("Send path to ros: Ok");
                 ros.RegisterPubPackage("Path_pub");
                 if (pathType == PathType.Beacons) {
                     StartCoroutine(SendPathToROS(ros));
                 } else {
                     StartCoroutine(SendInterpolatedPathToROS(ros));
                 }
+            } else {
+                Log("Send path to ros: False");
             }
+
+            if (sendMapToROS) {
+                Log("Send map to ros: Ok");
+                ros.RegisterPubPackage("Map_pub");
+                StartCoroutine(SendMapToROS(ros));
+            }
+
         }
+
         #endregion
 
         #region Private Functions  
+        private IEnumerator SendMapToROS(ROS ros) {
+            if (ros.IsConnected()) {
+                int house = FindObjectOfType<VirtualEnvironment>().houseSelected;
+                TextAsset map = (TextAsset)Resources.Load("RobotAtVirtualHome/Maps/House" + house);
+                OccupancyGridMsg occupancyGrid = new OccupancyGridMsg(new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), ""), map, 0.05f, new Vector3(-10, -10, 0));
+                if (ros == null) {
+                    ros = transform.root.GetComponentInChildren<ROS>();
+                }
+                ros.Publish(Map_pub.GetMessageTopic(), occupancyGrid);
+            }
+            return null;
+        }
+
         private IEnumerator SendPathToROS(ROS ros) {
             while (Application.isPlaying) {
                 if (ros.IsConnected()) {

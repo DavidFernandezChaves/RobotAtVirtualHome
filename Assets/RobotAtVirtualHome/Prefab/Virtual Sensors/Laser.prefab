@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2381658882718352974}
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Robot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,13 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e223c70cfe1092c44881292224acedbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
-  ROSFrecuency: 1
+  verbose: 0
+  samples: 628
+  updateRate: 1
   angle_min: 0
-  angle_max: 360
-  angle_increment: 5
+  angle_max: 6.28
+  angle_increment: 0.01
+  time_increment: 0
+  scan_time: 0
   range_min: 0.12
   range_max: 12
+  ranges: []
+  intensities: []
 --- !u!114 &2381658882718352974
 MonoBehaviour:
   m_ObjectHideFlags: 0

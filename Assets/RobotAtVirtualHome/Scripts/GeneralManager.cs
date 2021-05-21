@@ -11,7 +11,7 @@ namespace RobotAtVirtualHome {
     public class GeneralManager : MonoBehaviour {
 
         public int verbose;
-        public string ip = "192.168.0.12";
+        public string ip = "192.168.1.137";
         public GameObject virtualRobotPrefab;
 
         private Transform virtualRobot;
@@ -38,7 +38,7 @@ namespace RobotAtVirtualHome {
         #region Private Functions
         private void CreateVirtualRobot(House house) {            
             if (house.virtualObjects.ContainsKey("Station_0")) {
-                virtualRobot = Instantiate(virtualRobotPrefab, house.virtualObjects["Station_0"].transform.position, Quaternion.identity, house.transform.parent).transform;
+                virtualRobot = Instantiate(virtualRobotPrefab, house.virtualObjects["Station_0"].transform.position, Quaternion.identity).transform;
                 virtualRobot.GetComponent<ROS>().Connect(ip);
             } else { LogWarning("This house don't have robot station"); }
 
