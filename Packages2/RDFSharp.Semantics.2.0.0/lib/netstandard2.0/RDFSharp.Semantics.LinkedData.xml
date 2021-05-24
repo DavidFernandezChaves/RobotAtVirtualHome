@@ -1,0 +1,878 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDFSharp.Semantics.LinkedData</name>
+    </assembly>
+    <members>
+        <member name="T:RDFSharp.Semantics.LinkedData.DC.RDFDCOntology">
+            <summary>
+            RDFDCOntology represents an OWL-DL ontology implementation of Dublin Core vocabulary
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.DC.RDFDCOntology.Instance">
+            <summary>
+            Singleton instance of the DC ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.DC.RDFDCOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the DC ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.FOAF.RDFFOAFOntology">
+            <summary>
+            RDFFOAFOntology represents an OWL-DL ontology implementation of FOAF vocabulary
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.FOAF.RDFFOAFOntology.Instance">
+            <summary>
+            Singleton instance of the FOAF ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.FOAF.RDFFOAFOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the FOAF ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.GEO.RDFGEOOntology">
+            <summary>
+            RDFGEOOntology represents an OWL-DL ontology implementation of W3C GEO vocabulary
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.GEO.RDFGEOOntology.Instance">
+            <summary>
+            Singleton instance of the GEO ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.GEO.RDFGEOOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the GEO ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SIOC.RDFSIOCOntology">
+            <summary>
+            RDFSIOCOntology represents an OWL-DL ontology implementation of SIOC vocabulary
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SIOC.RDFSIOCOntology.Instance">
+            <summary>
+            Singleton instance of the SIOC ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SIOC.RDFSIOCOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the SIOC ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection">
+            <summary>
+            RDFSKOSCollection represents an instance of skos:Collection within an instance of skos:ConceptScheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.ConceptsCount">
+            <summary>
+            Count of the concepts of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.CollectionsCount">
+            <summary>
+            Count of the collections of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.ConceptsEnumerator">
+            <summary>
+            Gets the enumerator on the concepts of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.CollectionsEnumerator">
+            <summary>
+            Gets the enumerator on the collections of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.Concepts">
+            <summary>
+            Dictionary of concepts contained in the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.Collections">
+            <summary>
+            Dictionary of collections contained in the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build a skos:Collection with the given name
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.AddConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds the given concept to the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.AddCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection)">
+            <summary>
+            Adds the given collection to the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.RemoveConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Removes the given concept from the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.RemoveCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection)">
+            <summary>
+            Removes the given collection from the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.SelectConcept(System.String)">
+            <summary>
+            Selects the concept represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.SelectCollection(System.String)">
+            <summary>
+            Selects the collection represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.GetMembers">
+            <summary>
+            Gets the complete list of concepts contained in the collection 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this collection, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection.ToRDFOntologyData">
+            <summary>
+            Gets an ontology data representation of this collection
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept">
+            <summary>
+            RDFSKOSConcept represents an instance of skos:Concept within an instance of skos:ConceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build a skos:Concept with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme">
+            <summary>
+            RDFSKOSConceptScheme represents an instance of skos:ConceptScheme within an ontology data.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.ConceptsCount">
+            <summary>
+            Count of the concepts composing the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.CollectionsCount">
+            <summary>
+            Count of the collections composing the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.OrderedCollectionsCount">
+            <summary>
+            Count of the ordered collections composing the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.LabelsCount">
+            <summary>
+            Count of the labels composing the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.ConceptsEnumerator">
+            <summary>
+            Gets the enumerator on the concepts of the scheme for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.CollectionsEnumerator">
+            <summary>
+            Gets the enumerator on the collections of the scheme for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.OrderedCollectionsEnumerator">
+            <summary>
+            Gets the enumerator on the ordered collections of the scheme for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.LabelsEnumerator">
+            <summary>
+            Gets the enumerator on the labels of the scheme for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.Annotations">
+            <summary>
+            Annotations describing concepts of the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.Relations">
+            <summary>
+            Relations describing concepts of the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.Concepts">
+            <summary>
+            Concepts contained in the scheme (encodes the 'skos:inScheme' relation)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.Collections">
+            <summary>
+            Collections contained in the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.OrderedCollections">
+            <summary>
+            OrderedCollections contained in the scheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.Labels">
+            <summary>
+            Labels contained in the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build a conceptScheme with the given name
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#LinkedData#SKOS#RDFSKOSConcept}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the scheme's concepts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the scheme's concepts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.AddConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds the given concept to the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.AddCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection)">
+            <summary>
+            Adds the given collection to the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.AddOrderedCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection)">
+            <summary>
+            Adds the given ordered collection to the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.AddLabel(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel)">
+            <summary>
+            Adds the given label to the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.RemoveConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Removes the given concept from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.RemoveCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSCollection)">
+            <summary>
+            Removes the given collection from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.RemoveOrderedCollection(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection)">
+            <summary>
+            Removes the given ordered collection from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.RemoveLabel(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel)">
+            <summary>
+            Removes the given label from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.SelectConcept(System.String)">
+            <summary>
+            Selects the concept represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.SelectCollection(System.String)">
+            <summary>
+            Selects the collection represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.SelectOrderedCollection(System.String)">
+            <summary>
+            Selects the ordered collection represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.SelectLabel(System.String)">
+            <summary>
+            Selects the label represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.IntersectWith(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme)">
+            <summary>
+            Builds a new intersection scheme from this scheme and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.UnionWith(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme)">
+            <summary>
+            Builds a new union scheme from this scheme and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.DifferenceWith(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme)">
+            <summary>
+            Builds a new difference scheme from this scheme and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this scheme, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme.ToRDFOntologyData">
+            <summary>
+            Gets an ontology data representation of this scheme
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel">
+            <summary>
+            RDFSKOSLabel represents an instance of skosxl:Label within an instance of skos:ConceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build a skosxl:Label with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection">
+            <summary>
+            RDFSKOSOrderedCollection represents an instance of skos:OrderedCollection within an instance of skos:ConceptScheme
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.ConceptsCount">
+            <summary>
+            Count of the concepts of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.ConceptsEnumerator">
+            <summary>
+            Gets the ordered enumerator on the concepts of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.ConceptsSequentialCounter">
+            <summary>
+            Internal sequential counter of the concepts of the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.Concepts">
+            <summary>
+            Dictionary of concepts contained in the collection
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.Representative">
+            <summary>
+            Reification representative of the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build a skos:OrderedCollection with the given name
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.AddConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds the given concept to the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.RemoveConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Removes the given concept from the collection
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.SelectConcept(System.String)">
+            <summary>
+            Selects the concept represented by the given string from the scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.GetMembers">
+            <summary>
+            Gets the ordered list of concepts contained in the collection 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this collection, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOrderedCollection.ToRDFOntologyData">
+            <summary>
+            Gets an ontology data representation of this collection
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations">
+            <summary>
+            RDFSKOSAnnotations represents a collector for annotations describing SKOS concepts.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.PrefLabel">
+            <summary>
+            "skos:prefLabel" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.AltLabel">
+            <summary>
+            "skos:altLabel" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.HiddenLabel">
+            <summary>
+            "skos:hiddenLabel" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.Note">
+            <summary>
+            "skos:Note" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.ChangeNote">
+            <summary>
+            "skos:changeNote" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.EditorialNote">
+            <summary>
+            "skos:editorialNote" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.HistoryNote">
+            <summary>
+            "skos:historyNote" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.ScopeNote">
+            <summary>
+            "skos:scopeNote" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.Definition">
+            <summary>
+            "skos:definition" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.Example">
+            <summary>
+            "skos:example" annotations
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSAnnotations.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology annotations metadata
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker">
+            <summary>
+            RDFSKOSChecker is responsible for implicit SKOS validation of ontologies during modeling
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckBroaderRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the skos:broader/skos:broaderTransitive/skos:broadMatch relation can be added to the given aConcept with the given bConcept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckNarrowerRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the skos:narrower/skos:narrowerTransitive/skos:narrowMatch relation can be added to the given aConcept with the given bConcept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckRelatedRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the skos:related/skos:relatedMatch relation can be added to the given aConcept with the given bConcept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckCloseOrExactMatchRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the skos:closeMatch/skos:exactMatch relation can be added to the given aConcept with the given bConcept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckPrefLabel(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Checks if the skos:prefLabel/skosxl:prefLabel informations can be added to the given concept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckAltLabel(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Checks if the skos:altLabel/skosxl:altLabel informations can be added to the given concept
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSChecker.CheckHiddenLabel(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Checks if the skos:hiddenLabel/skosxl:hiddenLabel informations can be added to the given concept
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper">
+            <summary>
+             RDFSKOSHelper contains utility methods supporting SKOS modeling and reasoning
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddTopConceptRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds the given concept to the conceptScheme as top concept of the hierarchy
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddSemanticRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:semanticRelation' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddRelatedRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:related' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddBroaderRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:broader' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddBroaderTransitiveRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:broaderTransitive' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddNarrowerRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:narrower' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddNarrowerTransitiveRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:narrowerTransitive' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddMappingRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:mappingRelation' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddCloseMatchRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:closeMatch' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddExactMatchRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:exactMatch' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddBroadMatchRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:broadMatch' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddNarrowMatchRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:narrowMatch' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddRelatedMatchAssertion(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Adds a 'skos:relatedMatch' relation between the given concepts within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddNotationRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given notation to the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddPrefLabelRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given label as preferred label of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddAltLabelRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given label as alternative label of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddHiddenLabelRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given label as hidden label of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddLabelRelation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel)">
+            <summary>
+            Adds a 'skosxl:labelRelation' relation between the given labels within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddLiteralFormAssertion(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSLabel,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal form of the given label within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddPrefLabelAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as preferred label annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddAltLabelAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as alternative label annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddHiddenLabelAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the "concept -> skos:hiddenLabel -> hiddenLabelLiteral" annotation to the concept scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddNoteAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:note' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddChangeNoteAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:changeNote' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddEditorialNoteAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:editorialNote' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddHistoryNoteAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+             <summary>
+            Adds the given literal as 'skos:historyNote' annotation of the given concept within the conceptScheme
+             </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddScopeNoteAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:scopeNote' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddDefinitionAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:definition' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.AddExampleAnnotation(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal as 'skos:example' annotation of the given concept within the conceptScheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasBroaderConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has broader/broaderTransitive concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetBroaderConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the broader/broaderTransitive concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetBroaderConceptsOfInternal(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept})">
+            <summary>
+            Subsumes the "skos:broaderTransitive" taxonomy to discover direct and indirect broader concepts of the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasNarrowerConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has narrower/narrowerTransitive concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetNarrowerConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the narrower/narrowerTransitive concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetNarrowerConceptsOfInternal(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept})">
+            <summary>
+            Subsumes the "skos:narrowerTransitive" taxonomy to discover direct and indirect narrower concepts of the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasRelatedConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has related concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetRelatedConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the related concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasBroadMatchConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has broadMatch concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetBroadMatchConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the broadMatch concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasNarrowMatchConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has narrowMatch concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetNarrowMatchConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the narrowMatch concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasRelatedMatchConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept has relatedMatch concept the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetRelatedMatchConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the relatedMatch concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasCloseMatchConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept skos:closeMatch the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetCloseMatchConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the skos:closeMatch concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.CheckHasExactMatchConcept(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Checks if the given aConcept skos:exactMatch the given bConcept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetExactMatchConceptsOf(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept)">
+            <summary>
+            Enlists the skos:exactMatch concepts of the given concept within the given scheme
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSHelper.GetExactMatchConceptsOfInternal(RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConceptScheme,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSConcept})">
+            <summary>
+            Subsumes the "skos:exactMatch" taxonomy to discover direct and indirect exactmatches of the given concept
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOntology">
+            <summary>
+            RDFSKOSOntology represents an OWL-DL ontology implementation of SKOS vocabulary
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOntology.Instance">
+            <summary>
+            Singleton instance of the SKOS ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the SKOS ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations">
+            <summary>
+            RDFSKOSRelations represents a collector for relations connecting skos concepts.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.TopConcept">
+            <summary>
+            "skos:hasTopConcept" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.Broader">
+            <summary>
+            "skos:broader" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.BroaderTransitive">
+            <summary>
+            "skos:broaderTransitive" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.BroadMatch">
+            <summary>
+            "skos:broadMatch" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.Narrower">
+            <summary>
+            "skos:narrower" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.NarrowerTransitive">
+            <summary>
+            "skos:narrowerTransitive" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.NarrowMatch">
+            <summary>
+            "skos:narrowMatch" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.Related">
+            <summary>
+            "skos:related" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.RelatedMatch">
+            <summary>
+            "skos:relatedMatch" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.SemanticRelation">
+            <summary>
+            "skos:semanticRelation" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.MappingRelation">
+            <summary>
+            "skos:mappingRelation" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.CloseMatch">
+            <summary>
+            "skos:closeMatch" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.ExactMatch">
+            <summary>
+            "skos:exactMatch" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.Notation">
+            <summary>
+            "skos:Notation" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.PrefLabel">
+            <summary>
+            "skosxl:prefLabel" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.AltLabel">
+            <summary>
+            "skosxl:altLabel" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.HiddenLabel">
+            <summary>
+            "skosxl:hiddenLabel" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.LiteralForm">
+            <summary>
+            "skosxl:LiteralForm" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.LabelRelation">
+            <summary>
+            "skosxl:LabelRelation" relations
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.LinkedData.SKOS.RDFSKOSRelations.#ctor">
+            <summary>
+            Default-ctor to build an empty relations metadata
+            </summary>
+        </member>
+    </members>
+</doc>

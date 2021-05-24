@@ -1,0 +1,2130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDFSharp.Semantics</name>
+    </assembly>
+    <members>
+        <member name="T:RDFSharp.Semantics.RDFOntologyData">
+            <summary>
+            RDFOntologyData represents the data component (A-BOX) of an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.FactsCount">
+            <summary>
+            Count of the facts composing the data
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.LiteralsCount">
+            <summary>
+            Count of the literals composing the data
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.FactsEnumerator">
+            <summary>
+            Gets the enumerator on the facts of the data for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.LiteralsEnumerator">
+            <summary>
+            Gets the enumerator on the literals of the data for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.Annotations">
+            <summary>
+            Annotations describing facts of the ontology data
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.Relations">
+            <summary>
+            Relations describing facts of the ontology data
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.Facts">
+            <summary>
+            Dictionary of facts composing the data
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyData.Literals">
+            <summary>
+            Dictionary of literals composing the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#RDFOntologyFact}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the data's facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the data's facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddFact(RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Adds the given fact to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddLiteral(RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the given literal to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given standard annotation to the given ontology fact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given custom annotation to the given ontology fact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddClassTypeRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Adds the "ontologyFact -> rdf:type -> ontologyClass" relation to the data.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddSameAsRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Adds the "aFact -> owl:sameAs -> bFact" relation to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddDifferentFromRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Adds the "aFact -> owl:differentFrom -> bFact" relation to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddAssertionRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Adds the "aFact -> objectProperty -> bFact" relation to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.AddAssertionRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Adds the "ontologyFact -> datatypeProperty -> ontologyLiteral" relation to the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveFact(RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Removes the given fact from the data.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveLiteral(RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Removes the given literal from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given standard annotation from the given ontology fact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given custom annotation from the given ontology fact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveClassTypeRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "ontologyFact -> rdf:type -> ontologyClass" relation from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveSameAsRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Removes the "aFact -> owl:sameAs -> bFact" relation from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveDifferentFromRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Removes the "aFact -> owl:differentFrom -> bFact" relation from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveAssertionRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Removes the "aFact -> objectProperty -> bFact" relation from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.RemoveAssertionRelation(RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Removes the "ontologyFact -> datatypeProperty -> ontologyLiteral" relation from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.SelectFact(System.String)">
+            <summary>
+            Selects the fact represented by the given string from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.SelectLiteral(System.String)">
+            <summary>
+            Selects the literal represented by the given string from the data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.IntersectWith(RDFSharp.Semantics.RDFOntologyData)">
+            <summary>
+            Builds a new intersection data from this data and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.UnionWith(RDFSharp.Semantics.RDFOntologyData)">
+            <summary>
+            Builds a new union data from this data and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.DifferenceWith(RDFSharp.Semantics.RDFOntologyData)">
+            <summary>
+            Builds a new difference data from this data and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyData.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this ontology data, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyDataMetadata">
+            <summary>
+            RDFOntologyDataMetadata represents a collector for relations connecting ontology facts.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyDataMetadata.ClassType">
+            <summary>
+            "rdf:type" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyDataMetadata.SameAs">
+            <summary>
+            "owl:sameAs" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyDataMetadata.DifferentFrom">
+            <summary>
+            "owl:differentFrom" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyDataMetadata.Assertions">
+            <summary>
+            "ontology property -> ontology resource" custom relations
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyDataMetadata.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology data metadata
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyFact">
+            <summary>
+            RDFOntologyFact represents an instance of an ontology class within an ontology data.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyFact.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an ontology fact with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyLiteral">
+            <summary>
+            RDFOntologyLiteral represents an instance of literal within an ontology data.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyLiteral.#ctor(RDFSharp.Model.RDFLiteral)">
+            <summary>
+            Default-ctor to build an ontology literal from the given literal.
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyComplementClass">
+            <summary>
+            RDFOntologyComplementClass represents a complement class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyComplementClass.ComplementOf">
+            <summary>
+            Ontology class for which this class represents the complement
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyComplementClass.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Default-ctor to build an ontology complement class of the given class and with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyIntersectionClass">
+            <summary>
+            RDFOntologyIntersectionClass represents an intersection class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyIntersectionClass.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an empty ontology intersection class with the given className
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyUnionClass">
+            <summary>
+            RDFOntologyUnionClass represents a union class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyUnionClass.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an empty ontology union class with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyDataRangeClass">
+            <summary>
+            RDFOntologyDataRangeClass represents a datarange class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyDataRangeClass.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an empty ontology datarange class with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyEnumerateClass">
+            <summary>
+            RDFOntologyEnumerateClass represents an enumerate class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyEnumerateClass.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an empty ontology enumerate class with the given name
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyAllValuesFromRestriction">
+            <summary>
+            RDFOntologyAllValuesFromRestriction represents an "owl:AllValuesFrom" restriction class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAllValuesFromRestriction.FromClass">
+            <summary>
+            Ontology class representing the only accepted class type of the restricted property's range members
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyAllValuesFromRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Default-ctor to build an "owl:AllValuesFrom" ontology restriction with the given name on the given property and the given fromClass
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyCardinalityRestriction">
+            <summary>
+            RDFOntologyCardinalityRestriction represents an "owl:Cardinality" restriction class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyCardinalityRestriction.MinCardinality">
+            <summary>
+            Minimum accepted cardinality for the restriction to be satisfied
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyCardinalityRestriction.MaxCardinality">
+            <summary>
+            Maximum accepted cardinality for the restriction to be satisfied
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyCardinalityRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty,System.Int32,System.Int32)">
+            <summary>
+            Default-ctor to build an ontology cardinality restriction with the given name on the given property
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyHasValueRestriction">
+            <summary>
+            RDFOntologyHasValueRestriction represents an "owl:HasValue" restriction class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyHasValueRestriction.RequiredValue">
+            <summary>
+            Ontology resource representing the accepted value of the restricted property's range members
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHasValueRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Default-ctor to build an "owl:HasValue" ontology restriction with the given name on the given property and the given requiredValue
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHasValueRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Default-ctor to build an "owl:HasValue" ontology restriction with the given name on the given property and the given required value
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyRestriction">
+            <summary>
+            RDFOntologyRestriction represents a restriction class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyRestriction.OnProperty">
+            <summary>
+            Ontology property on which the ontology restriction is applied
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Default-ctor to build an ontology restriction with the given name on the given ontology property
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologySomeValuesFromRestriction">
+            <summary>
+            RDFOntologySomeValuesFromRestriction represents an "owl:SomeValuesFrom" restriction class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologySomeValuesFromRestriction.FromClass">
+            <summary>
+            Ontology class representing the accepted class type of the restricted property's range members
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologySomeValuesFromRestriction.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Default-ctor to build an "owl:SomeValuesFrom" ontology restriction with the given name on the given property and the given fromClass
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyClass">
+            <summary>
+            RDFOntologyClass represents a class definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClass.Deprecated">
+            <summary>
+            Flag indicating that this ontology class is "owl:DeprecatedClass"
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClass.Nature">
+            <summary>
+            Nature of the ontology class (RDFS/OWL)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClass.#ctor(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyClassNature)">
+            <summary>
+            Default-ctor to build an ontology class with the given name and nature
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClass.SetDeprecated(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology class as "owl:DeprecatedClass"
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyClassModel">
+            <summary>
+            RDFOntologyClassModel represents the class-oriented model component (T-BOX) of an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.ClassesCount">
+            <summary>
+            Count of the classes composing the class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.RestrictionsCount">
+            <summary>
+            Count of the restrictions classes composing the class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.EnumeratesCount">
+            <summary>
+            Count of the enumerate classes composing the class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.DataRangesCount">
+            <summary>
+            Count of the datarange classes composing the class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.CompositesCount">
+            <summary>
+            Count of the composite classes composing the class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.ClassesEnumerator">
+            <summary>
+            Gets the enumerator on the class model's classes for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.RestrictionsEnumerator">
+            <summary>
+            Gets the enumerator on the class model's restriction classes for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.EnumeratesEnumerator">
+            <summary>
+            Gets the enumerator on the class model's enumerate classes for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.DataRangesEnumerator">
+            <summary>
+            Gets the enumerator on the class model's datarange classes for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.CompositesEnumerator">
+            <summary>
+            Gets the enumerator on the class model's composite classes for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.Annotations">
+            <summary>
+            Annotations describing classes of the ontology class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.Relations">
+            <summary>
+            Relations describing classes of the ontology class model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModel.Classes">
+            <summary>
+            Dictionary of classes composing the class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.#ctor">
+            <summary>
+            Default-ctor to build an empty class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#RDFOntologyClass}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the class model's classes
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the ontology class model's classes
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddClass(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Adds the given class to the ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddRestriction(RDFSharp.Semantics.RDFOntologyRestriction)">
+            <summary>
+            Adds the given restriction class to the ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given standard annotation to the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given custom annotation to the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddSubClassOfRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Adds the "childClass -> rdfs:subClassOf -> motherClass" relation to the class model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddEquivalentClassRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Adds the "aClass -> owl:equivalentClass -> bClass" relation to the class model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddDisjointWithRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Adds the "aClass -> owl:disjointWith -> bClass" relation to the class model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddOneOfRelation(RDFSharp.Semantics.RDFOntologyEnumerateClass,System.Collections.Generic.List{RDFSharp.Semantics.RDFOntologyFact})">
+            <summary>
+            Foreach of the given facts, adds the "ontologyEnumerateClass -> owl:oneOf -> ontologyFact" relation to the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddOneOfRelation(RDFSharp.Semantics.RDFOntologyDataRangeClass,System.Collections.Generic.List{RDFSharp.Semantics.RDFOntologyLiteral})">
+            <summary>
+            Foreach of the given literals, adds the "ontologyDataRangeClass -> owl:oneOf -> ontologyLiteral" relation to the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddIntersectionOfRelation(RDFSharp.Semantics.RDFOntologyIntersectionClass,System.Collections.Generic.List{RDFSharp.Semantics.RDFOntologyClass})">
+            <summary>
+            Foreach of the given classes, adds the "ontologyIntersectionClass -> owl:intersectionOf -> ontologyClass" relation to the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.AddUnionOfRelation(RDFSharp.Semantics.RDFOntologyUnionClass,System.Collections.Generic.List{RDFSharp.Semantics.RDFOntologyClass})">
+            <summary>
+            Foreach of the given classes, adds the "ontologyUnionClass -> owl:unionOf -> ontologyClass" relation to the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveClass(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the given class from the ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveRestriction(RDFSharp.Semantics.RDFOntologyRestriction)">
+            <summary>
+            Removes the given restriction class from the ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given standard annotation from the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given custom annotation from the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveSubClassOfRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "childClass -> rdfs:subClassOf -> motherClass" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveEquivalentClassRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "aClass -> owl:equivalentClass -> bClass" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveDisjointWithRelation(RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "aClass -> owl:disjointWith -> bClass" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveOneOfRelation(RDFSharp.Semantics.RDFOntologyEnumerateClass,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Removes the "ontologyEnumerateClass -> owl:oneOf -> ontologyFact" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveOneOfRelation(RDFSharp.Semantics.RDFOntologyDataRangeClass,RDFSharp.Semantics.RDFOntologyLiteral)">
+            <summary>
+            Removes the "ontologyDataRangeClass -> owl:oneOf -> ontologyLiteral" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveIntersectionOfRelation(RDFSharp.Semantics.RDFOntologyIntersectionClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "ontologyIntersectionClass -> owl:intersectionOf -> ontologyClass" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.RemoveUnionOfRelation(RDFSharp.Semantics.RDFOntologyUnionClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Removes the "ontologyUnionClass -> owl:unionOf -> ontologyClass" relation from the class model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.SelectClass(System.String)">
+            <summary>
+            Selects the ontology class represented by the given string from the ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.IntersectWith(RDFSharp.Semantics.RDFOntologyClassModel)">
+            <summary>
+            Builds a new intersection class model from this class model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.UnionWith(RDFSharp.Semantics.RDFOntologyClassModel)">
+            <summary>
+            Builds a new union class model from this class model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.DifferenceWith(RDFSharp.Semantics.RDFOntologyClassModel)">
+            <summary>
+            Builds a new difference class model from this class model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModel.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this ontology class model, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyClassModelMetadata">
+            <summary>
+            RDFOntologyClassModelMetadata represents a collector for relations describing ontology classes.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.SubClassOf">
+            <summary>
+            "rdfs:subClassOf" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.EquivalentClass">
+            <summary>
+            "owl:equivalentClass" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.DisjointWith">
+            <summary>
+            "owl:disjointWith" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.OneOf">
+            <summary>
+            "owl:oneOf" relations (specific for enumerate and datarange classes)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.IntersectionOf">
+            <summary>
+            "owl:intersectionOf" relations (specific for intersection classes)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyClassModelMetadata.UnionOf">
+            <summary>
+            "owl:unionOf" relations (specific for union classes)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyClassModelMetadata.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology class model metadata
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyAnnotationProperty">
+            <summary>
+            RDFOntologyAnnotationProperty represents an annotation property definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyAnnotationProperty.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an ontology annotation property from the given non-blank resource
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyDatatypeProperty">
+            <summary>
+            RDFOntologyDatatypeProperty represents a datatype property definition within an ontology model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyDatatypeProperty.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an ontology datatype property from the given non-blank resource
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyObjectProperty">
+            <summary>
+            RDFOntologyObjectProperty represents an object property definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyObjectProperty.Symmetric">
+            <summary>
+            Flag indicating that the ontology property is "owl:SymmetricProperty"
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyObjectProperty.Transitive">
+            <summary>
+            Flag indicating that the ontology property is "owl:TransitiveProperty"
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyObjectProperty.InverseFunctional">
+            <summary>
+            Flag indicating that the ontology property is "owl:InverseFunctionalProperty"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyObjectProperty.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an ontology object property from the given non-blank resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyObjectProperty.SetSymmetric(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology object property as "owl:SymmetricProperty"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyObjectProperty.SetTransitive(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology object property as "owl:TransitiveProperty"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyObjectProperty.SetInverseFunctional(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology object property as "owl:InverseFunctionalProperty"
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyProperty">
+            <summary>
+            RDFOntologyProperty represents a property definition within an ontology model.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyProperty.Deprecated">
+            <summary>
+            Flag indicating that this ontology property is "owl:DeprecatedProperty"
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyProperty.Functional">
+            <summary>
+            Flag indicating that this ontology property is "owl:FunctionalProperty"
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyProperty.Domain">
+            <summary>
+            Domain class of the ontology property
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyProperty.Range">
+            <summary>
+            Range class of the ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyProperty.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an ontology RDF property with the given non-blank name
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyProperty.SetDomain(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Sets the domain of this ontology property to the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyProperty.SetRange(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Sets the range of this ontology property to the given ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyProperty.SetFunctional(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology property as "owl:FunctionalProperty"
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyProperty.SetDeprecated(System.Boolean)">
+            <summary>
+            Sets or unsets this ontology property as "owl:DeprecatedProperty"
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyPropertyModel">
+            <summary>
+            RDFOntologyPropertyModel represents the property-oriented model component (T-BOX) of an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.PropertiesCount">
+            <summary>
+            Count of the properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.AnnotationPropertiesCount">
+            <summary>
+            Count of the annotation properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.DatatypePropertiesCount">
+            <summary>
+            Count of the datatype properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.ObjectPropertiesCount">
+            <summary>
+            Count of the object properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.FunctionalPropertiesCount">
+            <summary>
+            Count of the functional properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.SymmetricPropertiesCount">
+            <summary>
+            Count of the symmetric properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.TransitivePropertiesCount">
+            <summary>
+            Count of the transitive properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.InverseFunctionalPropertiesCount">
+            <summary>
+            Count of the inverse functional properties composing the property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.PropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.AnnotationPropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's annotation properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.DatatypePropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's datatype properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.ObjectPropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's object properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.FunctionalPropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's functional properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.SymmetricPropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's symmetric properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.TransitivePropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's transitive properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.InverseFunctionalPropertiesEnumerator">
+            <summary>
+            Gets the enumerator on the property model's inverse functional properties for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.Annotations">
+            <summary>
+            Annotations describing properties of the ontology property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.Relations">
+            <summary>
+            Relations describing properties of the ontology property model
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModel.Properties">
+            <summary>
+            Dictionary of properties composing the property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.#ctor">
+            <summary>
+            Default-ctor to build an empty property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#RDFOntologyProperty}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the property model's properties
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the property model's properties
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddProperty(RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Adds the given property to the ontology property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given standard annotation to the given ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given custom annotation to the given ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddSubPropertyOfRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Adds the "childProperty -> rdfs:subPropertyOf -> motherProperty" relation to the property model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddSubPropertyOfRelation(RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Adds the "childProperty -> rdfs:subPropertyOf -> motherProperty" relation to the property model.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddEquivalentPropertyRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Adds the "aProperty -> owl:equivalentProperty -> bProperty" relation to the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddEquivalentPropertyRelation(RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Adds the "aProperty -> owl:equivalentProperty -> bProperty" relation to the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.AddInverseOfRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Adds the "aProperty -> owl:inverseOf -> bProperty" relation to the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveProperty(RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Removes the given property from the ontology property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given standard annotation from the given ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given custom annotation from the given ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveSubPropertyOfRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Removes the "childProperty -> rdfs:subPropertyOf -> motherProperty" relation from the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveSubPropertyOfRelation(RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Removes the "childProperty -> rdfs:subPropertyOf -> motherProperty" relation from the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveEquivalentPropertyRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Removes the "aProperty -> owl:equivalentProperty -> bProperty" relation from the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveEquivalentPropertyRelation(RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Removes the "aProperty -> owl:equivalentProperty -> bProperty" relation from the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.RemoveInverseOfRelation(RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Removes the "aProperty -> owl:inverseOf -> bProperty" relation from the property model 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.SelectProperty(System.String)">
+            <summary>
+            Selects the ontology property represented by the given string from the ontology property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.IntersectWith(RDFSharp.Semantics.RDFOntologyPropertyModel)">
+            <summary>
+            Builds a new intersection property model from this property model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.UnionWith(RDFSharp.Semantics.RDFOntologyPropertyModel)">
+            <summary>
+            Builds a new union property model from this property model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.DifferenceWith(RDFSharp.Semantics.RDFOntologyPropertyModel)">
+            <summary>
+            Builds a new difference property model from this property model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModel.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this ontology property model, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyPropertyModelMetadata">
+            <summary>
+            RDFOntologyPropertyModelMetadata represents a collector for relations describing ontology properties.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModelMetadata.SubPropertyOf">
+            <summary>
+            "rdfs:subPropertyOf" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModelMetadata.EquivalentProperty">
+            <summary>
+            "owl:equivalentProperty" relations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyPropertyModelMetadata.InverseOf">
+            <summary>
+            "owl:inverseOf" relations
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyPropertyModelMetadata.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology property model metadata
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyModel">
+            <summary>
+            RDFOntologyModel represents the model component (T-BOX) of an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyModel.ClassModel">
+            <summary>
+            Submodel containing the ontology classes
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyModel.PropertyModel">
+            <summary>
+            Submodel containing the ontology properties
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyModel.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyModel.IntersectWith(RDFSharp.Semantics.RDFOntologyModel)">
+            <summary>
+            Builds a new intersection model from this model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyModel.UnionWith(RDFSharp.Semantics.RDFOntologyModel)">
+            <summary>
+            Builds a new union model from this model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyModel.DifferenceWith(RDFSharp.Semantics.RDFOntologyModel)">
+            <summary>
+            Builds a new difference model from this model and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyModel.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this ontology model, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntology">
+            <summary>
+            RDFOntology represents an ontology definition.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntology.Model">
+            <summary>
+            Model (T-BOX) of the ontology
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntology.Data">
+            <summary>
+            Data (A-BOX) of the ontology
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntology.Annotations">
+            <summary>
+            Annotations describing the ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.#ctor(RDFSharp.Model.RDFResource)">
+            <summary>
+            Default-ctor to build an empty ontology with the given name
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.AddStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given standard annotation to the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.AddCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Adds the given custom annotation to the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.RemoveStandardAnnotation(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given standard annotation from the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.RemoveCustomAnnotation(RDFSharp.Semantics.RDFOntologyAnnotationProperty,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Removes the given custom annotation from the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.IntersectWith(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Builds a new intersection ontology from this ontology and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.UnionWith(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Builds a new union ontology from this ontology and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.DifferenceWith(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Builds a new difference ontology from this ontology and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.FromRDFGraph(RDFSharp.Model.RDFGraph)">
+            <summary>
+            Gets an ontology representation of the given graph.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntology.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this ontology, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFBASEOntology">
+            <summary>
+            RDFBASEOntology represents a partial OWL-DL ontology implementation of structural vocabularies (RDF/RDFS/OWL/XSD).
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFBASEOntology.Instance">
+            <summary>
+            Singleton instance of the BASE ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFBASEOntology.#cctor">
+            <summary>
+            Default-ctor to initialize the BASE ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyAnnotations">
+            <summary>
+            RDFOntologyAnnotations represents a collector for annotations describing ontology resources.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.VersionInfo">
+            <summary>
+            "owl:versionInfo" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.VersionIRI">
+            <summary>
+            "owl:versionIRI" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.Comment">
+            <summary>
+            "rdfs:comment" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.Label">
+            <summary>
+            "rdfs:label" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.SeeAlso">
+            <summary>
+            "rdfs:seeAlso" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.IsDefinedBy">
+            <summary>
+            "rdfs:isDefinedBy" annotations
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.PriorVersion">
+            <summary>
+            "owl:priorVersion" annotations (specific for ontologies)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.BackwardCompatibleWith">
+            <summary>
+            "owl:BackwardCompatibleWith" annotations (specific for ontologies)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.IncompatibleWith">
+            <summary>
+            "owl:IncompatibleWith" annotations (specific for ontologies)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.Imports">
+            <summary>
+            "owl:imports" annotations (specific for ontologies)
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyAnnotations.CustomAnnotations">
+            <summary>
+            Custom-property annotations
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyAnnotations.#ctor">
+            <summary>
+            Default-ctor to build an empty ontology annotations metadata
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyChecker">
+            <summary>
+            RDFOntologyChecker is responsible for implicit RDFS/OWL-DL validation of ontologies during modeling
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckReservedClass(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given class is a reserved BASE ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckSubClassOfCompatibility(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given childclass can be set subclassof the given motherclass
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckEquivalentClassCompatibility(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aclass can be set equivalentclassof the given bclass
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckDisjointWithCompatibility(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aclass can be set disjointwith the given bclass
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckReservedProperty(RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given property is a reserved BASE ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckSubPropertyOfCompatibility(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Checks if the given childproperty can be set subpropertyof the given motherproperty
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckSubPropertyOfCompatibility(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Checks if the given childproperty can be set subpropertyof the given motherproperty
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckEquivalentPropertyCompatibility(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Checks if the given aproperty can be set equivalentpropertyof the given bproperty
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckEquivalentPropertyCompatibility(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyDatatypeProperty,RDFSharp.Semantics.RDFOntologyDatatypeProperty)">
+            <summary>
+            Checks if the given aproperty can be set equivalentpropertyof the given bproperty
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckInverseOfPropertyCompatibility(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Checks if the given aproperty can be set inverseof the given bproperty
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckClassTypeCompatibility(RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given class can be assigned as classtype of facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckSameAsCompatibility(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given afact can be set sameas the given bfact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckDifferentFromCompatibility(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given afact can be set differentfrom the given bfact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyChecker.CheckTransitiveAssertionCompatibility(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given "aFact -> objectProperty -> bFact" has transitive assertions
+            which would cause transitive cycles (unallowed concept in OWL-DL)
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyHelper">
+            <summary>
+            RDFOntologyHelper contains utility methods supporting RDFS/OWL-DL modeling, validation and reasoning
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsSubClassOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aClass is subClass of the given bClass within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSubClassesOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the subClasses of the given class within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSubClassesOfInternalVisitor(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Subsumes the "rdfs:subClassOf" taxonomy to discover direct and indirect subClasses of the given class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsSuperClassOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aClass is superClass of the given bClass within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSuperClassesOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the superClasses of the given class within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSuperClassesOfInternalVisitor(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Subsumes the "rdfs:subClassOf" taxonomy to discover direct and indirect superClasses of the given class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsEquivalentClassOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aClass is equivalentClass of the given bClass within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetEquivalentClassesOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the equivalentClasses of the given class within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetEquivalentClassesOfInternal(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyClass})">
+            <summary>
+            Subsumes the "owl:equivalentClass" taxonomy to discover direct and indirect equivalentClasses of the given class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsDisjointClassWith(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given aClass is disjointClass with the given bClass within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetDisjointClassesWith(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the disjointClasses with the given class within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetDisjointClassesWithInternal(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyClass})">
+            <summary>
+            Subsumes the "owl:disjointWith" taxonomy to discover direct and indirect disjointClasses of the given class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsDomainOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given ontology class is domain of the given ontology property within the given ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetDomainOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Enlists the domain classes of the given property within the given ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsRangeOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given ontology class is range of the given ontology property within the given ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetRangeOf(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Enlists the range classes of the given property within the given ontology class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsLiteralCompatible(RDFSharp.Semantics.RDFOntologyClassModel,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given ontology class is compatible with 'rdfs:Literal' within the given class model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsSubPropertyOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given aProperty is subProperty of the given bProperty within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSubPropertiesOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Enlists the sub properties of the given property within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSubPropertiesOfInternalVisitor(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Subsumes the "rdfs:subPropertyOf" taxonomy to discover direct and indirect subProperties of the given property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsSuperPropertyOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given aProperty is superProperty of the given bProperty within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSuperPropertiesOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Enlists the super properties of the given property within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSuperPropertiesOfInternalVisitor(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Subsumes the "rdfs:subPropertyOf" taxonomy to discover direct and indirect superProperties of the given property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsEquivalentPropertyOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Checks if the given aProperty is equivalentProperty of the given bProperty within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetEquivalentPropertiesOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty)">
+            <summary>
+            Enlists the equivalentProperties of the given property within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetEquivalentPropertiesOfInternal(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyProperty,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyProperty})">
+            <summary>
+            Subsumes the "owl:equivalentProperty" taxonomy to discover direct and indirect equivalentProperties of the given property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsInversePropertyOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Checks if the given aProperty is inverse property of the given bProperty within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInversePropertiesOf(RDFSharp.Semantics.RDFOntologyPropertyModel,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Enlists the inverse properties of the given property within the given property model
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsSameFactAs(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given aFact is sameAs the given bFact within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSameFactsAs(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Enlists the sameFacts of the given fact within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetSameFactsAsInternal(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyFact})">
+            <summary>
+            Subsumes the "owl:sameAs" taxonomy to discover direct and indirect samefacts of the given facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsDifferentFactFrom(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given aFact is differentFrom the given bFact within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetDifferentFactsFrom(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Enlists the different facts of the given fact within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetDifferentFactsFromInternal(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyFact})">
+            <summary>
+            Subsumes the "owl:differentFrom" taxonomy to discover direct and indirect differentFacts of the given facts
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsTransitiveAssertionOf(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty,RDFSharp.Semantics.RDFOntologyFact)">
+            <summary>
+            Checks if the given "aFact -> transProp" assertion links to the given bFact within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetTransitiveAssertionsOf(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty)">
+            <summary>
+            Enlists the given "aFact -> transOntProp" assertions within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetTransitiveAssertionsOfInternal(RDFSharp.Semantics.RDFOntologyData,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyObjectProperty,System.Collections.Generic.Dictionary{System.Int64,RDFSharp.Semantics.RDFOntologyFact})">
+            <summary>
+            Enlists the transitive assertions of the given fact and the given property within the given data
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.CheckIsMemberOf(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyFact,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Checks if the given fact is member of the given class within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOf(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the facts which are members of the given class within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfClass(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the facts which are members of the given class within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfComposite(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the facts which are members of the given composition within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfEnumerate(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyEnumerateClass)">
+            <summary>
+            Enlists the facts which are members of the given enumeration within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfRestriction(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyRestriction)">
+            <summary>
+            Enlists the facts which are members of the given restriction within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfLiteralCompatibleClass(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the literals which are members of the given literal-compatible class within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetMembersOfNonLiteralCompatibleClass(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFOntologyClass)">
+            <summary>
+            Enlists the facts which are members of the given non literal-compatible class within the given ontology
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInferences(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Gets an ontology made by semantic inferences found in the given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInferences(RDFSharp.Semantics.RDFOntologyModel)">
+            <summary>
+            Gets an ontology model made by semantic inferences found in the given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInferences(RDFSharp.Semantics.RDFOntologyClassModel)">
+            <summary>
+            Gets an ontology class model made by semantic inferences found in the given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInferences(RDFSharp.Semantics.RDFOntologyPropertyModel)">
+            <summary>
+            Gets an ontology property model made by semantic inferences found in the given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.GetInferences(RDFSharp.Semantics.RDFOntologyData)">
+            <summary>
+            Gets an ontology data made by semantic inferences found in the given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.ClearInferences(RDFSharp.Semantics.RDFOntology)">
+            <summary>
+            Clears all the taxonomy entries marked as semantic inferences generated by a reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.ClearInferences(RDFSharp.Semantics.RDFOntologyModel)">
+            <summary>
+            Clears all the taxonomy entries marked as semantic inferences generated by a reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.ClearInferences(RDFSharp.Semantics.RDFOntologyClassModel)">
+            <summary>
+            Clears all the taxonomy entries marked as semantic inferences generated by a reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.ClearInferences(RDFSharp.Semantics.RDFOntologyPropertyModel)">
+            <summary>
+            Clears all the taxonomy entries marked as semantic inferences generated by a reasoner
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyHelper.ClearInferences(RDFSharp.Semantics.RDFOntologyData)">
+            <summary>
+            Clears all the taxonomy entries marked as semantic inferences generated by a reasoner
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyResource">
+            <summary>
+            RDFOntologyResource represents a generic resource definition within an ontology.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyResource.Value">
+            <summary>
+            Value of the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.ToString">
+            <summary>
+            Gets the string representation of the ontology resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsClass">
+            <summary>
+            Checks if this ontology resource represents an ontology class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsDeprecatedClass">
+            <summary>
+            Checks if this ontology resource represents an ontology deprecated class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsRestrictionClass">
+            <summary>
+            Checks if this ontology resource represents an ontology restriction class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsCompositeClass">
+            <summary>
+            Checks if this ontology resource represents an ontology composite class (union/intersection/complement)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsEnumerateClass">
+            <summary>
+            Checks if this ontology resource represents an ontology enumerate class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsDataRangeClass">
+            <summary>
+            Checks if this ontology resource represents an ontology datarange class
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsDeprecatedProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology deprecated property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsFunctionalProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology functional property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsSymmetricProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology symmetric property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsTransitiveProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology transitive property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsInverseFunctionalProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology inverse functional property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsAnnotationProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology annotation property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsDatatypeProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology datatype property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsObjectProperty">
+            <summary>
+            Checks if this ontology resource represents an ontology object property
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsFact">
+            <summary>
+            Checks if this ontology resource represents an ontology fact
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsLiteral">
+            <summary>
+            Checks if this ontology resource represents an ontology literal
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyResource.IsOntology">
+            <summary>
+            Checks if this ontology resource represents an ontology
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyTaxonomy">
+            <summary>
+            RDFOntologyTaxonomy represents a register for storing a generic taxonomy relationship.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomy.Category">
+            <summary>
+            Category of the ontology taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomy.EntriesCount">
+            <summary>
+            Count of the taxonomy entries
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomy.EntriesEnumerator">
+            <summary>
+            Gets the enumerator on the taxonomy entries for iteration
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomy.Entries">
+            <summary>
+            Dictionary of ontology entries composing the taxonomy
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomy.SyncLock">
+            <summary>
+            SyncLock for entries
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.#ctor(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyTaxonomyCategory)">
+            <summary>
+            Default-ctor to build an empty ontology taxonomy of the given category
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.System#Collections#Generic#IEnumerable{RDFSharp#Semantics#RDFOntologyTaxonomyEntry}#GetEnumerator">
+            <summary>
+            Exposes a typed enumerator on the taxonomy entries
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Exposes an untyped enumerator on the taxonomy entries
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.AddEntry(RDFSharp.Semantics.RDFOntologyTaxonomyEntry)">
+            <summary>
+            Adds the given taxonomy entry to the taxonomy.
+            Returns true if the insertion has been made.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.RemoveEntry(RDFSharp.Semantics.RDFOntologyTaxonomyEntry)">
+            <summary>
+            Removes the given taxonomy entry from the taxonomy.
+            Returns true if the deletion has been made.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.ContainsEntry(RDFSharp.Semantics.RDFOntologyTaxonomyEntry)">
+            <summary>
+            Checks if the taxonomy contains the given taxonomy entry
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.SelectEntriesBySubject(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets a taxonomy with the entries having the specified ontology resource as subject 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.SelectEntriesByPredicate(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets a taxonomy with the entries having the specified ontology resource as predicate 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.SelectEntriesByObject(RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Gets a taxonomy with the entries having the specified ontology resource as object 
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.IntersectWith(RDFSharp.Semantics.RDFOntologyTaxonomy)">
+            <summary>
+            Builds a new intersection taxonomy from this taxonomy and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.UnionWith(RDFSharp.Semantics.RDFOntologyTaxonomy)">
+            <summary>
+            Builds a new union taxonomy from this taxonomy and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.DifferenceWith(RDFSharp.Semantics.RDFOntologyTaxonomy)">
+            <summary>
+            Builds a new difference taxonomy from this taxonomy and a given one
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomy.ToRDFGraph(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of this taxonomy, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFOntologyTaxonomyEntry">
+            <summary>
+            RDFOntologyTaxonomy represents an entry of a RDFOntologyTaxonomy object.
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.TaxonomyEntryID">
+            <summary>
+            Unique representation of the taxonomy entry
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.TaxonomySubject">
+            <summary>
+            Ontology resource acting as subject of the taxonomy relationship
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.TaxonomyPredicate">
+            <summary>
+            Ontology resource acting as predicate of the taxonomy relationship
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.TaxonomyObject">
+            <summary>
+            Ontology resource acting as object of the taxonomy relationship
+            </summary>
+        </member>
+        <member name="P:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.InferenceType">
+            <summary>
+            Nature of the taxonomy entry as a semantic inference
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.#ctor(RDFSharp.Semantics.RDFOntologyResource,RDFSharp.Semantics.RDFOntologyResource,RDFSharp.Semantics.RDFOntologyResource)">
+            <summary>
+            Default-ctor to build a taxonomy entry with the given subject, predicate and object resources
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.ToString">
+            <summary>
+            Gets the string representation of the taxonomy entry
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.Equals(RDFSharp.Semantics.RDFOntologyTaxonomyEntry)">
+            <summary>
+            Performs the equality comparison between two taxonomy entries
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.SetInference(RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceType)">
+            <summary>
+            Marks this taxonomy entry as a semantic inference, depending on the given parameter
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFOntologyTaxonomyEntry.ToRDFTriple">
+            <summary>
+            Get a triple representation of this taxonomy entry
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums">
+            <summary>
+            RDFSemanticsEnums represents a collector for all the enumerations used by the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation">
+            <summary>
+            RDFOntologyStandardAnnotation represents an enumeration for predefined ontology annotation properties
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.VersionInfo">
+            <summary>
+            owl:versionInfo
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.VersionIRI">
+            <summary>
+            owl:versionIRI
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.Comment">
+            <summary>
+            rdfs:comment
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.Label">
+            <summary>
+            rdfs:label
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.SeeAlso">
+            <summary>
+            rdfs:seeAlso
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.IsDefinedBy">
+            <summary>
+            rdfs:isDefinedBy
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.Imports">
+            <summary>
+            owl:imports
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.BackwardCompatibleWith">
+            <summary>
+            owl:BackwardCompatibleWith
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.IncompatibleWith">
+            <summary>
+            owl:IncompatibleWith
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyStandardAnnotation.PriorVersion">
+            <summary>
+            owl:PriorVersion
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyValidatorEvidenceCategory">
+            <summary>
+            RDFOntologyValidatorEvidenceCategory represents an enumeration for possible categories of ontology validation evidence
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyValidatorEvidenceCategory.Warning">
+            <summary>
+            Specifications have not been violated: ontology may contain semantic inconsistencies
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyValidatorEvidenceCategory.Error">
+            <summary>
+            Specifications have been violated: ontology will contain semantic inconsistencies
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory">
+            <summary>
+            RDFOntologyReasonerEvidenceCategory represents an enumeration for possible categories of ontology reasoner evidence
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory.ClassModel">
+            <summary>
+            Semantic inference has been generated within the ontology class model
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory.PropertyModel">
+            <summary>
+            Semantic inference has been generated within the ontology property model
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyReasonerEvidenceCategory.Data">
+            <summary>
+            Semantic inference has been generated within the ontology data
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceType">
+            <summary>
+            RDFOntologyInferenceType represents an enumeration for possible types of a semantic inference
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceType.None">
+            <summary>
+            Not a semantic inference
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceType.API">
+            <summary>
+            Semantic inference generated during ontology modeling
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceType.Reasoner">
+            <summary>
+            Semantic inference generated during ontology reasoning
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior">
+            <summary>
+            RDFOntologyInferenceExportBehavior represents an enumeration for supported inference export behaviors
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior.None">
+            <summary>
+            Does not export any semantic inference
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior.OnlyModel">
+            <summary>
+            Exports only semantic inferences of ontology model
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior.OnlyData">
+            <summary>
+            Exports only semantic inferences of ontology data
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior.ModelAndData">
+            <summary>
+            Exports both semantic inferences of ontology model and ontology data 
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyTaxonomyCategory">
+            <summary>
+            RDFOntologyTaxonomyCategory represents an enumeration for supported types of taxonomy
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyTaxonomyCategory.Annotation">
+            <summary>
+            Annotation taxonomy
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyTaxonomyCategory.Model">
+            <summary>
+            Model taxonomy
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyTaxonomyCategory.Data">
+            <summary>
+            Data taxonomy
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyClassNature">
+            <summary>
+            RDFOntologyClassNature represents an enumeration for possible nature of an ontology class (RDFS/OWL)
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyClassNature.RDFS">
+            <summary>
+            rdfs:Class
+            </summary>
+        </member>
+        <member name="F:RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyClassNature.OWL">
+            <summary>
+            owl:Class
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEvents">
+            <summary>
+            RDFSemanticsEvents represents a collector for all the events generated within the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="E:RDFSharp.Semantics.RDFSemanticsEvents.OnSemanticsInfo">
+            <summary>
+            Event representing an information message generated within the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEvents.RDFSemanticsInfoEventHandler">
+            <summary>
+            Delegate to handle information events generated within the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsEvents.RaiseSemanticsInfo(System.String)">
+            <summary>
+            Internal invoker of the subscribed information event handler
+            </summary>
+        </member>
+        <member name="E:RDFSharp.Semantics.RDFSemanticsEvents.OnSemanticsWarning">
+            <summary>
+            Event representing a warning message generated within the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsEvents.RDFSemanticsWarningEventHandler">
+            <summary>
+            Delegate to handle warning events generated within the "RDFSharp.Semantics" namespace
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsEvents.RaiseSemanticsWarning(System.String)">
+            <summary>
+            Internal invoker of the subscribed warning event handler
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsException">
+            <summary>
+            RDFSemanticsException represents an exception thrown during creation and execution of RDF semantics.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsException.#ctor">
+            <summary>
+            Basic ctor to throw an empty RDFSemanticsException
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsException.#ctor(System.String)">
+            <summary>
+            Basic ctor to throw an RDFSemanticsException with message
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Basic ctor to throw an RDFSemanticsException with message and inner exception
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Basic ctor to support serialization of a remotely thrown RDFSemanticsException
+            </summary>
+        </member>
+        <member name="T:RDFSharp.Semantics.RDFSemanticsUtilities">
+            <summary>
+            RDFSemanticsUtilities is a collector of reusable utility methods for RDF ontology management.
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.FromRDFGraph(RDFSharp.Model.RDFGraph)">
+            <summary>
+            Gets an ontology representation of the given graph
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFGraph(RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Gets a graph representation of the given ontology, exporting inferences according to the selected behavior
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyClass(RDFSharp.Model.RDFResource,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyClassNature)">
+            <summary>
+            Gets an ontology class of the given nature from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyProperty(RDFSharp.Model.RDFResource)">
+            <summary>
+            Gets an ontology property from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyObjectProperty(RDFSharp.Model.RDFResource)">
+            <summary>
+            Gets an ontology object property from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyDatatypeProperty(RDFSharp.Model.RDFResource)">
+            <summary>
+            Gets an ontology datatype property from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyAnnotationProperty(RDFSharp.Model.RDFResource)">
+            <summary>
+            Gets an ontology annotation property from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyFact(RDFSharp.Model.RDFResource)">
+            <summary>
+            Gets an ontology fact from the given RDF resource
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ToRDFOntologyLiteral(RDFSharp.Model.RDFLiteral)">
+            <summary>
+            Gets an ontology literal from the given RDF literal
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ApplyToOntology(RDFSharp.Query.RDFSelectQuery,RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Applies the given SPARQL SELECT query to the given ontology (which is converted into
+            a RDF graph including semantic inferences in respect of the given export behavior)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ApplyToOntology(RDFSharp.Query.RDFAskQuery,RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Applies the given SPARQL ASK query to the given ontology (which is converted into
+            a RDF graph including semantic inferences in respect of the given export behavior)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ApplyToOntology(RDFSharp.Query.RDFConstructQuery,RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Applies the given SPARQL CONSTRUCT query to the given ontology (which is converted into
+            a RDF graph including semantic inferences in respect of the given export behavior)
+            </summary>
+        </member>
+        <member name="M:RDFSharp.Semantics.RDFSemanticsUtilities.ApplyToOntology(RDFSharp.Query.RDFDescribeQuery,RDFSharp.Semantics.RDFOntology,RDFSharp.Semantics.RDFSemanticsEnums.RDFOntologyInferenceExportBehavior)">
+            <summary>
+            Applies the given SPARQL DESCRIBE query to the given ontology (which is converted into
+            a RDF graph including semantic inferences in respect of the given export behavior)
+            </summary>
+        </member>
+    </members>
+</doc>
