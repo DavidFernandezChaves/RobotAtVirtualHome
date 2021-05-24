@@ -9,7 +9,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/[Aa]ssets/RobotAtVirtualHome/ExternalResources
+/[Aa]ssets/RobotAtVirtualHome/ExternalResources/
+/[Ee]xternalResources/
 /.vs
 
 # MemoryCaptures can get excessive in size.
@@ -48,7 +49,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.meta
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -78,3 +78,4 @@ crashlytics-build.properties
 Releases/
 
 *.ply
+*.meta
