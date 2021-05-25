@@ -13,7 +13,7 @@ namespace RobotAtVirtualHome {
 
     [RequireComponent(typeof(NavMeshAgent))]
 
-    public class VirtualRobots : MonoBehaviour {
+    public class VirtualAgent : MonoBehaviour {
 
         public enum StatusMode { Loading, Walking, Turning, Finished }
         public enum PathType { Beacons, Interpolated }

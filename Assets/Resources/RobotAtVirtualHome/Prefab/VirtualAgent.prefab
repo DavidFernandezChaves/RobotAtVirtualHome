@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5696814597877837170}
   - component: {fileID: 1370599316258896279}
   m_Layer: 0
-  m_Name: VirtualRobot
+  m_Name: VirtualAgent
   m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,7 @@ namespace RobotAtVirtualHome {
 
     [RequireComponent(typeof(NavMeshAgent))]
 
-    public class AIWander : VirtualRobots {
+    public class AIWander : VirtualAgent {
 
         public bool cyclicalBehaviour;
         public bool randomSecuence;
@@ -27,7 +27,7 @@ namespace RobotAtVirtualHome {
 
         #region Unity Functions
         void Start() {
-            filePath = FindObjectOfType<VirtualEnvironment>().path;
+            filePath = FindObjectOfType<GeneralSystem>().path;
             VisitPoints = new List<Vector3>();
 
             var rooms = FindObjectsOfType<Room>();

@@ -22,12 +22,12 @@ public class SmartCamera : MonoBehaviour
 
     private Camera cameraRgb;
     private Camera cameraDepth;
-    private VirtualEnvironment virtualEnvironment;
+    private GeneralSystem virtualEnvironment;
     private House house;
 
     #region Unity Functions
     private void Awake() {
-        virtualEnvironment = FindObjectOfType<VirtualEnvironment>();
+        virtualEnvironment = FindObjectOfType<GeneralSystem>();
         house = FindObjectOfType<House>(); 
         cameraRgb = transform.Find("CameraRGB").GetComponent<Camera>();
         cameraDepth = transform.Find("CameraD").GetComponent<Camera>();

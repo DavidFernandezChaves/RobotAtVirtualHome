@@ -5,43 +5,44 @@ using UnityEngine;
 
 namespace RobotAtVirtualHome {
 
-    [RequireComponent(typeof(ObjectManager))]
-    [RequireComponent(typeof(OntologyManager))]
-
     public class GeneralManager : MonoBehaviour {
 
-        public int verbose;
-        public string ip = "192.168.0.12";
-        public GameObject virtualRobotPrefab;
-
-        private Transform virtualRobot;
-        private OntologyManager ontologyManager;
-
-
-        #region Unity Functions
-        private void Awake() {
-            ontologyManager = GetComponent<OntologyManager>();
-
+        [System.Serializable]
+        public struct Agent {
+            public string name;
+            public string ip;
+            public GameObject prefab;
         }
 
+        public int verbose;
+        public List<Agent> agentToInstantiate;
+        public List<Transform> agents;
+
+        #region Unity Functions
         void Start() {
-            ontologyManager.LoadOntology();
+            var ontologyManager = GetComponent<OntologyManager>();
+            if(ontologyManager != null)
+                ontologyManager.LoadOntology();
         }        
         #endregion
 
         #region Public Functions
         public void VirtualEnviromentLoaded(GameObject house) {
-            CreateVirtualRobot(house.GetComponent<House>());
+            CreateVirtualAgent(house.GetComponent<House>());
         }
         #endregion
 
         #region Private Functions
-        private void CreateVirtualRobot(House house) {            
+        private void CreateVirtualAgent(House house) {            
             if (house.virtualObjects.ContainsKey("Station_0")) {
-                virtualRobot = Instantiate(virtualRobotPrefab, house.virtualObjects["Station_0"].transform.position, Quaternion.identity, house.transform.parent).transform;
-                virtualRobot.GetComponent<ROS>().Connect(ip);
+                var origin = house.virtualObjects["Station_0"].transform.position;
+                foreach (Agent r in agentToInstantiate) {
+                    Transform agent = Instantiate(r.prefab, origin , Quaternion.identity, house.transform.parent).transform;
+                    agent.GetComponent<ROS>().robotName = r.name;
+                    agent.GetComponent<ROS>().Connect(r.ip);
+                    agents.Add(agent);
+                }
             } else { LogWarning("This house don't have robot station"); }
-
         }
 
         private void Log(string _msg) {

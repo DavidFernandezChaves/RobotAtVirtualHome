@@ -8,7 +8,7 @@ namespace RobotAtVirtualHome {
 
     [RequireComponent(typeof(NavMeshAgent))]
 
-    public class AIGrid : VirtualRobots {
+    public class AIGrid : VirtualAgent {
 
         public Vector2 minRange;
         public Vector2 maxRange;
@@ -27,7 +27,7 @@ namespace RobotAtVirtualHome {
         #region Unity Functions
 
         void Start() {
-            filePath = FindObjectOfType<VirtualEnvironment>().path;
+            filePath = FindObjectOfType<GeneralSystem>().path;
 
             if (minRange[0] >= maxRange[0] || minRange[1] >= maxRange[1]) {
                 LogWarning("Incorrect ranges");
