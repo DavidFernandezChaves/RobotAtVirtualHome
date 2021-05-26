@@ -20,7 +20,7 @@ namespace RobotAtVirtualHome {
 
         #region Unity Functions
         void Start() {
-            var ontologyManager = GetComponent<OntologyManager>();
+            var ontologyManager = GetComponent<OntologySystem>();
             if(ontologyManager != null)
                 ontologyManager.LoadOntology();
         }        
