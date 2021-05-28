@@ -162,7 +162,7 @@ namespace RobotAtVirtualHome {
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
-                        bytes = smartCamera.GetImageMask().EncodeToPNG();
+                        bytes = smartCamera.ImageMask.EncodeToPNG();
                         File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", bytes);
                     }
                     bytes = null;

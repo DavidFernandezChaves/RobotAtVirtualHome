@@ -18,10 +18,11 @@ public class SmartCamera : MonoBehaviour
 
     public Texture2D ImageRGB { get; private set; }
     public Texture2D ImageDepth { get; private set; }
-    public Texture2D imageSemanticMask { get; private set; }
+    public Texture2D ImageMask { get; private set; }
 
     private Camera cameraRgb;
     private Camera cameraDepth;
+    private Camera cameraMask;
     private GeneralSystem virtualEnvironment;
     private House house;
 
@@ -31,6 +32,7 @@ public class SmartCamera : MonoBehaviour
         house = FindObjectOfType<House>(); 
         cameraRgb = transform.Find("CameraRGB").GetComponent<Camera>();
         cameraDepth = transform.Find("CameraD").GetComponent<Camera>();
+        cameraMask = transform.Find("CameraMaskInstance").GetComponent<Camera>();
 
         Log("Sensor size: " + cameraRgb.sensorSize.ToString() + "/" +
             "FoalLength: " + cameraRgb.focalLength.ToString() + "/" + 
@@ -41,7 +43,7 @@ public class SmartCamera : MonoBehaviour
 
         ImageRGB = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
         ImageDepth = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
-        imageSemanticMask = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        ImageMask = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
     }
 
     void Start() {
@@ -71,25 +73,6 @@ public class SmartCamera : MonoBehaviour
         }
         return "None";
     }
-
-    public Texture2D GetImageMask() {        
-
-        for (int i = 0; i < imageSize.x; i++) {
-            for (int j = 0; j < imageSize.y; j++) {
-                string name = GetSemanticType(new Vector3(i, j, 0));
-                Color color = Color.black;
-                if (house.semanticColors.ContainsKey(name)) {
-                    color = house.semanticColors[name];
-                }
-
-                imageSemanticMask.SetPixel(i, j, color);
-            }
-        }
-        imageSemanticMask.Apply();
-
-        return imageSemanticMask;
-    }
-
     #endregion
 
 
@@ -101,6 +84,7 @@ public class SmartCamera : MonoBehaviour
             Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);
             RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);
             RenderTexture renderTextureDepth = new RenderTexture(imageSize.x, imageSize.y, 24);
+            RenderTexture renderTextureMask = new RenderTexture(imageSize.x, imageSize.y, 24);
 
             cameraRgb.targetTexture = renderTextureRGB;
             cameraRgb.Render();
@@ -115,11 +99,19 @@ public class SmartCamera : MonoBehaviour
             ImageDepth.ReadPixels(rect, 0, 0);
             ImageDepth.Apply();
 
+            cameraMask.targetTexture = renderTextureMask;
+            cameraMask.Render();
+            RenderTexture.active = renderTextureMask;
+            ImageMask.ReadPixels(rect, 0, 0);
+            ImageMask.Apply();
+
             cameraRgb.targetTexture = null;
             cameraDepth.targetTexture = null;
+            cameraMask.targetTexture = null;
             RenderTexture.active = null; //Clean
             Destroy(renderTextureRGB); //Free memory
             Destroy(renderTextureDepth); //Free memory
+            Destroy(renderTextureMask); //Free memory
         }
     }
 

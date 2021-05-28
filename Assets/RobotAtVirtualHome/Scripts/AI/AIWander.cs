@@ -160,7 +160,7 @@ namespace RobotAtVirtualHome {
                 if (captureSemanticMask) {
                     writer.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                         + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    itemBGBytes = smartCamera.GetImageMask().EncodeToPNG();
+                    itemBGBytes = smartCamera.ImageMask.EncodeToPNG();
                     File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.png", itemBGBytes);
                 }
 

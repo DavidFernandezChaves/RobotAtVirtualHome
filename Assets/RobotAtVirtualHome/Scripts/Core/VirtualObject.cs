@@ -68,6 +68,11 @@ namespace RobotAtVirtualHome {
             }
 
             transform.name = FindObjectOfType<House>().RegistVirtualObject(this);
+            var renders = GetComponentsInChildren<Renderer>();
+            foreach(Renderer r in renders) {
+                r.material.SetColor("_UnlitColor", FindObjectOfType<House>().semanticColors[name]);
+            }
+            
         }
         #endregion
 
