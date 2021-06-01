@@ -565,7 +565,7 @@ PrefabInstance:
     - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}
       propertyPath: sendImagesToROS
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5b8e66e4d3d7584e9120efa5c4e60ae, type: 3}
