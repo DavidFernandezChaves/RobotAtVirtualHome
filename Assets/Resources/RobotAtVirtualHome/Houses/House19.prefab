@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 7320971601204925134}
   - component: {fileID: 485511152739037271}
   - component: {fileID: 5554353676936266662}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Kitchen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 7420544193499895855}
   - component: {fileID: 2352286148337810010}
   - component: {fileID: 2203860332793919017}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bedroom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 7811606405305345816}
   - component: {fileID: 2711512814999984429}
   - component: {fileID: 2232170377568035527}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: LivingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 7862011989199973592}
   - component: {fileID: 3182098545722716255}
   - component: {fileID: 7144706251684899824}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bathroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1447,7 +1447,7 @@ GameObject:
   - component: {fileID: 5986453031013552744}
   - component: {fileID: 4392185627296906143}
   - component: {fileID: 3659183476041319737}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bedroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 1301964475481203798}
   - component: {fileID: 4456279448049036710}
   - component: {fileID: 4342674921476380841}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Corridor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1887,7 +1887,7 @@ GameObject:
   - component: {fileID: 8403792922041528548}
   - component: {fileID: 6259413446987041728}
   - component: {fileID: 1604623588050176121}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2012,7 +2012,7 @@ GameObject:
   - component: {fileID: 3663366316675582197}
   - component: {fileID: 7257933787018047976}
   - component: {fileID: 5459923457514356350}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bedroom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

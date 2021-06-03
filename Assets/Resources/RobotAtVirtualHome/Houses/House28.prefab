@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 7257214809575403902}
   - component: {fileID: 2652750225465706267}
   - component: {fileID: 5864596435204205268}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bathroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 2580118875659089939}
   - component: {fileID: 4900937394368614852}
   - component: {fileID: 7119121232089930675}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: KitchenLivingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 1990433849149815734}
   - component: {fileID: 6925223682041025912}
   - component: {fileID: 2187919238942022945}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bathroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +982,7 @@ GameObject:
   - component: {fileID: 5152051018897505300}
   - component: {fileID: 7365131049126509468}
   - component: {fileID: 6642786242308911354}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bedroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1164,7 @@ GameObject:
   - component: {fileID: 7196870720143908896}
   - component: {fileID: 7959877863260118405}
   - component: {fileID: 5497315214217174518}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Bedroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
