@@ -53,8 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7bc2d82a4e4c449ac7844bbcaba5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoConnect: 0
   robotName: VirtualRobot
   verbose: 1
+  ip: 
 --- !u!114 &931527486158493165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +76,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949812d6ee2e44344a478ff81105acb2, type: 3}
   m_Name: 

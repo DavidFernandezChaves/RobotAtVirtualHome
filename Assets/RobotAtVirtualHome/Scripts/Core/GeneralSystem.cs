@@ -65,7 +65,7 @@ namespace RobotAtVirtualHome {
                         }
                             
                     }
-                    Invoke("StartSimulation", 0.2f);
+                    Invoke("StartSimulation", 0.1f);
                 } else {
                     LogWarning("The gameObject " + (houseSelected-1) + " does not have the 'House' component.");
                 }
@@ -73,6 +73,20 @@ namespace RobotAtVirtualHome {
             } else { LogWarning("There are no assigned houses in the virtual environment."); }
         }        
 
+
+        #endregion
+
+        #region Public Functions
+        public Transform FindObjectUPWithClass(Type component, Transform ini ) {
+            do {
+                ini = ini.parent;
+            } while ( ini != transform && ini.GetComponent(component) == null && ini != transform.root);
+            return ini;
+        }
+
+        #endregion
+
+        #region Private Functions
         private void StartSimulation() {
             if (recordHierarchy) {
                 writer = new StreamWriter(path + "/VirtualObjects.csv", true);
@@ -93,19 +107,7 @@ namespace RobotAtVirtualHome {
             GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
 
         }
-        #endregion
 
-        #region Public Functions
-        public Transform FindObjectUPWithClass(Type component, Transform ini ) {
-            do {
-                ini = ini.parent;
-            } while ( ini != transform && ini.GetComponent(component) == null && ini != transform.root);
-            return ini;
-        }
-
-        #endregion
-
-        #region Private Functions
         private void Log(string _msg) {
             if (verbose > 1)
                 Debug.Log("[Virtual Environment]: " + _msg);

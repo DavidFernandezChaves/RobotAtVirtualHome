@@ -240,14 +240,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 1
+  houseSelected: 31
   recordHierarchy: 0
   transparentRoof: 1
   initialStateDoor: 3
   initialStateGeneralLight: 0
-  initialStateLights: 2
-  wallPainting: 2
-  floorPainting: 2
+  initialStateLights: 1
+  wallPainting: 1
+  floorPainting: 1
   forceSeed: 1
   seedForced: 0
   path: D:\RobotAtVirtualHome
@@ -559,7 +559,6 @@ GameObject:
   - component: {fileID: 1701356809}
   - component: {fileID: 1701356813}
   - component: {fileID: 1701356811}
-  - component: {fileID: 1701356815}
   - component: {fileID: 1701356814}
   m_Layer: 9
   m_Name: General Scripts
@@ -610,9 +609,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  threshold_match: 0.8
+  threshold_match: 0.5
   minSize: 0.05
-  minimunConfidenceScore: 0
+  minimunConfidenceScore: 0.6
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
@@ -670,27 +669,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!114 &1701356815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701356808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2138321dc0ddbab449f965560e196a77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verbose: 1
-  nObservationsToConsider: 5
-  rate: 2
-  sendResultsToROS: 0
-  panel: {fileID: 0}
-  titleRoom: {fileID: 0}
-  graph: {fileID: 0}
-  uiCategoryRoom: {fileID: 0}
-  robot: {fileID: 0}
 --- !u!1 &2047795872
 GameObject:
   m_ObjectHideFlags: 0

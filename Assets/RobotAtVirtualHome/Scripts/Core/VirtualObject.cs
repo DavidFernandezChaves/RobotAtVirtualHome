@@ -19,7 +19,11 @@ namespace RobotAtVirtualHome {
 
         #region Unity Functions
         private void Awake() {
-            verbose = FindObjectOfType<House>().verbose;
+            var house = FindObjectOfType<House>();
+            if(house!= null) {
+                verbose = house.verbose;
+            }
+            
             seed = Random.Range(0, models.Length);
 
             foreach (GameObject go in models) {

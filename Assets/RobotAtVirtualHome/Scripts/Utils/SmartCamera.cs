@@ -47,7 +47,7 @@ public class SmartCamera : MonoBehaviour
     }
 
     void Start() {
-        StartCoroutine(UpdateImages());
+         StartCoroutine(UpdateImages());
     }
 
     void Update() {
@@ -62,6 +62,12 @@ public class SmartCamera : MonoBehaviour
         if (sendImagesToROS) {
             ros.RegisterPubPackage("CameraRGB_pub");
             StartCoroutine(SendImages(ros));
+        }
+    }
+
+    public void Disconnected(ROS ros) {
+        if (sendImagesToROS) {
+            StopAllCoroutines();
         }
     }
 
