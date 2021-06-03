@@ -17,13 +17,30 @@ namespace RobotAtVirtualHome {
         public int verbose;
         public List<Agent> agentToInstantiate;
         public List<Transform> agents;
+        public bool skiptSave = false;
 
         #region Unity Functions
         void Start() {
             var ontologyManager = GetComponent<OntologySystem>();
             if(ontologyManager != null)
                 ontologyManager.LoadOntology();
-        }        
+
+            if (!skiptSave && agentToInstantiate.Count > 0) {
+                Agent agent = new Agent();
+                agent.name = PlayerPrefs.GetString("robotName", "VirtualAgent");
+                agent.ip = PlayerPrefs.GetString("ip", agentToInstantiate[0].ip);
+                agentToInstantiate[0] = agent;                  
+            }
+
+        }
+
+        private void OnApplicationQuit() {
+            if (agentToInstantiate.Count > 0) {
+                PlayerPrefs.SetString("robotName", agentToInstantiate[0].name);
+                PlayerPrefs.SetString("ip", agentToInstantiate[0].ip);
+                PlayerPrefs.Save();
+            }
+        }
         #endregion
 
         #region Public Functions
