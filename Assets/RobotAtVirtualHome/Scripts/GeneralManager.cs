@@ -17,7 +17,7 @@ namespace RobotAtVirtualHome {
         public int verbose;
         public List<Agent> agentToInstantiate;
         public List<Transform> agents;
-        public bool skiptSave = false;
+        public bool skipSave = false;
 
         #region Unity Functions
         void Start() {
@@ -25,7 +25,7 @@ namespace RobotAtVirtualHome {
             if(ontologyManager != null)
                 ontologyManager.LoadOntology();
 
-            if (!skiptSave && agentToInstantiate.Count > 0) {
+            if (!skipSave && agentToInstantiate.Count > 0) {
                 Agent agent = new Agent();
                 agent.name = PlayerPrefs.GetString("robotName", "VirtualAgent");
                 agent.ip = PlayerPrefs.GetString("ip", agentToInstantiate[0].ip);

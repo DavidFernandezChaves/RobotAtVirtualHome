@@ -83,7 +83,7 @@ public class SmartCamera : MonoBehaviour
 
 
     #region Private Functions
-    public IEnumerator UpdateImages() {
+    private IEnumerator UpdateImages() {
         while (Application.isPlaying) {
             yield return new WaitForEndOfFrame();            
 
