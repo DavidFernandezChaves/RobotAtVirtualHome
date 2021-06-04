@@ -86,8 +86,8 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  cyclicalBehaviour: 0
-  randomSecuence: 0
+  cyclicalBehaviour: 1
+  randomSecuence: 1
   frequencyCapture: 1
   captureRGB: 0
   captureDepth: 0
@@ -549,25 +549,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 5990025511522091735, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7205881389748370572, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}
       propertyPath: m_Name
       value: SmartCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: ROSFrecuency
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: sendImagesToROS
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5b8e66e4d3d7584e9120efa5c4e60ae, type: 3}

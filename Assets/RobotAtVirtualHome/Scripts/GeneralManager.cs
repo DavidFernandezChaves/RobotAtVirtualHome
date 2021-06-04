@@ -29,6 +29,7 @@ namespace RobotAtVirtualHome {
                 Agent agent = new Agent();
                 agent.name = PlayerPrefs.GetString("robotName", "VirtualAgent");
                 agent.ip = PlayerPrefs.GetString("ip", agentToInstantiate[0].ip);
+                agent.prefab = agentToInstantiate[0].prefab;
                 agentToInstantiate[0] = agent;                  
             }
 

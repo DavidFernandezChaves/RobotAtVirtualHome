@@ -63,7 +63,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 2817
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -200,7 +200,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 785
+    m_Bits: 2833
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -288,7 +288,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 2305
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 2
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 5867271200427793981}
   - component: {fileID: 4888199888887510705}
   - component: {fileID: 4937872121495254803}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Cube
   m_TagString: Robot
   m_Icon: {fileID: 0}
