@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Vimantic - Robot@Home.unity
-    guid: 0683eae5d8e4202418f46961cd7949c4
+    path: Assets/RobotAtVirtualHome/Scenes/RobotAtVirtualHome.unity
+    guid: 9d251de31c177c143a2a44fcb15ad65c
   m_configObjects: {}

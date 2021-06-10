@@ -4,3 +4,6 @@
 [submodule "Assets/ViMantic"]
 	path = Assets/ViMantic
 	url = https://github.com/DavidFernandezChaves/ViMantic-Unity3DNode.git
+[submodule "Assets/geometry3Sharp"]
+	path = Assets/geometry3Sharp
+	url = https://github.com/gradientspace/geometry3Sharp.git
