@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 8244464800012263865}
   - component: {fileID: 8029640737421032612}
   m_Layer: 0
-  m_Name: Camera RGB-D
+  m_Name: Smart Camera
   m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

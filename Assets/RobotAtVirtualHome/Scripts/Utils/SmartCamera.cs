@@ -67,7 +67,7 @@ public class SmartCamera : MonoBehaviour
 
     public void Disconnected(ROS ros) {
         if (sendImagesToROS) {
-            StopAllCoroutines();
+            StopCoroutine(SendImages(ros));
         }
     }
 
