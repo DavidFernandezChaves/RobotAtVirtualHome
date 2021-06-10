@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.43748957, g: 0.48531067, b: 0.5655849, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -615,6 +615,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verbose: 2
   threshold_match: 0.6
+  wDistance: 0.35
+  wSize: 0.65
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
