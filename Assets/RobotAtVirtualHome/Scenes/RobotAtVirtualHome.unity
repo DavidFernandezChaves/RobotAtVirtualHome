@@ -614,7 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  threshold_match: 0.25
+  threshold_match: 1
+  minPixelsMask: 1000
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
