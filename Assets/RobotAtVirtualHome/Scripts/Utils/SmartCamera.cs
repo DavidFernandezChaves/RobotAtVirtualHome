@@ -46,10 +46,6 @@ public class SmartCamera : MonoBehaviour
         ImageMask = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
     }
 
-    void Start() {
-         StartCoroutine(UpdateImages());
-    }
-
     void Update() {
         if (mouseInteractive && Input.GetMouseButtonDown(0)) {
             Vector3 screenPoint = Input.mousePosition;
@@ -83,59 +79,56 @@ public class SmartCamera : MonoBehaviour
 
 
     #region Private Functions
-    private IEnumerator UpdateImages() {
-        while (Application.isPlaying) {
-            yield return new WaitForEndOfFrame();            
-
-            Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);
-            RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);
-            RenderTexture renderTextureDepth = new RenderTexture(imageSize.x, imageSize.y, 24);
-            RenderTexture renderTextureMask = new RenderTexture(imageSize.x, imageSize.y, 24);
-
-            cameraRgb.targetTexture = renderTextureRGB;
-            cameraRgb.Render();
-            RenderTexture.active = renderTextureRGB;
-            ImageRGB.ReadPixels(rect, 0, 0);
-            ImageRGB.Apply();
-
-            cameraDepth.depthTextureMode = DepthTextureMode.Depth;
-            cameraDepth.targetTexture = renderTextureDepth;
-            cameraDepth.Render();
-            RenderTexture.active = renderTextureDepth;
-            ImageDepth.ReadPixels(rect, 0, 0);
-            ImageDepth.Apply();
-
-            cameraMask.targetTexture = renderTextureMask;
-            cameraMask.Render();
-            RenderTexture.active = renderTextureMask;
-            ImageMask.ReadPixels(rect, 0, 0);
-            ImageMask.Apply();
-
-            cameraRgb.targetTexture = null;
-            cameraDepth.targetTexture = null;
-            cameraMask.targetTexture = null;
-            RenderTexture.active = null; //Clean
-            Destroy(renderTextureRGB); //Free memory
-            Destroy(renderTextureDepth); //Free memory
-            Destroy(renderTextureMask); //Free memory
-        }
-    }
 
     IEnumerator SendImages(ROS ros) {
+
+        Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);
+        RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);
+        RenderTexture renderTextureDepth = new RenderTexture(imageSize.x, imageSize.y, 24);
+        RenderTexture renderTextureMask = new RenderTexture(imageSize.x, imageSize.y, 24);
+        Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+
+        cameraRgb.targetTexture = renderTextureRGB;
+
+        cameraDepth.depthTextureMode = DepthTextureMode.Depth;
+        cameraDepth.targetTexture = renderTextureDepth;
+
+        cameraMask.targetTexture = renderTextureMask;
+
         while (Application.isPlaying) {
             Log("Sending images to ros.");
             if (ros.IsConnected()) {
-                Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
 
-                Color[] pxs = ImageRGB.GetPixels();
-                Color[] pxsDepth = ImageDepth.GetPixels();
+                cameraRgb.Render();
+                RenderTexture.active = renderTextureRGB;
+                ImageRGB.ReadPixels(rect, 0, 0);
+                ImageRGB.Apply();
+
+                cameraDepth.Render();
+                RenderTexture.active = renderTextureDepth;
+                ImageDepth.ReadPixels(rect, 0, 0);
+                ImageDepth.Apply();
+
+
+                cameraMask.Render();
+                RenderTexture.active = renderTextureMask;
+                ImageMask.ReadPixels(rect, 0, 0);
+                ImageMask.Apply();
+
+                //cameraRgb.targetTexture = null;
+                //cameraDepth.targetTexture = null;
+                //cameraMask.targetTexture = null;
+                RenderTexture.active = null; //Clean                
+
+                Color32[] pxs = ImageRGB.GetPixels32();
+                Color32[] pxsDepth = ImageDepth.GetPixels32();
 
                 //Compose img: RGBD
                 for (int i = 0; i < pxs.Length; i++) {
                     pxs[i].a = pxsDepth[i].a;
                 }
 
-                rgb.SetPixels(pxs);
+                rgb.SetPixels32(pxs);
                 rgb.Apply();
 
                 HeaderMsg _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
@@ -144,6 +137,10 @@ public class SmartCamera : MonoBehaviour
             }
             yield return new WaitForSeconds(ROSFrecuency);
         }
+
+        Destroy(renderTextureRGB); //Free memory
+        Destroy(renderTextureDepth); //Free memory
+        Destroy(renderTextureMask); //Free memory
     }
 
     private void Log(string _msg) {
