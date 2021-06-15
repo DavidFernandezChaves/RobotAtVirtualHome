@@ -5,8 +5,6 @@ using ROSUnityCore;
 using UnityEngine;
 using RobotAtVirtualHome;
 using System;
-using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class SmartCamera : MonoBehaviour
 {
@@ -81,43 +79,36 @@ public class SmartCamera : MonoBehaviour
     #region Private Functions
 
     IEnumerator SendImages(ROS ros) {
-
-        Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);
-        RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);
-        RenderTexture renderTextureDepth = new RenderTexture(imageSize.x, imageSize.y, 24);
-        RenderTexture renderTextureMask = new RenderTexture(imageSize.x, imageSize.y, 24);
         Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-
-        cameraRgb.targetTexture = renderTextureRGB;
-
-        cameraDepth.depthTextureMode = DepthTextureMode.Depth;
-        cameraDepth.targetTexture = renderTextureDepth;
-
-        cameraMask.targetTexture = renderTextureMask;
+        Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);      
+        cameraDepth.depthTextureMode = DepthTextureMode.Depth;    
 
         while (Application.isPlaying) {
             Log("Sending images to ros.");
             if (ros.IsConnected()) {
-
+                RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);               
+                
+                cameraRgb.targetTexture = renderTextureRGB;
                 cameraRgb.Render();
                 RenderTexture.active = renderTextureRGB;
                 ImageRGB.ReadPixels(rect, 0, 0);
                 ImageRGB.Apply();
+                cameraRgb.targetTexture = null;
 
+                cameraDepth.targetTexture = renderTextureRGB;
                 cameraDepth.Render();
-                RenderTexture.active = renderTextureDepth;
+                RenderTexture.active = renderTextureRGB;
                 ImageDepth.ReadPixels(rect, 0, 0);
                 ImageDepth.Apply();
+                cameraDepth.targetTexture = null;
 
-
+                cameraMask.targetTexture = renderTextureRGB;
                 cameraMask.Render();
-                RenderTexture.active = renderTextureMask;
+                RenderTexture.active = renderTextureRGB;
                 ImageMask.ReadPixels(rect, 0, 0);
                 ImageMask.Apply();
+                cameraMask.targetTexture = null;
 
-                //cameraRgb.targetTexture = null;
-                //cameraDepth.targetTexture = null;
-                //cameraMask.targetTexture = null;
                 RenderTexture.active = null; //Clean                
 
                 Color32[] pxs = ImageRGB.GetPixels32();
@@ -127,20 +118,20 @@ public class SmartCamera : MonoBehaviour
                 for (int i = 0; i < pxs.Length; i++) {
                     pxs[i].a = pxsDepth[i].a;
                 }
-
+                
                 rgb.SetPixels32(pxs);
                 rgb.Apply();
 
                 HeaderMsg _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
                 CompressedImageMsg compressedImg = new CompressedImageMsg(_head, "png", rgb.EncodeToPNG());
                 ros.Publish(CameraRGB_pub.GetMessageTopic(), compressedImg);
+
+                Destroy(renderTextureRGB); //Free memory
             }
             yield return new WaitForSeconds(ROSFrecuency);
         }
 
-        Destroy(renderTextureRGB); //Free memory
-        Destroy(renderTextureDepth); //Free memory
-        Destroy(renderTextureMask); //Free memory
+
     }
 
     private void Log(string _msg) {
