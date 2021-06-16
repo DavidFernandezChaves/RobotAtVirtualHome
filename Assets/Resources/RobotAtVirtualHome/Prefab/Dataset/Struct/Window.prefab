@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1616137624187998133}
   - component: {fileID: 6848306767976143402}
   - component: {fileID: 1457060364753273275}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Model3
   m_TagString: VirtualObject
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105275740301232380}
   - component: {fileID: 8485787947747851424}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Window
   m_TagString: VirtualObject
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1494297759230237696}
   - component: {fileID: 6967027924413396520}
   - component: {fileID: 3426706262729480659}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Model1
   m_TagString: VirtualObject
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 8400645764032401739}
   - component: {fileID: 6372135069999117945}
   - component: {fileID: 2861862840899223923}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Model2
   m_TagString: VirtualObject
   m_Icon: {fileID: 0}
