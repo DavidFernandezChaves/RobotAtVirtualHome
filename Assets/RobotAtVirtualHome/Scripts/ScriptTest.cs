@@ -22,13 +22,13 @@ public class ScriptTest : MonoBehaviour
             }
 
             if (Mide) {
-                Debug.Log(VirtualObjectSystem.CalculateCornerDistance(ref1, obs, false));
+                Debug.Log(VirtualObjectSystem.CalculateCornerDistance(ref1, obs));
                 Mide = false;
             }
 
             if (Ordena) {
                 vob2.semanticObject.SetNewCorners(YNN(vob1.semanticObject.Corners, vob2.semanticObject.Corners));
-                Debug.Log(VirtualObjectSystem.CalculateCornerDistance(ref1, obs, false));
+                Debug.Log(VirtualObjectSystem.CalculateCornerDistance(ref1, obs));
                 Ordena = false;
             }
 

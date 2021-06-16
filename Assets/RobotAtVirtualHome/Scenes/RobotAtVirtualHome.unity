@@ -614,8 +614,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  threshold_match: 4
+  threshold_match_same_type: 4
+  threshold_match_diff_type: 2
   minPixelsMask: 1000
+  deepRange: {x: 0.5, y: 5}
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
@@ -715,7 +717,7 @@ GameObject:
   - component: {fileID: 2094589308}
   - component: {fileID: 2094589307}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Test Tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,9 +735,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47ebc70f561dc641a922fa0378e0c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
   vob1: {fileID: 0}
   vob2: {fileID: 0}
+  Mide: 0
+  Ordena: 0
 --- !u!4 &2094589308
 Transform:
   m_ObjectHideFlags: 0

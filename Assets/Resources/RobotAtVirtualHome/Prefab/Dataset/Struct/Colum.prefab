@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2875584933362452713}
   - component: {fileID: 1007440192185418287}
   - component: {fileID: 290736062242784277}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Colum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &290736062242784277
 MeshCollider:
   m_ObjectHideFlags: 0
