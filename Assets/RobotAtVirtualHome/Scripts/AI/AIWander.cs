@@ -10,10 +10,9 @@ namespace RobotAtVirtualHome {
 
     public class AIWander : VirtualAgent {
 
-        public bool cyclicalBehaviour;
-        public bool randomSecuence;
-        
         public float frequencyCapture;
+        public bool cyclicalBehaviour;
+        public bool randomSecuence;       
         
         public List<Vector3> VisitPoints { get; private set; }
         public string currentRoom { get; private set; }
@@ -68,8 +67,7 @@ namespace RobotAtVirtualHome {
         void Update() {
             switch (state) {
                 case StatusMode.Walking:
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit)) {
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit)) {
                         currentRoom = hit.transform.name;
                     }
 
