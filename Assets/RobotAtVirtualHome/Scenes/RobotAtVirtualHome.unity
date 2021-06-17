@@ -254,7 +254,7 @@ MonoBehaviour:
   wallPainting: 1
   floorPainting: 1
   forceSeed: 0
-  seedForced: 1
+  seedForced: 0
   path: D:\RobotAtVirtualHome
 --- !u!4 &238323567
 Transform:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  threshold_match_same_type: 4
+  threshold_match_same_type: 5
   threshold_match_diff_type: 2
   minPixelsMask: 1000
   deepRange: {x: 0.5, y: 5}

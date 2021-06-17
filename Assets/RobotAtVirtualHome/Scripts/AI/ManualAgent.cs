@@ -7,8 +7,8 @@ using UnityEngine.AI;
 namespace RobotAtVirtualHome {
     public class ManualAgent : VirtualAgent {
 
-        public float mainSpeed = 1f;        
-        public float angularSpeed = 1f;
+        public float mainSpeed = 0.5f;        
+        public float angularSpeed = 0.5f;
         public float factorSpeed = 2f;
 
         public float frequencyCapture;
@@ -64,10 +64,10 @@ namespace RobotAtVirtualHome {
             transform.Translate(p);            
 
             if (Input.GetKey(KeyCode.Q)) {
-                transform.Rotate(0, newangle, 0);
+                transform.Rotate(0, -newangle, 0);
             }
             if (Input.GetKey(KeyCode.E)) {
-                transform.Rotate(0, -newangle, 0);
+                transform.Rotate(0, newangle, 0);
             }
 
         }
