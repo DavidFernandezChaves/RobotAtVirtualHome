@@ -10,7 +10,7 @@ public class SmartCamera : MonoBehaviour
 {
     public bool mouseInteractive;
     public int verbose;
-    public Vector2Int imageSize = new Vector2Int(640,480);
+    public Vector2Int imageSize;
     public float ROSFrecuency = 1;
     public bool sendImagesToROS;
 
@@ -33,6 +33,8 @@ public class SmartCamera : MonoBehaviour
         cameraMask = transform.Find("CameraMaskInstance").GetComponent<Camera>();
 
         Log("Sensor size: " + cameraRgb.sensorSize.ToString() + "/" +
+            "Field of View: " + cameraRgb.fieldOfView.ToString() + "/" +
+            "Image Size: " + imageSize.ToString() + "/" +
             "FoalLength: " + cameraRgb.focalLength.ToString() + "/" + 
             "LensShift: " + cameraRgb.lensShift + "/"+
             "Fx: " + cameraRgb.focalLength * (imageSize.x / cameraRgb.sensorSize.x) + "/"+

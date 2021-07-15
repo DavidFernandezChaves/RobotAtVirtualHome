@@ -187,26 +187,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2751955974639426536, guid: ac9647a790840754eb53428413915e14,
-        type: 3}
-      propertyPath: m_HDR
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2751955974639426536, guid: ac9647a790840754eb53428413915e14,
-        type: 3}
-      propertyPath: m_AllowMSAA
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2751955974639426536, guid: ac9647a790840754eb53428413915e14,
-        type: 3}
-      propertyPath: m_RenderingPath
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2751955974639426536, guid: ac9647a790840754eb53428413915e14,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 3072
-      objectReference: {fileID: 0}
     - target: {fileID: 2996449316319995066, guid: ac9647a790840754eb53428413915e14,
         type: 3}
       propertyPath: m_Name
@@ -245,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 20
+  houseSelected: 30
   recordHierarchy: 0
   transparentRoof: 1
   initialStateDoor: 3
