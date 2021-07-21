@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
+  ScanFrecuency: 0.5
+  sendScanToROS: 0
   ROSFrecuency: 1
   angle_min: 0
   angle_max: 360
-  angle_increment: 5
+  angle_increment: 1
   range_min: 0.12
   range_max: 12
 --- !u!114 &2381658882718352974

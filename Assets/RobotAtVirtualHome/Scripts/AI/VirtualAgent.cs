@@ -21,21 +21,19 @@ namespace RobotAtVirtualHome {
         public int verbose;
         public StatusMode state { get; protected set; }
 
-        public bool record;
-
         public bool sendPathToROS;
         public PathType pathType = PathType.Beacons;
         public float rOSFrecuency = 1;
 
-        public string filePath { get; protected set; }
         protected SmartCamera smartCamera;
+        protected LaserScanner laserScan;
         protected NavMeshAgent agent;
-        protected StreamWriter writer;
 
         #region Unity Functions
         protected void Awake() {
             agent = GetComponent<NavMeshAgent>();
             smartCamera = GetComponentInChildren<SmartCamera>();
+            laserScan = GetComponentInChildren<LaserScanner>();
             if (smartCamera == null) {
                 LogWarning("Smart camera not found");
             }

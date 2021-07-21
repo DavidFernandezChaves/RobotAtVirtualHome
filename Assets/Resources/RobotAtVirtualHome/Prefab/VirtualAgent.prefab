@@ -83,16 +83,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  record: 0
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  frequencyCapture: 1
-  cyclicalBehaviour: 1
+  cyclicalBehaviour: 0
   randomSecuence: 1
-  captureRGB: 0
-  captureDepth: 0
-  captureSemanticMask: 0
+  frequencyCapture: 0.5
+  captureRGB: 1
+  captureDepth: 1
+  captureSemanticMask: 1
+  captureScan: 1
 --- !u!114 &-9195802655526172168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 2
-  record: 0
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
@@ -115,9 +114,10 @@ MonoBehaviour:
   cellSize: 0.5
   exactRoute: 1
   photosPerPoint: 10
-  captureRGB: 0
-  captureDepth: 0
-  captureSemanticMask: 0
+  captureRGB: 1
+  captureDepth: 1
+  captureSemanticMask: 1
+  captureScan: 1
 --- !u!114 &3039054764102594731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 0
-  record: 0
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
@@ -142,6 +141,7 @@ MonoBehaviour:
   captureRGB: 0
   captureDepth: 0
   captureSemanticMask: 0
+  captureScan: 0
 --- !u!195 &931527486158493160
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -598,11 +598,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Laser
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635886726084542720, guid: c17c7ba979b8cea4b8aea192924c6851,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}

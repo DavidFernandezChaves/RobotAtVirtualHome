@@ -9,24 +9,29 @@ namespace RobotAtVirtualHome {
     [RequireComponent(typeof(NavMeshAgent))]
 
     public class AIWander : VirtualAgent {
-
-        public float frequencyCapture;
+        
         public bool cyclicalBehaviour;
         public bool randomSecuence;       
         
         public List<Vector3> VisitPoints { get; private set; }
         public string currentRoom { get; private set; }
 
+        public float frequencyCapture;
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
+        public bool captureScan;
+
+        public string filePath { get; private set; }
+        private StreamWriter logImgWriter;
+        private StreamWriter logScanWriter;
 
         private int index = 0;    
         private int index2 = 0;
 
         #region Unity Functions
         void Start() {
-            filePath = FindObjectOfType<GeneralSystem>().path;
+            
             VisitPoints = new List<Vector3>();
 
             var rooms = FindObjectsOfType<Room>();
@@ -38,8 +43,9 @@ namespace RobotAtVirtualHome {
                     VisitPoints.Add(point);
                 }
             }
-
-            if (record) {
+            
+            if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
+                filePath = FindObjectOfType<GeneralSystem>().path;
                 string tempPath = Path.Combine(filePath, "Wandering");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -52,10 +58,18 @@ namespace RobotAtVirtualHome {
                     Directory.CreateDirectory(filePath);
                 }
 
+                if(captureRGB || captureDepth || captureSemanticMask) {
+                    logImgWriter = new StreamWriter(filePath + "/LogImg.csv", true);
+                    logImgWriter.WriteLine("photoID;robotPosition;robotRotation;cameraPosition;cameraRotation;room");
+                }
+
+                if (captureScan) {
+                    logScanWriter = new StreamWriter(filePath + "/LogScan.csv", true);
+                    logScanWriter.WriteLine("scanID;robotPosition;robotRotation;data");
+                }                
+
                 Log("The saving path is:" + filePath);
-                writer = new StreamWriter(filePath + "/Info.csv", true);
-                writer.WriteLine("photoID;robotPosition;robotRotation;cameraPosition;cameraRotation;room");
-                StartCoroutine("Record");
+                StartCoroutine(Capture());
             }
 
             agent.SetDestination(VisitPoints[0]);
@@ -91,8 +105,11 @@ namespace RobotAtVirtualHome {
         }
 
         private void OnDestroy() {
-            if (this.enabled && record) {
-                writer.Close();
+            if (logImgWriter != null) {
+                logImgWriter.Close();
+            }
+            if (logScanWriter != null) {
+                logScanWriter.Close();
             }
         }
 
@@ -148,7 +165,7 @@ namespace RobotAtVirtualHome {
             return true;
         }
 
-        private IEnumerator Record() {
+        private IEnumerator Capture() {
             while (state != StatusMode.Finished) {
 
                 yield return new WaitForEndOfFrame();
@@ -156,14 +173,14 @@ namespace RobotAtVirtualHome {
                 yield return new WaitForSeconds(0.1f);
                 byte[] itemBGBytes;
                 if (captureSemanticMask) {
-                    writer.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                         + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
                     itemBGBytes = smartCamera.ImageMask.EncodeToPNG();
                     File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.png", itemBGBytes);
                 }
 
                 if (captureRGB) {
-                    writer.WriteLine(index2.ToString() + "_rgb.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_rgb.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                         + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
                     itemBGBytes = smartCamera.ImageRGB.EncodeToPNG();
                     File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.png", itemBGBytes);
@@ -171,10 +188,18 @@ namespace RobotAtVirtualHome {
                 }
 
                 if (captureDepth) {
-                    writer.WriteLine(index2.ToString() + "_depth.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_depth.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                         + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
                     itemBGBytes = smartCamera.ImageDepth.EncodeToPNG();
                     File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.png", itemBGBytes);
+                }
+
+                if (captureScan) {
+                    string data = "";
+                    foreach(float d in laserScan.ranges) {
+                        data += d.ToString() + ";";
+                    }
+                    logScanWriter.WriteLine(index2.ToString() + transform.position + ";" + transform.rotation.eulerAngles + ";" + data);
                 }
 
                 agent.isStopped = false;

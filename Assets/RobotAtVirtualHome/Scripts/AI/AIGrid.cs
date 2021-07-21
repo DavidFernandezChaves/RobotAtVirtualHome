@@ -15,9 +15,15 @@ namespace RobotAtVirtualHome {
         public float cellSize = 0.5f;
         public bool exactRoute = false;
         public int photosPerPoint = 10;
+
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
+        public bool captureScan;
+
+        public string filePath { get; private set; }
+        private StreamWriter logImgWriter;
+        private StreamWriter logScanWriter;
 
         public string room { get; private set; }        
 
@@ -27,13 +33,13 @@ namespace RobotAtVirtualHome {
         #region Unity Functions
 
         void Start() {
-            filePath = FindObjectOfType<GeneralSystem>().path;
 
             if (minRange[0] >= maxRange[0] || minRange[1] >= maxRange[1]) {
                 LogWarning("Incorrect ranges");
             }
 
-            if (record) {
+            if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
+                filePath = FindObjectOfType<GeneralSystem>().path;
                 string tempPath = Path.Combine(filePath, "Grid");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -46,14 +52,22 @@ namespace RobotAtVirtualHome {
                     Directory.CreateDirectory(filePath);
                 }
 
+                if (captureRGB || captureDepth || captureSemanticMask) {
+
+                    logImgWriter = new StreamWriter(filePath + "/InfoGrid.csv", true);
+                    logImgWriter.WriteLine("photoID;robotPosition;robotRotation;cameraPosition;cameraRotation;room");
+                }
+
+                if (captureScan) {
+                    logScanWriter = new StreamWriter(filePath + "/LogScan.csv", true);
+                    logScanWriter.WriteLine("scanID;robotPosition;robotRotation;data");
+                }
+
                 Log("The saving path is:" + filePath);
-                writer = new StreamWriter(filePath + "/InfoGrid.csv", true);
-                writer.WriteLine("photoID;robotPosition;robotRotation;cameraPosition;cameraRotation;room");
             }
             state = StatusMode.Loading;
             grid = new List<Vector3>();
-            StartCoroutine(CalculateGrid());
-           
+            StartCoroutine(CalculateGrid());           
         }
 
         private void Update() {
@@ -76,8 +90,11 @@ namespace RobotAtVirtualHome {
         }
 
         private void OnDestroy() {
-            if (this.enabled && record) {
-                writer.Close();
+            if (logImgWriter != null) {
+                logImgWriter.Close();
+            }
+            if (logScanWriter != null) {
+                logScanWriter.Close();
             }
         }
 
@@ -115,10 +132,9 @@ namespace RobotAtVirtualHome {
                             grid.Add(point);
                         }
                     }
-
-
                 }
             }
+            Debug.Log("Nodos: " + grid.Count);
             yield return new WaitForEndOfFrame();
             agent.SetDestination(grid[index]);
             agent.isStopped = false;
@@ -132,44 +148,54 @@ namespace RobotAtVirtualHome {
         private IEnumerator Capture() {
             transform.rotation = Quaternion.identity;
             yield return new WaitForEndOfFrame();
-            if (record) {
-                byte[] bytes;
-                for (int i = 1; i <= photosPerPoint; i++) {
-                    if (captureRGB) {
-                        writer.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
+
+            if (captureScan) {
+                string data = "";
+                foreach (float d in laserScan.ranges) {
+                    data += d.ToString() + ";";
+                }
+                logScanWriter.WriteLine(index.ToString() + transform.position + ";" + transform.rotation.eulerAngles + ";" + data);
+            }
+
+            byte[] bytes;
+            for (int i = 1; i <= photosPerPoint; i++) {
+                if (captureRGB) {
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
                         bytes = smartCamera.ImageRGB.EncodeToPNG();
-                        File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.png", bytes);
-                    }
-                    if (captureDepth) {
-                        writer.WriteLine(index.ToString() + "_" + i.ToString() + "_depth.png;"
-                        + transform.position.ToString("F6") + ";"
-                        + transform.rotation.eulerAngles.ToString("F6") + ";"
-                        + smartCamera.transform.localPosition.ToString("F6") + ";"
-                        + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
-                        + room);
-                        bytes = smartCamera.ImageDepth.EncodeToPNG();
-                        File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.png", bytes);
-                    }
-                    if (captureSemanticMask) {
-                        writer.WriteLine(index.ToString() + "_" + i.ToString() + "_mask.png;"
-                        + transform.position.ToString("F6") + ";"
-                        + transform.rotation.eulerAngles.ToString("F6") + ";"
-                        + smartCamera.transform.localPosition.ToString("F6") + ";"
-                        + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
-                        + room);
-                        bytes = smartCamera.ImageMask.EncodeToPNG();
-                        File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", bytes);
-                    }
-                    bytes = null;
-                    transform.rotation = Quaternion.Euler(0, i * (360 / photosPerPoint), 0);
-                    yield return new WaitForEndOfFrame();
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.png", bytes);
                 }
+                if (captureDepth) {
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_depth.png;"
+                        + transform.position.ToString("F6") + ";"
+                        + transform.rotation.eulerAngles.ToString("F6") + ";"
+                        + smartCamera.transform.localPosition.ToString("F6") + ";"
+                        + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
+                        + room);
+                    bytes = smartCamera.ImageDepth.EncodeToPNG();
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.png", bytes);
+                }
+                if (captureSemanticMask) {
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_mask.png;"
+                        + transform.position.ToString("F6") + ";"
+                        + transform.rotation.eulerAngles.ToString("F6") + ";"
+                        + smartCamera.transform.localPosition.ToString("F6") + ";"
+                        + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
+                        + room);
+                    bytes = smartCamera.ImageMask.EncodeToPNG();
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", bytes);
+                }                
+
+                bytes = null;
+                transform.rotation = Quaternion.Euler(0, i * (360 / photosPerPoint), 0);
+                //yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.1f);
             }
+
             Log(index.ToString() + "/" + grid.Count + " - " + (index / (float)grid.Count) * 100 + "%");
             index++;
             if (index >= grid.Count) {
