@@ -77,7 +77,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949812d6ee2e44344a478ff81105acb2, type: 3}
   m_Name: 
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd310a0bbdffa3342a6f9ac6f3d0bd93, type: 3}
   m_Name: 
@@ -112,7 +112,7 @@ MonoBehaviour:
   minRange: {x: -100, y: -100}
   maxRange: {x: 100, y: 100}
   cellSize: 0.5
-  exactRoute: 1
+  exactRoute: 0
   photosPerPoint: 10
   captureRGB: 1
   captureDepth: 1
@@ -152,7 +152,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 0.25
+  m_Speed: 1
   m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 25

@@ -159,6 +159,7 @@ namespace RobotAtVirtualHome {
 
             byte[] bytes;
             for (int i = 1; i <= photosPerPoint; i++) {
+                yield return new WaitForSeconds(0.75f);
                 if (captureRGB) {
                     logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
                         + transform.position.ToString("F6") + ";"
@@ -192,8 +193,6 @@ namespace RobotAtVirtualHome {
 
                 bytes = null;
                 transform.rotation = Quaternion.Euler(0, i * (360 / photosPerPoint), 0);
-                //yield return new WaitForEndOfFrame();
-                yield return new WaitForSeconds(0.1f);
             }
 
             Log(index.ToString() + "/" + grid.Count + " - " + (index / (float)grid.Count) * 100 + "%");

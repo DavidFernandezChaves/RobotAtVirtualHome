@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.01427218, g: 0.0065441616, b: 0.0014980838, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,15 +225,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 30
+  houseSelected: 4
   recordHierarchy: 1
   transparentRoof: 0
   initialStateDoor: 3
   initialStateGeneralLight: 0
-  initialStateLights: 2
-  wallPainting: 2
-  floorPainting: 2
-  forceSeed: 2
+  initialStateLights: 1
+  wallPainting: 1
+  floorPainting: 1
+  forceSeed: 0
   seedForced: 0
   path: D:\RobotAtVirtualHome
 --- !u!4 &238323567
@@ -462,14 +462,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333401733}
-  m_LocalRotation: {x: 0.9848078, y: -0, z: -0, w: -0.17364809}
+  m_LocalRotation: {x: 0.76604444, y: 0, z: 0, w: 0.64278764}
   m_LocalPosition: {x: 4.573242, y: 0.4658203, z: 0.71972656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1231701453}
   m_Father: {fileID: 238323567}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 200, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 100, y: 0, z: 0}
 --- !u!850595691 &1448122530
 LightingSettings:
   m_ObjectHideFlags: 0
