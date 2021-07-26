@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 1
-  houseSelected: 4
+  houseSelected: 30
   recordHierarchy: 1
   transparentRoof: 0
   initialStateDoor: 3
