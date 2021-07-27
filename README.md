@@ -12,7 +12,7 @@ Robot@VirtualHome consists of a set of tools that can instantiate, change the ap
   
   
 ## Features
-1. **Customize your environment**:
+**1. Customize your environment:**
 In the gameobject "map" you can find the "GeneralManager" script which will help you configure many of the appearance aspects of the environment.
 
 >**House Selected:** You can choose which house to instantiate between 1 and 30. (0 to choose a random house).
@@ -23,28 +23,28 @@ In the gameobject "map" you can find the "GeneralManager" script which will help
 >
 >**Initial State Door:** Choose the state of the doors, which modifies the navigation area of the agents. It can be set to None - will be kept as default, on - all doors open, off - all doors closed, or random. 
 >
->**Initial State General Light:** Modifies the status of the ceiling lights in each room. It can be set to None - will be kept as default, on - all doors open, off - all doors closed, or random.
+>**Initial State General Light:** Modifies the status of the ceiling lights in each room. It can be set to None - will be kept as default, on - all lights on, off - all lights off, or random.
 >
->**Initial State Lights:** Modify the state of the lights in the lamps of each room. It can be set to None - will be kept as default, on - all doors open, off - all doors closed, or random.
+>**Initial State Lights:** Modify the state of the lights in the lamps of each room. It can be set to None - will be kept as default, on - all lights on, off - all lights off, or random.
 >
->**Wall Painting:** Modify the color of the walls. It can be set to None - will be kept as default, on - all doors open, off - all doors closed, or random. It is possible to add new colors and textures by inserting it in the folder: "Assets/Resources/RobotAtVirtualHome/Materials/Walls"
+>**Wall Painting:** Modify the color of the walls. It can be set to None - will be kept as default, or random. It is possible to add new colors and textures by inserting it in the folder: "Assets/Resources/RobotAtVirtualHome/Materials/Walls"
 >
->**Floor Painting:** Modify the color of the floors. It can be set to None - will be kept as default, on - all doors open, off - all doors closed, or random. It is possible to add new colors and textures by inserting it in the folder: "Assets/Resources/RobotAtVirtualHome/Materials/Floors"
+>**Floor Painting:** Modify the color of the floors. It can be set to None - will be kept as default, or random. It is possible to add new colors and textures by inserting it in the folder: "Assets/Resources/RobotAtVirtualHome/Materials/Floors"
 >
->**Force Speed:**
+>**Force Seed:** Modifies the model used by virtual objects. It can be set to None - will be kept as default, on - the specified seed will be used, or random. This setting does not affect objects that inherit the seed from another object.
 >
->**Speed Foced:**
->
->**Path:**
+>**Path:** Path where the captures and log will be saved.
         
-  you can change the default options for lights, doors, colors, etc., by modifying each House prefabs in: "Assets/Resources/RobotAtVirtualHome/Houses".
+  The default options can be changed by modifying each House prefabs in: "Assets/Resources/RobotAtVirtualHome/Houses".
   
-  2. Ambient Light  
-
   
-  3. Robotic Behavior
+ **2. Ambient Light:**
+ It is possible to change the ambient light of the environment by simulating day and night cycles. To do this, the angle of the sun must be modified: rotation of the X-axis of the virtual object sun.
   
-  4. Virtual Sensors
+ **3. Customize a virtual agent:**
+  
+  
+ **4. Virtual Sensors:**
   
   
 ## Use Case
