@@ -45,7 +45,7 @@ namespace RobotAtVirtualHome {
             }
             
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<GeneralSystem>().path;
+                filePath = FindObjectOfType<GeneralManager>().path;
                 string tempPath = Path.Combine(filePath, "Wandering");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {

@@ -40,8 +40,8 @@ namespace RobotAtVirtualHome {
                 LogWarning("Unassigned tag");
             }
 
-            Transform t = FindObjectOfType<GeneralSystem>().FindObjectUPWithClass(typeof(Room), transform);
-            if (t != FindObjectOfType<GeneralSystem>()) {
+            Transform t = FindObjectOfType<GeneralManager>().FindObjectUPWithClass(typeof(Room), transform);
+            if (t != FindObjectOfType<GeneralManager>()) {
                 room = t.GetComponent<Room>();
                 switch (room.forceSeed) {
                     case mode.On:

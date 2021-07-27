@@ -9,7 +9,7 @@ using UnityEngine.AI;
 
 
 namespace RobotAtVirtualHome {
-    public class GeneralSystem : MonoBehaviour {
+    public class GeneralManager : MonoBehaviour {
 
         public int verbose;
         public int houseSelected = 0;

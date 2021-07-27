@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RobotAtVirtualHome {
 
-    public class GeneralManager : MonoBehaviour {
+    public class Initializer : MonoBehaviour {
 
         [System.Serializable]
         public struct Agent {
