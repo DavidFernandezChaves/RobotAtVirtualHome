@@ -8,7 +8,11 @@ Robot@VirtualHome consists of a set of tools that can instantiate, change the ap
 ![Head Image](./Assets/Resources/RobotAtVirtualHome/Images/ImgExample.png)
   
 ## How to use?
-This work has been developed in Unity 2020.3.14 (2020 and later versions should be compatible). To start using this ecosystem, you just need to have [Unity](https://unity3d.com/es/get-unity/download)  installed, download the project, open it and open the scene located in: "Assets/RobotAtVirtualHome/Scenes/RobotAtVirtualHome".
+This work has been developed in Unity 2020.3.14 (2020 and later versions should be compatible). To start using this ecosystem, you need to have [Unity](https://unity3d.com/es/get-unity/download)  installed and download the project.
+
+To lighten the load of git, the heavy files have been extracted so you should [download this](https://mega.nz/file/b9wjhArS#Eb3u50DcJxt60C6wpzv7r1wvZx0WawwtN77nvdrMhwo) folder in: "RobotAtVirtualHome/Assets/RobotAtVirtualHome" so that the path is: "RobotAtVirtualHome/Assets/RobotAtVirtualHome/ExternalResources".
+
+Then you only have to open the scene located in: "Assets/RobotAtVirtualHome/Scenes/RobotAtVirtualHome".
   
 
   
