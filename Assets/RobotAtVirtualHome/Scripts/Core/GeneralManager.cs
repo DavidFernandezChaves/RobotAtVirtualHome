@@ -104,6 +104,7 @@ namespace RobotAtVirtualHome {
                 writer.Close();
             }
             transform.GetComponent<NavMeshSurface>().BuildNavMesh();
+
             GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
 
         }

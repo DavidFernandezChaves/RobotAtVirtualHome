@@ -616,11 +616,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verbose: 1
   agentToInstantiate:
-  - name: VirtualAgent
+  - name: VirtualAgen1
     ip: 192.168.0.23
     prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
   agents: []
-  skipSave: 0
 --- !u!114 &1701356813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +636,6 @@ MonoBehaviour:
   saveOntology: 0
   prefix: MAPIR
   masterURI: http://mapir.isa.uma.es/
-  path: D:\SemanticMap.owl
   cateogiesOfRooms: []
 --- !u!114 &1701356814
 MonoBehaviour:

@@ -1,7 +1,9 @@
 ﻿using ROSUnityCore;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+
 
 namespace RobotAtVirtualHome {
 
@@ -12,12 +14,17 @@ namespace RobotAtVirtualHome {
             public string name;
             public string ip;
             public GameObject prefab;
+            public Agent(string name, string ip, string root)
+            {
+                this.name = name;
+                this.ip = ip;
+                this.prefab = (GameObject)AssetDatabase.LoadAssetAtPath(root, typeof(GameObject)); ;
+            }
         }
 
         public int verbose;
         public List<Agent> agentToInstantiate;
         public List<Transform> agents;
-        public bool skipSave = false;
 
         #region Unity Functions
         void Start() {
@@ -25,22 +32,6 @@ namespace RobotAtVirtualHome {
             if(ontologyManager != null)
                 ontologyManager.LoadOntology();
 
-            if (!skipSave && agentToInstantiate.Count > 0) {
-                Agent agent = new Agent();
-                agent.name = PlayerPrefs.GetString("robotName", "VirtualAgent");
-                agent.ip = PlayerPrefs.GetString("ip", agentToInstantiate[0].ip);
-                agent.prefab = agentToInstantiate[0].prefab;
-                agentToInstantiate[0] = agent;                  
-            }
-
-        }
-
-        private void OnApplicationQuit() {
-            if (agentToInstantiate.Count > 0) {
-                PlayerPrefs.SetString("robotName", agentToInstantiate[0].name);
-                PlayerPrefs.SetString("ip", agentToInstantiate[0].ip);
-                PlayerPrefs.Save();
-            }
         }
         #endregion
 
@@ -51,11 +42,12 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void CreateVirtualAgent(House house) {            
+        private void CreateVirtualAgent(House house) {
             if (house.virtualObjects.ContainsKey("Station_0")) {
-                var origin = house.virtualObjects["Station_0"].transform.position;
-                foreach (Agent r in agentToInstantiate) {
-                    Transform agent = Instantiate(r.prefab, origin , Quaternion.identity, house.transform.parent).transform;
+                var origin = house.virtualObjects["Station_0"].transform.position;                
+                foreach (Agent r in agentToInstantiate)
+                {
+                    Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, house.transform.parent).transform;
                     agent.GetComponent<ROS>().robotName = r.name;
                     agent.GetComponent<ROS>().Connect(r.ip);
                     agents.Add(agent);
