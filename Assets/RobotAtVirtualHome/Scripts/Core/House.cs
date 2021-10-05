@@ -5,8 +5,9 @@ using UnityEngine;
 namespace RobotAtVirtualHome {
     public class House : MonoBehaviour {
 
-        public int verbose;        
-        
+        [Tooltip("The log level to use")]
+        public LogLevel LogLevel = LogLevel.Normal;
+
         public List<Room> rooms { get; private set; }
         public Dictionary<string,VirtualObject> virtualObjects { get; private set; }
         public Dictionary<string,Color> semanticColors { get; private set; }
@@ -79,14 +80,20 @@ namespace RobotAtVirtualHome {
 
         #region Private Functions
 
-        private void Log(string _msg) {
-            if (verbose>1)
-                Debug.Log("[House]: " + _msg);
-        }
+        private void Log(string _msg, LogLevel lvl, bool Warning = false)
+        {
+            if (LogLevel <= lvl)
+            {
+                if (Warning)
+                {
+                    Debug.LogWarning("[House]: " + _msg);
+                }
+                else
+                {
+                    Debug.Log("[House]: " + _msg);
+                }
+            }
 
-        private void LogWarning(string _msg) {
-            if (verbose>0)
-                Debug.LogWarning("[House]: " + _msg);
         }
         #endregion
 

@@ -5,22 +5,23 @@ using UnityEngine;
 
 namespace RobotAtVirtualHome {
 
-    public enum mode { On, Off, Radomly, None }
-
     public class Room : MonoBehaviour {
+        [Header("General")]
+        [Tooltip("The log level to use")]
+        public LogLevel LogLevel = LogLevel.Normal;
 
-        public int verbose;
-
+        [Tooltip("Room type")]
         public RoomType roomType;
 
-        public mode initialStateDoor = mode.Off;
-        public mode initialStateGeneralLight = mode.On;
-        public mode initialStateLights = mode.Radomly;
-        public mode wallPainting = mode.Radomly;
-        public mode floorPainting = mode.Radomly;
-        public mode forceSeed = mode.None;
-        public int seedForced = 0;
+        [Header("Customization")]        
+        public LightLevel initialStateGeneralLight = LightLevel.On;
+        public LightLevel initialStateLights = LightLevel.Radomly;
+        public bool randomStateDoor = false;
+        public bool randomWallPainting = true;
+        public bool randomFloorPainting = true;
+        public bool randomObjectModel = false;
 
+        [Header("Preloading materials")]
         public Material[] wallPaints;
         public Material[] floorPaints;
 
@@ -30,7 +31,7 @@ namespace RobotAtVirtualHome {
 
         #region Unity Functions
         private void Awake() {
-            verbose = FindObjectOfType<House>().verbose;
+            LogLevel = FindObjectOfType<House>().LogLevel;
             generalLights = new List<Light>();
             lamps = new List<Light>();
             doors = new List<Door>();
@@ -60,68 +61,53 @@ namespace RobotAtVirtualHome {
             SendMessage("SetRoomID", transform.name,SendMessageOptions.DontRequireReceiver);
             SendMessage("SetRoomType", roomType.ToString(),SendMessageOptions.DontRequireReceiver);
 
-            switch (initialStateDoor) {
-                case mode.On:
-                    SetDoors(true);
-                    break;
-                case mode.Off:
-                    SetDoors(false);
-                    break;
-                case mode.Radomly:
-                    SetDoors(Random.value >= 0.5f);
-                    break;
-            }
+            if(randomStateDoor)
+                SetDoors(Random.value >= 0.5f);
 
             switch (initialStateGeneralLight) {
-                case mode.On:
+                case LightLevel.On:
                     TurnGeneralLight(true);
                     break;
-                case mode.Off:
+                case LightLevel.Off:
                     TurnGeneralLight(false);
                     break;
-                case mode.Radomly:
+                case LightLevel.Radomly:
                     TurnGeneralLight(Random.value >= 0.5f);
                     break;
             }
 
             switch (initialStateLights) {
-                case mode.On:
+                case LightLevel.On:
                     TurnLight(true);
                     break;
-                case mode.Off:
+                case LightLevel.Off:
                     TurnLight(false);
                     break;
-                case mode.Radomly:
+                case LightLevel.Radomly:
                     TurnLight(Random.value >= 0.5f);
                     break;
             }
 
-            switch (wallPainting) {
-                case mode.On:
-                    if (wallPaints.Length > 0) {
-                        PaintWall(wallPaints[Random.Range(0, wallPaints.Length)]);
-                    } else {
-                        LogWarning("No wall painting added");
-                    }
-                    break;
-                case mode.Radomly:
-                    Material[] mts = Resources.LoadAll("RobotAtVirtualHome/Materials/Walls", typeof(Material)).Cast<Material>().ToArray();
-                    PaintWall(mts[Random.Range(0, mts.Length)]);
-                    break;
+            if (randomWallPainting) {
+                if (wallPaints.Length > 0)
+                {
+                    PaintWall(wallPaints[Random.Range(0, wallPaints.Length)]);
+                }
+                else
+                {
+                    Log("No wall painting added", LogLevel.Error, true);
+                }
             }
 
-            switch (floorPainting) {
-                case mode.On:
-                    if (floorPaints.Length > 0) {
-                        PaintFloor(floorPaints[Random.Range(0, floorPaints.Length)]);
-                    } else {
-                        LogWarning("No floor painting added");
-                    }
-                    break;
-                case mode.Radomly:
-                    Material[] mts = Resources.LoadAll("RobotAtVirtualHome/Materials/Floors", typeof(Material)).Cast<Material>().ToArray();
-                    PaintFloor(mts[Random.Range(0, mts.Length)]);
-                    break;
+            if (randomFloorPainting) {
+                if (floorPaints.Length > 0)
+                {
+                    PaintFloor(floorPaints[0]);
+                }
+                else
+                {
+                    Log("No floor painting added", LogLevel.Error, true);
+                }
             }
         }
         #endregion
@@ -161,14 +147,19 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void Log(string _msg) {
-            if (verbose > 1)
-                Debug.Log("[Room " + roomType.ToString() + "]: " + _msg);
-        }
-
-        private void LogWarning(string _msg) {
-            if (verbose > 0)
-                Debug.LogWarning("[Room " + roomType.ToString() + "]: " + _msg);
+        private void Log(string _msg, LogLevel lvl, bool Warning=false) {
+            if (LogLevel <= lvl)
+            {
+                if (Warning)
+                {
+                    Debug.LogWarning("[Room " + roomType.ToString() + "]: " + _msg);
+                }
+                else
+                {
+                    Debug.Log("[Room " + roomType.ToString() + "]: " + _msg);
+                }
+            }
+                
         }
         #endregion
     }

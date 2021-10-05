@@ -18,9 +18,15 @@ namespace RobotAtVirtualHome {
         public enum StatusMode { Loading, Walking, Turning, Finished }
         public enum PathType { Beacons, Interpolated }
 
-        public int verbose;
-        public StatusMode state { get; protected set; }
+        [Header("General")]
+        [Tooltip("The log level to use")]
+        public LogLevel LogLevel = LogLevel.Normal;
 
+        [SerializeField]
+        protected StatusMode state;
+
+
+        [Header("ROS")]
         public bool sendPathToROS;
         public PathType pathType = PathType.Beacons;
         public float rOSFrecuency = 1;
@@ -35,7 +41,7 @@ namespace RobotAtVirtualHome {
             smartCamera = GetComponentInChildren<SmartCamera>();
             laserScan = GetComponentInChildren<LaserScanner>();
             if (smartCamera == null) {
-                LogWarning("Smart camera not found");
+                Log("Smart camera not found",LogLevel.Error,true);
             }
         }
         #endregion
@@ -43,7 +49,7 @@ namespace RobotAtVirtualHome {
         #region Public Functions
         public void Connected(ROS ros) {
             if (enabled && sendPathToROS) {
-                Log("Sending path to ROS.");
+                Log("Sending path to ROS.",LogLevel.Normal);
                 ros.RegisterPubPackage("Path_pub");
                 if (pathType == PathType.Beacons) {
                     StartCoroutine(SendPathToROS(ros));
@@ -150,14 +156,19 @@ namespace RobotAtVirtualHome {
             }
         }
 
-        protected void Log(string _msg) {
-            if (verbose > 1)
-                Debug.Log("[VirtualRobot]: " + _msg);
-        }
-
-        protected void LogWarning(string _msg) {
-            if (verbose > 0)
-                Debug.LogWarning("[VirtualRobot]: " + _msg);
+        protected void Log(string _msg, LogLevel lvl, bool Warning = false)
+        {
+            if (LogLevel <= lvl)
+            {
+                if (Warning)
+                {
+                    Debug.LogWarning("[VirtualRobot]: " + _msg);
+                }
+                else
+                {
+                    Debug.Log("[VirtualRobot]: " + _msg);
+                }
+            }
         }
         #endregion
     }

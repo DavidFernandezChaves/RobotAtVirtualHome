@@ -7,18 +7,23 @@ using UnityEngine.AI;
 namespace RobotAtVirtualHome {
     public class ManualAgent : VirtualAgent {
 
-        public float mainSpeed = 0.5f;        
+        [Header("Behaviour")]
+        [Range(0.1f, 10)]
+        public float mainSpeed = 0.5f;
+        [Range(0.1f, 10)]
         public float angularSpeed = 0.5f;
+        [Range(1f, 3)]
         public float factorSpeed = 2f;
 
-        public string currentRoom { get; private set; }
-
+        [Header("Capture Data")]
+        [Range(0.1f, 10)]
         public float frequencyCapture;
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
         public bool captureScan;
 
+        public string currentRoom { get; private set; }
         public string filePath { get; private set; }
         private StreamWriter logImgWriter;
         private StreamWriter logScanWriter;
@@ -31,7 +36,7 @@ namespace RobotAtVirtualHome {
                 navMesh.enabled = false;
 
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<GeneralManager>().path;
+                filePath = FindObjectOfType<EnvironmentManager>().path;
                 string tempPath = Path.Combine(filePath, "ManualAgent");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -54,7 +59,7 @@ namespace RobotAtVirtualHome {
                     logScanWriter.WriteLine("scanID;robotPosition;robotRotation;data");
                 }
 
-                Log("The saving path is:" + filePath);
+                Log("The saving path is:" + filePath,LogLevel.Normal);
                 StartCoroutine(Capture());
             }
         }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+using ViMantic;
 
 namespace RobotAtVirtualHome {
 
@@ -22,9 +22,12 @@ namespace RobotAtVirtualHome {
             }
         }
 
-        public int verbose;
+        [Header("General")]
+        [Tooltip("The log level to use")]
+        public LogLevel LogLevel = LogLevel.Normal;
+        [Tooltip("Insert the prefab of the robots you want to load at the start of the simulation.")]
         public List<Agent> agentToInstantiate;
-        public List<Transform> agents;
+        public List<Transform> agents { set; private get; }
 
         #region Unity Functions
         void Start() {
@@ -52,17 +55,23 @@ namespace RobotAtVirtualHome {
                     agent.GetComponent<ROS>().Connect(r.ip);
                     agents.Add(agent);
                 }
-            } else { LogWarning("This house don't have robot station"); }
+            } else { Log("This house don't have robot station",LogLevel.Error,true); }
         }
 
-        private void Log(string _msg) {
-            if (verbose > 1)
-                Debug.Log("[General Manager]: " + _msg);
-        }
+        private void Log(string _msg, LogLevel lvl, bool Warning = false)
+        {
+            if (LogLevel <= lvl)
+            {
+                if (Warning)
+                {
+                    Debug.LogWarning("[General Manager]: " + _msg);
+                }
+                else
+                {
+                    Debug.Log("[General Manager]: " + _msg);
+                }
+            }
 
-        private void LogWarning(string _msg) {
-            if (verbose > 0)
-                Debug.LogWarning("[General Manager]: " + _msg);
         }
         #endregion
 

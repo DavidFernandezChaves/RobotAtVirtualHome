@@ -9,19 +9,21 @@ namespace RobotAtVirtualHome {
     [RequireComponent(typeof(NavMeshAgent))]
 
     public class AIWander : VirtualAgent {
-        
-        public bool cyclicalBehaviour;
-        public bool randomSecuence;       
-        
-        public List<Vector3> VisitPoints { get; private set; }
-        public string currentRoom { get; private set; }
 
+        [Header("Behaviour")]
+        public bool cyclical;
+        public bool randomSecuence;
+
+        [Header("Capture Data")]
+        [Range(0.1f,10)]
         public float frequencyCapture;
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
         public bool captureScan;
 
+        public List<Vector3> VisitPoints { get; private set; }
+        public string currentRoom { get; private set; }
         public string filePath { get; private set; }
         private StreamWriter logImgWriter;
         private StreamWriter logScanWriter;
@@ -45,7 +47,7 @@ namespace RobotAtVirtualHome {
             }
             
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<GeneralManager>().path;
+                filePath = FindObjectOfType<EnvironmentManager>().path;
                 string tempPath = Path.Combine(filePath, "Wandering");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -68,7 +70,7 @@ namespace RobotAtVirtualHome {
                     logScanWriter.WriteLine("scanID;robotPosition;robotRotation;data");
                 }                
 
-                Log("The saving path is:" + filePath);
+                Log("The saving path is:" + filePath,LogLevel.Normal);
                 StartCoroutine(Capture());
             }
 
@@ -91,12 +93,12 @@ namespace RobotAtVirtualHome {
                         if (GetNextGoal(out nextGoal)) {
                             agent.SetDestination(nextGoal);
                             agent.isStopped = false;
-                            Log("Next goal:" + nextGoal.ToString());
+                            Log("Next goal:" + nextGoal.ToString(),LogLevel.Normal);
                             state = StatusMode.Loading;
                             StartCoroutine(DoOnGoal());
                         } else {
                             state = StatusMode.Finished;
-                            Log("Finish");
+                            Log("Finish", LogLevel.Normal);
                             GetComponent<AudioSource>().Play();
                         }
                     }
@@ -115,7 +117,7 @@ namespace RobotAtVirtualHome {
 
 #if UNITY_EDITOR
         private void OnDrawGizmos() {
-            if (Application.isPlaying && this.enabled && verbose > 0) {
+            if (Application.isPlaying && this.enabled && LogLevel >= LogLevel.Normal) {
                 Gizmos.color = Color.green;
                 foreach (Vector3 point in VisitPoints) {
                     Gizmos.DrawSphere(point, 0.1f);
@@ -140,7 +142,7 @@ namespace RobotAtVirtualHome {
 
         private bool GetNextGoal(out Vector3 result) {
             result = Vector3.zero;
-            if (cyclicalBehaviour) {
+            if (cyclical) {
                 if (randomSecuence) {
                     result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
                 } else {

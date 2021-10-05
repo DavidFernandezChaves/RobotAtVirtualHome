@@ -10,12 +10,15 @@ namespace RobotAtVirtualHome {
 
     public class AIGrid : VirtualAgent {
 
+        [Header("Behaviour")]
         public Vector2 minRange;
         public Vector2 maxRange;
+        [Range(0.1f,10)]
         public float cellSize = 0.5f;
         public bool exactRoute = false;
-        public int photosPerPoint = 10;
+        public int photosPerNode = 10;
 
+        [Header("Capture Data")]
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
@@ -35,11 +38,11 @@ namespace RobotAtVirtualHome {
         void Start() {
 
             if (minRange[0] >= maxRange[0] || minRange[1] >= maxRange[1]) {
-                LogWarning("Incorrect ranges");
+                Log("Incorrect ranges",LogLevel.Error,true);
             }
 
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<GeneralManager>().path;
+                filePath = FindObjectOfType<EnvironmentManager>().path;
                 string tempPath = Path.Combine(filePath, "Grid");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -63,7 +66,7 @@ namespace RobotAtVirtualHome {
                     logScanWriter.WriteLine("scanID;robotPosition;robotRotation;data");
                 }
 
-                Log("The saving path is:" + filePath);
+                Log("The saving path is:" + filePath,LogLevel.Normal);
             }
             state = StatusMode.Loading;
             grid = new List<Vector3>();
@@ -83,7 +86,7 @@ namespace RobotAtVirtualHome {
                         agent.velocity.sqrMagnitude == 0f) {
                         state = StatusMode.Turning;
                         StartCoroutine(Capture());
-                        Log("Change state to Capture");
+                        Log("Change state to Capture",LogLevel.Developer);
                     }
                     break;
             }
@@ -100,7 +103,7 @@ namespace RobotAtVirtualHome {
 
 #if UNITY_EDITOR
         private void OnDrawGizmos() {
-            if (Application.isPlaying && this.enabled && verbose > 0) {
+            if (Application.isPlaying && this.enabled && LogLevel >= LogLevel.Normal) {
                 Gizmos.color = Color.green;
                 foreach (Vector3 point in grid) {
                     Gizmos.DrawSphere(point, 0.1f);
@@ -111,9 +114,6 @@ namespace RobotAtVirtualHome {
         }
 #endif
 
-        #endregion
-
-        #region Public Functions
         #endregion
 
         #region Private Functions
@@ -140,7 +140,7 @@ namespace RobotAtVirtualHome {
             agent.isStopped = false;
             yield return new WaitForEndOfFrame();
             state = StatusMode.Walking;
-            Log("Start");
+            Log("Start",LogLevel.Normal);
 
             yield return null;
         }
@@ -158,7 +158,7 @@ namespace RobotAtVirtualHome {
             }
 
             byte[] bytes;
-            for (int i = 1; i <= photosPerPoint; i++) {
+            for (int i = 1; i <= photosPerNode; i++) {
                 yield return new WaitForSeconds(0.75f);
                 if (captureRGB) {
                     logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
@@ -192,20 +192,20 @@ namespace RobotAtVirtualHome {
                 }                
 
                 bytes = null;
-                transform.rotation = Quaternion.Euler(0, i * (360 / photosPerPoint), 0);
+                transform.rotation = Quaternion.Euler(0, i * (360 / photosPerNode), 0);
             }
 
-            Log(index.ToString() + "/" + grid.Count + " - " + (index / (float)grid.Count) * 100 + "%");
+            Log(index.ToString() + "/" + grid.Count + " - " + (index / (float)grid.Count) * 100 + "%",LogLevel.Normal);
             index++;
             if (index >= grid.Count) {
                 state = StatusMode.Finished;
-                Log("Finished");
+                Log("Finished",LogLevel.Normal);
                 GetComponent<AudioSource>().Play();
             } else {
                 agent.SetDestination(grid[index]);
                 agent.isStopped = false;
                 state = StatusMode.Walking;
-                Log(grid[index].ToString());
+                Log(grid[index].ToString(),LogLevel.Normal);
             }
 
             yield return null;

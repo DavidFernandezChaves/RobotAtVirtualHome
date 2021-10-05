@@ -5,13 +5,18 @@ using UnityEngine;
 
 namespace RobotAtVirtualHome {
     public class VirtualObject : MonoBehaviour {
+        [Header("General")]
+        [Tooltip("The log level to use")]
+        public LogLevel LogLevel = LogLevel.Normal;        
 
-        public int verbose;
+        [Tooltip("Specify the labels that are related to the represented object.")]
         public ObjectTag[] tags;
+        
+        [Tooltip("Insert the object from which you want to inherit the seed of the model to be loaded.")]
         public VirtualObject inheritedSeed;
-        public bool forceSeed;
-        public int seedForced=0;
+        public bool radomModel;
 
+        [Header("Preloading models")]
         public GameObject[] models;
 
         public int seed { get; private set; }
@@ -21,7 +26,7 @@ namespace RobotAtVirtualHome {
         private void Awake() {
             var house = FindObjectOfType<House>();
             if(house!= null) {
-                verbose = house.verbose;
+                LogLevel = house.LogLevel;
             }
             
             seed = Random.Range(0, models.Length);
@@ -31,42 +36,32 @@ namespace RobotAtVirtualHome {
             }
 
             if(models == null || models.Length == 0) {
-                Log("Unassigned model");
+                Log("Unassigned model", LogLevel.Error, true);
             }
         }
 
         void Start() {
             if (tags == null || tags.Length == 0) {
-                LogWarning("Unassigned tag");
+                Log("Unassigned tag", LogLevel.Error, true);
             }
 
-            Transform t = FindObjectOfType<GeneralManager>().FindObjectUPWithClass(typeof(Room), transform);
-            if (t != FindObjectOfType<GeneralManager>()) {
-                room = t.GetComponent<Room>();
-                switch (room.forceSeed) {
-                    case mode.On:
-                        forceSeed = true;
-                        seedForced = room.seedForced;
-                        break;
-                    case mode.Off: forceSeed = false; break;
-                    case mode.Radomly: forceSeed = false; break;
-                }
+            Transform t = FindObjectOfType<EnvironmentManager>().FindObjectUPWithClass(typeof(Room), transform);
+            if (t != FindObjectOfType<EnvironmentManager>()) {
+                radomModel = t.GetComponent<Room>().randomObjectModel;                
             } else {
-                LogWarning("Room not found");
+                Log("Room not found", LogLevel.Error, true);
             }
 
-            if (forceSeed) {
-                seed = seedForced;
-            }else if(inheritedSeed != null){
+            if(inheritedSeed != null){
                 seed = inheritedSeed.seed;
             }
 
             if(seed < models.Length) {
-                Log("Selected style: " + seed.ToString());
+                Log("Selected style: " + seed.ToString(), LogLevel.Developer);
                 models[seed].SetActive(true);
             } else {
                 if (models != null && models.Length > 0) {
-                    Log("The model closest to: " + seed.ToString() + "was selected");
+                    Log("The model closest to: " + seed.ToString() + "was selected", LogLevel.Developer);
                     models[models.Length-1].SetActive(true);
                 }
             }
@@ -87,14 +82,20 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void Log(string _msg) {
-            if (verbose > 1)
-                Debug.Log("[VirtualObject-" + transform.name + "]: " + _msg);
-        }
+        private void Log(string _msg, LogLevel lvl, bool Warning = false)
+        {
+            if (LogLevel <= lvl)
+            {
+                if (Warning)
+                {
+                    Debug.LogWarning("[VirtualObject-" + transform.name + "]: " + _msg);
+                }
+                else
+                {
+                    Debug.Log("[VirtualObject-" + transform.name + "]: " + _msg);
+                }
+            }
 
-        private void LogWarning(string _msg) {
-            if (verbose > 0)
-                Debug.LogWarning("[VirtualObject-" + transform.name + "]: " + _msg);
         }
         #endregion
     }
