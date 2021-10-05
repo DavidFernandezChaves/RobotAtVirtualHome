@@ -25,9 +25,6 @@ namespace RobotAtVirtualHome {
         #region Unity Functions
         private void Awake() {
             var house = FindObjectOfType<House>();
-            if(house!= null) {
-                LogLevel = house.LogLevel;
-            }
             
             seed = Random.Range(0, models.Length);
 
@@ -36,7 +33,7 @@ namespace RobotAtVirtualHome {
             }
 
             if(models == null || models.Length == 0) {
-                Log("Unassigned model", LogLevel.Error, true);
+                Log("Unassigned model", LogLevel.Normal);
             }
         }
 
@@ -84,7 +81,7 @@ namespace RobotAtVirtualHome {
         #region Private Functions
         private void Log(string _msg, LogLevel lvl, bool Warning = false)
         {
-            if (LogLevel <= lvl)
+            if (LogLevel <= lvl && LogLevel != LogLevel.Nothing)
             {
                 if (Warning)
                 {

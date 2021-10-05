@@ -22,8 +22,7 @@ namespace RobotAtVirtualHome {
         [Tooltip("Path where you want to save the collected data.")]
         public string path = @"D:\";
         [Tooltip("Do you want the roof to be transparent for easy viewing?")]
-        public bool transparentRoof;
-        
+        public bool transparentRoof;       
 
         [Header("Customization")]
         public LightLevel initialStateGeneralLight;
@@ -33,13 +32,16 @@ namespace RobotAtVirtualHome {
         public bool randomFloorPainting;
         public bool randomObjectModel;
 
+        [Header("Preload prefabs")]
+        [SerializeField]
+        private List<GameObject> houses;
+
         private House house;
         
         private StreamWriter writer;
 
         #region Unity Functions
         private void Awake() {
-            var houses = Resources.LoadAll("RobotAtVirtualHome/Houses", typeof(GameObject)).Cast<GameObject>().ToList();
             if (houses != null && houses.Count > 0) {
 
                 if (houseSelected == 0) {
@@ -64,7 +66,7 @@ namespace RobotAtVirtualHome {
                         room.randomFloorPainting = randomFloorPainting;
                         room.randomObjectModel = randomObjectModel;
                     }
-                    Invoke("StartSimulation", 0.1f);
+                    Invoke("StartSimulation", 0.5f);
                 } else {
                     Log("The gameObject " + (houseSelected-1) + " does not have the 'House' component.",LogLevel.Error,true);
                 }
@@ -106,12 +108,13 @@ namespace RobotAtVirtualHome {
 
             GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
 
+
         }
 
 
         private void Log(string _msg, LogLevel lvl, bool Warning = false)
         {
-            if (LogLevel <= lvl)
+            if (LogLevel <= lvl && LogLevel != LogLevel.Nothing)
             {
                 if (Warning)
                 {

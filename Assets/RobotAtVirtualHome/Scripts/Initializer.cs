@@ -29,7 +29,12 @@ namespace RobotAtVirtualHome {
         public List<Agent> agentToInstantiate;
         public List<Transform> agents { set; private get; }
 
+
         #region Unity Functions
+        private void Awake()
+        {
+            agents = new List<Transform>();
+        }
         void Start() {
             var ontologyManager = GetComponent<OntologySystem>();
             if(ontologyManager != null)
@@ -60,7 +65,7 @@ namespace RobotAtVirtualHome {
 
         private void Log(string _msg, LogLevel lvl, bool Warning = false)
         {
-            if (LogLevel <= lvl)
+            if (LogLevel <= lvl && LogLevel != LogLevel.Nothing)
             {
                 if (Warning)
                 {

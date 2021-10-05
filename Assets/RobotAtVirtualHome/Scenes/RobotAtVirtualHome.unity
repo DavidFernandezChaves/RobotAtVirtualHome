@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749017, g: 0.4853112, b: 0.56558603, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -224,18 +224,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daefdec6733c53446a34e61b1dcc82fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
-  houseSelected: 30
-  recordHierarchy: 1
+  LogLevel: 1
+  houseSelected: 20
+  recordEnvironmentDatas: 0
+  path: D:\RobotAtVirtualHome
   transparentRoof: 0
-  initialStateDoor: 3
   initialStateGeneralLight: 0
   initialStateLights: 1
-  wallPainting: 1
-  floorPainting: 1
-  forceSeed: 0
-  seedForced: 0
-  path: D:\RobotAtVirtualHome
+  randomStateDoor: 0
+  randomWallPainting: 0
+  randomFloorPainting: 0
+  randomObjectModel: 0
+  houses:
+  - {fileID: 5591509399737963863, guid: b500168d03a878741afa66af528f124d, type: 3}
+  - {fileID: 2505263735248533966, guid: 78cfc527f8044a94f8fb4af17a7594a1, type: 3}
+  - {fileID: 5175839292598740021, guid: 76eb9c2b7e3da554bacab43dd6198e17, type: 3}
+  - {fileID: 409248765806845269, guid: 04ec7f91472c7d2409f5251b1c832360, type: 3}
+  - {fileID: 6776413355765860488, guid: 64a8d98c702068641a2d904410c245d5, type: 3}
+  - {fileID: 6182154327969863802, guid: cbd521ff2080faa478c728584bd43ee5, type: 3}
+  - {fileID: 8040090885828261601, guid: ae708a2099a3fbe4bb37e0c6e7fe6541, type: 3}
+  - {fileID: 5627921120118828259, guid: 08fe50df8d29d8746a99a072aa1df43f, type: 3}
+  - {fileID: 6714529773594097328, guid: 46f84401bcb5d274bb15ffeabc325779, type: 3}
+  - {fileID: 7802410191631084768, guid: 604e8d8961122534a808659860823eff, type: 3}
+  - {fileID: 5093307413679979763, guid: fe467da6ebe2b3647b7402ba07c0e012, type: 3}
+  - {fileID: 6750662268457156931, guid: 6747513769596514bbede6ea89f42848, type: 3}
+  - {fileID: 911579529663641992, guid: e41bbf8e754579948a5c885062491b12, type: 3}
+  - {fileID: 5563423102212225632, guid: 793318577dc847b46aa640167ec3d574, type: 3}
+  - {fileID: 8731037887417600141, guid: dbb4629cd67df4e4994d537d8baa52c3, type: 3}
+  - {fileID: 2887312678713584618, guid: 2ba34ea448bf97d4e98ab7073b1884c2, type: 3}
+  - {fileID: 3077704681969443829, guid: d5b2ac8f5a6104e4282a82e9d2454968, type: 3}
+  - {fileID: 8528626757357625862, guid: 4a666e2e08d35174e8ed2b0f4c8236c2, type: 3}
+  - {fileID: 2955202393244113757, guid: 8d3e83a288ec0f24f97cf8936c5af39f, type: 3}
+  - {fileID: 1112769279574540562, guid: 2e2e89fb346193c48ab920da698864f8, type: 3}
+  - {fileID: 2450873576671662101, guid: 1541f0660da2725428b3f37505fb9241, type: 3}
+  - {fileID: 8525906916606830508, guid: faeb829015ca78342afd14f16f2a0bd0, type: 3}
+  - {fileID: 9088366524161414707, guid: 13bb059216339bf47ae1f0bb24ac57f9, type: 3}
+  - {fileID: 682834431190122361, guid: 0ae82d59446332e45bbe4112479d267f, type: 3}
+  - {fileID: 5877860875789954494, guid: c9817cc5600f769429609ff68d552033, type: 3}
+  - {fileID: 1294605523938481594, guid: c3abe1b130ec0fe47bb0ab19c53618ca, type: 3}
+  - {fileID: 3591149234395902097, guid: 865d1c46a2ecc394c8a8c76b5a3742fb, type: 3}
+  - {fileID: 7016719146016694467, guid: 5ec817929a3b7674093ec5c791459cd4, type: 3}
+  - {fileID: 6082542048185358924, guid: 84b33884f43aa6c429b88c4d09414145, type: 3}
+  - {fileID: 355009211327281689, guid: 75a77525beb9c5248b9c37676f9cb245, type: 3}
 --- !u!4 &238323567
 Transform:
   m_ObjectHideFlags: 0
@@ -541,9 +571,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1701356810}
   - component: {fileID: 1701356812}
-  - component: {fileID: 1701356809}
   - component: {fileID: 1701356813}
   - component: {fileID: 1701356811}
+  - component: {fileID: 1701356809}
   - component: {fileID: 1701356814}
   m_Layer: 9
   m_Name: General Scripts
@@ -564,8 +594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec01fb4313a062042b56a22172d6c4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
+  LogLevel: 2
   updateRate: 0.1
+  clients: []
+  tfNodesRegistered: []
 --- !u!4 &1701356810
 Transform:
   m_ObjectHideFlags: 0
@@ -593,11 +625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfd9c59273188c46ae4a23c880a5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 2
-  threshold_match_same_type: 5
-  threshold_match_diff_type: 2
+  LogLevel: 1
   minPixelsMask: 1000
   deepRange: {x: 0.5, y: 5}
+  thresholdMatchSameSype: 4
+  thresholdMatchDiffType: 2
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
     type: 3}
   tfFrameForObjects: {fileID: 2047795873}
@@ -614,12 +646,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47509e260dc3b449b229545423d1a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
+  LogLevel: 1
   agentToInstantiate:
   - name: VirtualAgen1
     ip: 192.168.0.23
     prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
-  agents: []
 --- !u!114 &1701356813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,11 +663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52eecb07d2792884b8b5c5e53557d6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
+  LogLevel: 1
   saveOntology: 0
   prefix: MAPIR
   masterURI: http://mapir.isa.uma.es/
-  cateogiesOfRooms: []
 --- !u!114 &1701356814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,53 +713,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 238323567}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2094589306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2094589308}
-  - component: {fileID: 2094589307}
-  m_Layer: 0
-  m_Name: Test Tool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2094589307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094589306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c47ebc70f561dc641a922fa0378e0c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vob1: {fileID: 0}
-  vob2: {fileID: 0}
-  Mide: 0
-  Ordena: 0
---- !u!4 &2094589308
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094589306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.2060437, y: 3.238575, z: -0.47923613}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2106486403 stripped
 Transform:

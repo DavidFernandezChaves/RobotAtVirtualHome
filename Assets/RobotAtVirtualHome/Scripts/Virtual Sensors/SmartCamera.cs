@@ -151,7 +151,7 @@ public class SmartCamera : MonoBehaviour
 
     private void Log(string _msg, LogLevel lvl, bool Warning = false)
     {
-        if (LogLevel <= lvl)
+        if (LogLevel <= lvl && LogLevel != LogLevel.Nothing)
         {
             if (Warning)
             {
