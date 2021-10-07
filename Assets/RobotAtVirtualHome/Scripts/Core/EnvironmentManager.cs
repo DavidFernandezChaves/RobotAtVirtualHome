@@ -14,65 +14,79 @@ namespace RobotAtVirtualHome {
         [Header("General")]
         [Tooltip("The log level to use")]
         public LogLevel LogLevel = LogLevel.Normal;
-        [Tooltip("House to be loaded. 0 for random.")]
-        [Range(0,30)]
-        public int houseSelected = 0;
+
         [Tooltip("Do you want to save a file with information about the loaded environment?")]
         public bool recordEnvironmentDatas;
-        [Tooltip("Path where you want to save the collected data.")]
-        public string path = @"D:\";
         [Tooltip("Do you want the roof to be transparent for easy viewing?")]
-        public bool transparentRoof;       
+        public bool transparentRoof;
 
+        [SerializeField]
         [Header("Customization")]
-        public LightLevel initialStateGeneralLight;
-        public LightLevel initialStateLights;
-        public bool randomStateDoor;
-        public bool randomWallPainting;
-        public bool randomFloorPainting;
-        public bool randomObjectModel;
+        public SimulationOptions m_simulationOptions;
 
         [Header("Preload prefabs")]
         [SerializeField]
         private List<GameObject> houses;
 
-        private House house;
-        
+        public event Action OnEnvironmentLoaded;
+
+        private House house;        
         private StreamWriter writer;
 
         #region Unity Functions
         private void Awake() {
             if (houses != null && houses.Count > 0) {
 
-                if (houseSelected == 0) {
-                    houseSelected = UnityEngine.Random.Range(1, houses.Count);
+                if (m_simulationOptions.houseSelected == 0) {
+                    m_simulationOptions.houseSelected = UnityEngine.Random.Range(1, houses.Count);
                 }              
 
-                if (house = Instantiate(houses[houseSelected-1], transform).GetComponent<House>()) {
-                    path = Path.Combine(path, "Home" + houseSelected.ToString("D2"));
+                if (house = Instantiate(houses[m_simulationOptions.houseSelected - 1], transform).GetComponent<House>()) {
+                    m_simulationOptions.path = Path.Combine(m_simulationOptions.path, "Home" + m_simulationOptions.houseSelected.ToString("D2"));
                     if (recordEnvironmentDatas) {                        
-                        if (!Directory.Exists(path)) {
-                            Directory.CreateDirectory(path);
+                        if (!Directory.Exists(m_simulationOptions.path)) {
+                            Directory.CreateDirectory(m_simulationOptions.path);
                         }
-                        Log("The saving path is:" + path,LogLevel.Normal);
+                        Log("The saving path is:" + m_simulationOptions.path, LogLevel.Normal);
                     }
 
-                    house.SetTransparentRoof(transparentRoof);
-                    foreach(Room room in house.transform.GetComponentsInChildren<Room>()) {
-                        room.randomStateDoor = randomStateDoor;
-                        room.initialStateGeneralLight = initialStateGeneralLight;
-                        room.initialStateLights = initialStateLights;
-                        room.randomWallPainting = randomWallPainting;
-                        room.randomFloorPainting = randomFloorPainting;
-                        room.randomObjectModel = randomObjectModel;
-                    }
-                    Invoke("StartSimulation", 0.5f);
                 } else {
-                    Log("The gameObject " + (houseSelected-1) + " does not have the 'House' component.",LogLevel.Error,true);
+                    Log("The gameObject " + (m_simulationOptions.houseSelected - 1) + " does not have the 'House' component.",LogLevel.Error,true);
                 }
 
             } else { Log("There are no assigned houses in the virtual environment.",LogLevel.Error,true); }
-        }        
+        }
+
+        private void Start()
+        {
+            house.SetTransparentRoof(transparentRoof);
+            house.LoadHouse(m_simulationOptions);
+
+            if (recordEnvironmentDatas)
+            {
+                writer = new StreamWriter(m_simulationOptions.path + "/VirtualObjects.csv", true);
+                writer.WriteLine("id;color;room;roomType;type;globalPosition;rotation;seed");
+                foreach (KeyValuePair<string, VirtualObject> obj in house.virtualObjects)
+                {
+                    writer.WriteLine(obj.Key.ToString() + ";"
+                        + house.semanticColors[obj.Key].ToString() + ";"
+                        + obj.Value.room.transform.name.ToString() + ";"
+                        + obj.Value.room.roomType.ToString() + ";"
+                        + obj.Value.tags[0].ToString() + ";"
+                        + obj.Value.transform.position.ToString() + ";"
+                        + obj.Value.transform.rotation.eulerAngles.ToString() + ";"
+                        + obj.Value.m_seed.ToString());
+                }
+                writer.Close();
+            }
+            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+            StartCoroutine(LoadingEnvironment());
+            
+            //GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
+
+
+        }
 
 
         #endregion
@@ -88,29 +102,29 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void StartSimulation() {
-            if (recordEnvironmentDatas) {
-                writer = new StreamWriter(path + "/VirtualObjects.csv", true);
-                writer.WriteLine("id;color;room;roomType;type;globalPosition;rotation;seed");
-                foreach (KeyValuePair<string, VirtualObject> obj in house.virtualObjects) {
-                    writer.WriteLine(obj.Key.ToString() + ";"
-                        + house.semanticColors[obj.Key].ToString() + ";"
-                        + obj.Value.room.transform.name.ToString() + ";"
-                        + obj.Value.room.roomType.ToString() + ";"
-                        + obj.Value.tags[0].ToString() + ";"
-                        + obj.Value.transform.position.ToString() + ";"
-                        + obj.Value.transform.rotation.eulerAngles.ToString() + ";"
-                        + obj.Value.seed.ToString());
+        private IEnumerator LoadingEnvironment()
+        {
+            bool isLoading = true;
+            while (isLoading)
+            {
+                isLoading = false;
+                var objs = Resources.FindObjectsOfTypeAll(typeof(VirtualObject)) as VirtualObject[];
+                foreach (VirtualObject virtualObject in objs)
+                {                    
+                    if (virtualObject.isActiveAndEnabled && virtualObject.m_initialized == false)
+                    {
+                        isLoading = true;
+                    }
                 }
-                writer.Close();
+                if (objs.Length == 0)
+                {
+                    isLoading = true;
+                }
+                yield return null;
             }
-            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-
-            GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
-
-
+            
+            OnEnvironmentLoaded?.Invoke();
         }
-
 
         private void Log(string _msg, LogLevel lvl, bool Warning = false)
         {

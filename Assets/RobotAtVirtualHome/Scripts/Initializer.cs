@@ -29,28 +29,44 @@ namespace RobotAtVirtualHome {
         public List<Agent> agentToInstantiate;
         public List<Transform> agents { set; private get; }
 
+        private EnvironmentManager environmentManager;
 
         #region Unity Functions
         private void Awake()
         {
             agents = new List<Transform>();
+            environmentManager = FindObjectOfType<EnvironmentManager>();
+            environmentManager.OnEnvironmentLoaded += VirtualEnviromentLoaded;
         }
         void Start() {
             var ontologyManager = GetComponent<OntologySystem>();
             if(ontologyManager != null)
                 ontologyManager.LoadOntology();
 
+            
+        }
+
+        private void OnDestroy()
+        {
+            environmentManager.OnEnvironmentLoaded -= VirtualEnviromentLoaded;
         }
         #endregion
 
         #region Public Functions
-        public void VirtualEnviromentLoaded(GameObject house) {
-            CreateVirtualAgent(house.GetComponent<House>());
+        public void VirtualEnviromentLoaded() {
+            CreateVirtualAgent();
         }
         #endregion
 
         #region Private Functions
-        private void CreateVirtualAgent(House house) {
+        private void CreateVirtualAgent() {
+            var house = FindObjectOfType<House>();
+
+            if(house==null) 
+            { 
+                Log("Cannot find a house", LogLevel.Error, true);
+                return;
+            }
             if (house.virtualObjects.ContainsKey("Station_0")) {
                 var origin = house.virtualObjects["Station_0"].transform.position;                
                 foreach (Agent r in agentToInstantiate)

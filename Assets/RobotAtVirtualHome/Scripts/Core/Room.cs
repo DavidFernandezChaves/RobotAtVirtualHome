@@ -13,36 +13,37 @@ namespace RobotAtVirtualHome {
         [Tooltip("Room type")]
         public RoomType roomType;
 
-        [Header("Customization")]        
-        public LightLevel initialStateGeneralLight = LightLevel.On;
-        public LightLevel initialStateLights = LightLevel.Radomly;
-        public bool randomStateDoor = false;
-        public bool randomWallPainting = true;
-        public bool randomFloorPainting = true;
-        public bool randomObjectModel = false;
-
-        [Header("Preloading materials")]
-        public Material[] wallPaints;
-        public Material[] floorPaints;
-
+        [SerializeField]
         public List<Light> generalLights { get; private set; }
+        [SerializeField]
         public List<Door> doors { get; private set; }
+        [SerializeField]
         public List<Light> lamps { get; private set; }
 
         #region Unity Functions
         private void Awake() {
-            LogLevel = FindObjectOfType<House>().LogLevel;
+
             generalLights = new List<Light>();
             lamps = new List<Light>();
             doors = new List<Door>();
+        }
+
+        public void LoadRoom(SimulationOptions simulationOptions) {
+            //If you are using Vimantic architecture
+            gameObject.AddComponent<SemanticRoom>();
+
+            SendMessage("SetRoomID", transform.name,SendMessageOptions.DontRequireReceiver);
+            SendMessage("SetRoomType", roomType.ToString(),SendMessageOptions.DontRequireReceiver);
 
 
-            for (int i = 0; i < transform.childCount; i++) {
+            for (int i = 0; i < transform.childCount; i++)
+            {
                 Transform editingTransform = transform.GetChild(i);
-                
+
                 //General Light Case
                 Light light = editingTransform.GetComponent<Light>();
-                if (light != null) {
+                if (light != null)
+                {
                     generalLights.Add(light);
                     editingTransform.name = "Light_" + generalLights.Count();
                 }
@@ -51,79 +52,90 @@ namespace RobotAtVirtualHome {
             lamps = GetComponentsInChildren<Light>(true).ToList();
             generalLights.ForEach(l => lamps.Remove(l));
             doors = GetComponentsInChildren<Door>().ToList();
-            
-        }
 
-        private void Start() {
-            //If you are using Vimantic architecture
-            gameObject.AddComponent<SemanticRoom>();
+            TurnLights(simulationOptions.StateGeneralLight, generalLights);
+            TurnLights(simulationOptions.StateLights, lamps);
+            SetDoors(simulationOptions.RandomStateDoor);
 
-            SendMessage("SetRoomID", transform.name,SendMessageOptions.DontRequireReceiver);
-            SendMessage("SetRoomType", roomType.ToString(),SendMessageOptions.DontRequireReceiver);
-
-            if(randomStateDoor)
-                SetDoors(Random.value >= 0.5f);
-
-            switch (initialStateGeneralLight) {
-                case LightLevel.On:
-                    TurnGeneralLight(true);
-                    break;
-                case LightLevel.Off:
-                    TurnGeneralLight(false);
-                    break;
-                case LightLevel.Radomly:
-                    TurnGeneralLight(Random.value >= 0.5f);
-                    break;
+            List<Material> materialsWall = new List<Material>();
+            foreach (PairForMaterials pair in simulationOptions.WallsMaterials.FindAll(pair => pair.roomType == roomType)) {
+                materialsWall.Add(pair.material);
             }
 
-            switch (initialStateLights) {
-                case LightLevel.On:
-                    TurnLight(true);
-                    break;
-                case LightLevel.Off:
-                    TurnLight(false);
-                    break;
-                case LightLevel.Radomly:
-                    TurnLight(Random.value >= 0.5f);
-                    break;
+            if (materialsWall.Count == 0)
+            {
+                materialsWall = Resources.LoadAll("Walls", typeof(Material)).Cast<Material>().ToList();
             }
 
-            if (randomWallPainting) {
-                if (wallPaints.Length > 0)
-                {
-                    PaintWall(wallPaints[Random.Range(0, wallPaints.Length)]);
-                }
-                else
-                {
-                    Log("No wall painting added", LogLevel.Error, true);
-                }
+            if (materialsWall.Count != 0)
+            {
+                PaintWall(materialsWall[Random.Range(0, materialsWall.Count)]);
+            }
+            else
+            {
+                Log("No wall painting found", LogLevel.Error, true);
             }
 
-            if (randomFloorPainting) {
-                if (floorPaints.Length > 0)
-                {
-                    PaintFloor(floorPaints[0]);
-                }
-                else
-                {
-                    Log("No floor painting added", LogLevel.Error, true);
-                }
+            List<Material> materialsFloor = new List<Material>();
+            foreach (PairForMaterials pair in simulationOptions.FloorsMaterials.FindAll(pair => pair.roomType == roomType))
+            {
+                materialsFloor.Add(pair.material);
             }
+
+            if (materialsFloor.Count == 0)
+            {
+                materialsFloor = Resources.LoadAll("Floors", typeof(Material)).Cast<Material>().ToList();
+            }
+
+            if (materialsFloor.Count != 0)
+            {
+                PaintFloor(materialsFloor[Random.Range(0, materialsFloor.Count)]);
+            }
+            else
+            {
+                Log("No floor painting found", LogLevel.Error, true);
+            }
+
         }
         #endregion
 
         #region Public Functions
-        public void SetDoors(bool _state) {
-            doors.ForEach(d=> d.SetDoor(_state));
+        public void SetDoors(DoorStatus status) {
+            foreach(Door d in doors)
+            {
+                switch (status)
+                {
+                    case DoorStatus.Open:
+                        d.SetDoor(false);
+                        break;
+                    case DoorStatus.Close:
+                        d.SetDoor(false);
+                        break;
+                    case DoorStatus.Radomly:
+                        d.SetDoor(Random.value >= 0.5f);
+                        break;
+                }
+            }
         }
 
-        public void TurnGeneralLight(bool _state) {
-            generalLights.ForEach(l => l.enabled = _state);
+        public void TurnLights(LightStatus state, List<Light> lights) {
+            foreach(Light l in lights)
+            {
+                switch (state)
+                {
+                    case LightStatus.On:
+                        l.enabled = true;
+                        break;
+                    case LightStatus.Off:
+                        l.enabled = false;
+                        break;
+                    case LightStatus.Radomly:
+                        l.enabled = Random.value >= 0.5f;
+                        break;
+                }
+            }
         }
 
-        public void TurnLight(bool _state) {
-            lamps.ForEach(l => l.enabled = _state);
-        }
 
         public void PaintWall(Material paint) {
             var mats = GetComponent<MeshRenderer>().materials;

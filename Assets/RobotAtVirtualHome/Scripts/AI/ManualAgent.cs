@@ -36,7 +36,7 @@ namespace RobotAtVirtualHome {
                 navMesh.enabled = false;
 
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<EnvironmentManager>().path;
+                filePath = FindObjectOfType<EnvironmentManager>().m_simulationOptions.path;
                 string tempPath = Path.Combine(filePath, "ManualAgent");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {

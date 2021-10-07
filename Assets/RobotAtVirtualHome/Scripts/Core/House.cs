@@ -9,7 +9,7 @@ namespace RobotAtVirtualHome {
         public LogLevel LogLevel = LogLevel.Normal;
 
         public List<Room> rooms { get; private set; }
-        public Dictionary<string,VirtualObject> virtualObjects { get; private set; }
+        public Dictionary<string, VirtualObject> virtualObjects;
         public Dictionary<string,Color> semanticColors { get; private set; }
         private Transform roof;
 
@@ -18,26 +18,32 @@ namespace RobotAtVirtualHome {
             rooms = new List<Room>();
             virtualObjects = new Dictionary<string, VirtualObject>();
             semanticColors = new Dictionary<string, Color>();
-
-            for (int i = 0; i<transform.childCount; i++) {
-                Transform editingTransform = transform.GetChild(i);
-                Room room = editingTransform.GetComponent<Room>();
-                if (room != null) {
-                    rooms.Add(room);
-                    int n = rooms.FindAll(r => r.roomType == room.roomType).Count;
-                    editingTransform.name = room.roomType.ToString() + "_" + n;
-                }
-                if(editingTransform.name == "Roof") {
-                    roof = editingTransform;
-                }
-            }
-
         }
         #endregion
 
         #region Public Functions
+        public void LoadHouse(SimulationOptions simulationOptions)
+        {
 
-        public string RegistVirtualObject(VirtualObject virtualObject) {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform editingTransform = transform.GetChild(i);
+                Room room = editingTransform.GetComponent<Room>();
+                if (room != null)
+                {
+                    rooms.Add(room);
+                    int n = rooms.FindAll(r => r.roomType == room.roomType).Count;
+                    editingTransform.name = room.roomType.ToString() + "_" + n;
+                    room.LoadRoom(simulationOptions);
+                }
+                if (editingTransform.name == "Roof")
+                {
+                    roof = editingTransform;
+                }
+            }
+        }
+
+        public string RegisterVirtualObject(VirtualObject virtualObject) {
             int i = 0;
             while (virtualObjects.ContainsKey(virtualObject.tags[0].ToString() + "_" + i)) {
                 i++;

@@ -225,16 +225,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogLevel: 1
-  houseSelected: 20
   recordEnvironmentDatas: 0
-  path: D:\RobotAtVirtualHome
   transparentRoof: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 1
-  randomStateDoor: 0
-  randomWallPainting: 0
-  randomFloorPainting: 0
-  randomObjectModel: 0
+  m_simulationOptions: {fileID: 11400000, guid: ba738b152ca79a049a5e971044058da7,
+    type: 2}
   houses:
   - {fileID: 5591509399737963863, guid: b500168d03a878741afa66af528f124d, type: 3}
   - {fileID: 2505263735248533966, guid: 78cfc527f8044a94f8fb4af17a7594a1, type: 3}
