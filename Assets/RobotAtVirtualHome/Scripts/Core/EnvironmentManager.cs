@@ -62,6 +62,8 @@ namespace RobotAtVirtualHome {
             house.SetTransparentRoof(transparentRoof);
             house.LoadHouse(m_simulationOptions);
 
+            transform.GetChild(0).rotation = Quaternion.Euler(m_simulationOptions.SunRotation, 0, 0);
+
             if (recordEnvironmentDatas)
             {
                 writer = new StreamWriter(m_simulationOptions.path + "/VirtualObjects.csv", true);

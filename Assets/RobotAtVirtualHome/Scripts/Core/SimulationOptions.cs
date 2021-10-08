@@ -17,6 +17,10 @@ namespace RobotAtVirtualHome
         [Tooltip("Path where you want to save the collected data.")]
         public string path = @"C:\";
 
+        [Tooltip("Sun rotation during the simulation. Modify the ambient light of the simulation.")]
+        [Range(0,360)]
+        public float SunRotation = 100;
+
         [Tooltip("Set the status of the roof lights")]
         public LightStatus StateGeneralLight;
         [Tooltip("Set the status of the lamps")]
