@@ -26,7 +26,7 @@ namespace RobotAtVirtualHome {
         protected StatusMode state;
 
 
-        [Header("ROS")]
+        [Header("Path to ROS")]
         public bool sendPathToROS;
         public PathType pathType = PathType.Beacons;
         public float rOSFrecuency = 1;

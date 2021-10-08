@@ -29,9 +29,12 @@ namespace RobotAtVirtualHome {
         private List<GameObject> houses;
 
         public event Action OnEnvironmentLoaded;
+        public string path { get; private set; }
+
 
         private House house;        
         private StreamWriter writer;
+
 
         #region Unity Functions
         private void Awake() {
@@ -42,12 +45,12 @@ namespace RobotAtVirtualHome {
                 }              
 
                 if (house = Instantiate(houses[m_simulationOptions.houseSelected - 1], transform).GetComponent<House>()) {
-                    m_simulationOptions.path = Path.Combine(m_simulationOptions.path, "Home" + m_simulationOptions.houseSelected.ToString("D2"));
+                    path = Path.Combine(m_simulationOptions.path, "Home" + m_simulationOptions.houseSelected.ToString("D2"));
                     if (recordEnvironmentDatas) {                        
-                        if (!Directory.Exists(m_simulationOptions.path)) {
-                            Directory.CreateDirectory(m_simulationOptions.path);
+                        if (!Directory.Exists(path)) {
+                            Directory.CreateDirectory(path);
                         }
-                        Log("The saving path is:" + m_simulationOptions.path, LogLevel.Normal);
+                        Log("The saving path is:" + path, LogLevel.Normal);
                     }
 
                 } else {
@@ -66,7 +69,7 @@ namespace RobotAtVirtualHome {
 
             if (recordEnvironmentDatas)
             {
-                writer = new StreamWriter(m_simulationOptions.path + "/VirtualObjects.csv", true);
+                writer = new StreamWriter(path + "/VirtualObjects.csv", true);
                 writer.WriteLine("id;color;room;roomType;type;globalPosition;rotation;seed");
                 foreach (KeyValuePair<string, VirtualObject> obj in house.virtualObjects)
                 {

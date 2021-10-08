@@ -15,10 +15,8 @@ namespace RobotAtVirtualHome
 
         [Header("General")]
         [Tooltip("The log level to use")]
-        public LogLevel LogLevel = LogLevel.Normal;       
+        public LogLevel LogLevel = LogLevel.Normal;      
 
-        [Range(0.01f,10)]
-        public float ScanFrecuency = 0.5f;
         [Range(0, 360)]
         public double angleMin = 0;
         [Range(0, 360)]
@@ -38,6 +36,8 @@ namespace RobotAtVirtualHome
 
         public double[] ranges { get; private set; }
 
+        public Action<double[]> OnScanTaken;
+
         private int layerMask;
 
         #region Unity Functions
@@ -48,7 +48,6 @@ namespace RobotAtVirtualHome
             layerMask = ~((1 << 1) | 1 << 2 | 1 << 10);
             int samples = (int)((angleMax - angleMin) / angleIncrement);
             ranges = new double[samples];
-            StartCoroutine(Scan());
         }
         #endregion
 
@@ -61,6 +60,25 @@ namespace RobotAtVirtualHome
                 StartCoroutine(SendLaser(ros));
             }
         }
+
+        public double[] Scan()
+        {
+            Ray ray;
+            for (double i = angleMin; i < angleMax; i += angleIncrement)
+            {
+                ray = new Ray(transform.position, Quaternion.Euler(0, 90 + (float)-i, 0) * transform.forward);
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, (float)rangeMax, layerMask))
+                {
+
+                    if (raycastHit.distance >= rangeMin && raycastHit.distance <= rangeMax)
+                    {
+                        ranges[(int)(i / angleIncrement)] = raycastHit.distance;
+                    }
+                }
+            }
+            OnScanTaken?.Invoke(ranges);
+            return ranges;
+        }
         #endregion
 
         #region Private Functions
@@ -71,32 +89,12 @@ namespace RobotAtVirtualHome
             {
                 yield return new WaitForEndOfFrame();
                 HeaderMsg _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
-                LaserScanMsg scan = new LaserScanMsg(_head, angleMin * Mathf.Deg2Rad, angleMax * Mathf.Deg2Rad, angleIncrement * Mathf.Deg2Rad, 0, 0, rangeMin, rangeMax, ranges, new double[0]);
+                LaserScanMsg scan = new LaserScanMsg(_head, angleMin * Mathf.Deg2Rad, angleMax * Mathf.Deg2Rad, angleIncrement * Mathf.Deg2Rad, 0, 0, rangeMin, rangeMax, Scan(), new double[0]);
                 ros.Publish(LaserScan_pub.GetMessageTopic(), scan);
                 yield return new WaitForSeconds(ROSFrecuency);
             }
         }
 
-        private IEnumerator Scan()
-        {
-            while (Application.isPlaying)
-            {
-                Ray ray;
-                for (double i = angleMin; i < angleMax; i += angleIncrement)
-                {
-                    ray = new Ray(transform.position, Quaternion.Euler(0, 90 + (float)-i, 0) * transform.forward);
-                    if (Physics.Raycast(ray, out RaycastHit raycastHit, (float)rangeMax, layerMask))
-                    {
-
-                        if (raycastHit.distance >= rangeMin && raycastHit.distance <= rangeMax)
-                        {
-                            ranges[(int)(i / angleIncrement)] = raycastHit.distance;
-                        }
-                    }
-                }
-                yield return new WaitForSeconds(ScanFrecuency);
-            }
-        }
         private void Log(string _msg, LogLevel lvl, bool Warning = false)
         {
             if (LogLevel <= lvl && LogLevel != LogLevel.Nothing)

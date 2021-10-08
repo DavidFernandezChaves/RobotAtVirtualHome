@@ -8,12 +8,6 @@ TagManager:
   - VirtualObject
   - Object
   - ROSListener
-  - Sink
-  - Washbasin
-  - Oven
-  - Wall
-  - Burner
-  - KitchenFurniture
   layers:
   - Default
   - TransparentFX

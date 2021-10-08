@@ -66,7 +66,7 @@ Camera:
     m_Bits: 2817
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -203,7 +203,7 @@ Camera:
     m_Bits: 2833
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 3
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
@@ -441,10 +441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c703868f3cb554e8779d6d9e2ccf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 1
-  mouseInteractive: 0
+  LogLevel: 1
   CaptureFrecuency: 0.5
-  imageSize: {x: 640, y: 480}
+  imageSize: {x: 1366, y: 768}
   sendImagesToROS: 1
   ROSFrecuency: 1
 --- !u!114 &8029640737421032612

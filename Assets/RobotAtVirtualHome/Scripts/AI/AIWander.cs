@@ -15,8 +15,9 @@ namespace RobotAtVirtualHome {
         public bool randomSecuence;
 
         [Header("Capture Data")]
-        [Range(0.1f,10)]
-        public float frequencyCapture;
+        [Tooltip("Time between data capture")]
+        [Range(0.1f, 10)]
+        public float timeBetweenDataCapture = 0.5f;
         public bool captureRGB;
         public bool captureDepth;
         public bool captureSemanticMask;
@@ -27,13 +28,12 @@ namespace RobotAtVirtualHome {
         public string filePath { get; private set; }
         private StreamWriter logImgWriter;
         private StreamWriter logScanWriter;
-
         private int index = 0;    
         private int index2 = 0;
+        private float speed;
 
         #region Unity Functions
         void Start() {
-            
             VisitPoints = new List<Vector3>();
 
             var rooms = FindObjectsOfType<Room>();
@@ -47,7 +47,7 @@ namespace RobotAtVirtualHome {
             }
             
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<EnvironmentManager>().m_simulationOptions.path;
+                filePath = FindObjectOfType<EnvironmentManager>().path;
                 string tempPath = Path.Combine(filePath, "Wandering");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -71,22 +71,38 @@ namespace RobotAtVirtualHome {
                 }                
 
                 Log("The saving path is:" + filePath,LogLevel.Normal);
-                StartCoroutine(Capture());
+                
+
             }
 
             agent.SetDestination(VisitPoints[0]);
             agent.isStopped = false;
             state = StatusMode.Walking;
 
+            StartCoroutine(CaptureData());
+
+        }
+
+        private void OnDestroy()
+        {
+            if (logImgWriter != null)
+            {
+                logImgWriter.Close();
+            }
+            if (logScanWriter != null)
+            {
+                logScanWriter.Close();
+            }
         }
 
         void Update() {
             switch (state) {
                 case StatusMode.Walking:
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit)) {
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit))
+                    {
                         currentRoom = hit.transform.name;
                     }
-
+                    
                     if (agent.remainingDistance <= agent.stoppingDistance &&
                         agent.velocity.sqrMagnitude == 0f) {
                         Vector3 nextGoal;
@@ -103,15 +119,6 @@ namespace RobotAtVirtualHome {
                         }
                     }
                     break;
-            }
-        }
-
-        private void OnDestroy() {
-            if (logImgWriter != null) {
-                logImgWriter.Close();
-            }
-            if (logScanWriter != null) {
-                logScanWriter.Close();
             }
         }
 
@@ -136,7 +143,7 @@ namespace RobotAtVirtualHome {
 
         #region Private Functions
         private IEnumerator DoOnGoal() {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             state = StatusMode.Walking;
         }
 
@@ -167,38 +174,39 @@ namespace RobotAtVirtualHome {
             return true;
         }
 
-        private IEnumerator Capture() {
-            while (state != StatusMode.Finished) {
+        private IEnumerator CaptureData()
+        {
+            while (state != StatusMode.Finished)
+            {
 
                 yield return new WaitForEndOfFrame();
+
                 agent.isStopped = true;
-                yield return new WaitForSeconds(0.1f);
-                byte[] itemBGBytes;
-                if (captureSemanticMask) {
-                    logImgWriter.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
-                        + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    itemBGBytes = smartCamera.ImageMask.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.png", itemBGBytes);
-                }
-
-                if (captureRGB) {
+                if (captureRGB)
+                {
                     logImgWriter.WriteLine(index2.ToString() + "_rgb.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
-                        + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    itemBGBytes = smartCamera.ImageRGB.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.png", itemBGBytes);
-
+                            + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.png", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToPNG());
                 }
-
-                if (captureDepth) {
+                yield return null;
+                if (captureDepth)
+                {
                     logImgWriter.WriteLine(index2.ToString() + "_depth.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
-                        + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    itemBGBytes = smartCamera.ImageDepth.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.png", itemBGBytes);
+                    + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.png", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToPNG());
                 }
-
-                if (captureScan) {
+                yield return null;
+                if (captureSemanticMask)
+                {
+                    logImgWriter.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.png", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToPNG());
+                }
+                if (captureScan)
+                {
                     string data = "";
-                    foreach(float d in laserScan.ranges) {
+                    foreach (float d in laserScan.Scan())
+                    {
                         data += d.ToString() + ";";
                     }
                     logScanWriter.WriteLine(index2.ToString() + transform.position + ";" + transform.rotation.eulerAngles + ";" + data);
@@ -206,10 +214,7 @@ namespace RobotAtVirtualHome {
 
                 agent.isStopped = false;
                 index2++;
-                if (frequencyCapture != 0) {
-                    yield return new WaitForSeconds(frequencyCapture);
-                }
-
+                yield return new WaitForSeconds(timeBetweenDataCapture);
             }
         }
 
