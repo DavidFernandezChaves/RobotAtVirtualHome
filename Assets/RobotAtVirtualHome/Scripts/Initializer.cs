@@ -85,6 +85,7 @@ namespace RobotAtVirtualHome {
                 {
                     Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, house.transform.parent).transform;
                     agent.GetComponent<ROS>().robotName = r.name;
+                    agent.name = r.name;
                     agent.GetComponent<ROS>().Connect(r.ip);
                     agents.Add(agent);
                 }

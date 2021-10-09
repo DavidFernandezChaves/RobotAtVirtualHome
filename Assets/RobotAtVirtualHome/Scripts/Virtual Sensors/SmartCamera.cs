@@ -115,13 +115,12 @@ public class SmartCamera : MonoBehaviour
     #region Private Functions
     IEnumerator SendImages(ROS ros) {
         Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-
+        
         while (Application.isPlaying)
-        {
-            Log("Sending images to ros.", LogLevel.Normal);
+        {            
             if (ros.IsConnected())
             {
-
+                Log("Sending images to ros.", LogLevel.Developer);
                 Color32[] pxs = CaptureImage(ImageType.RGB).GetPixels32();
                 Color32[] pxsDepth = CaptureImage(ImageType.Depth).GetPixels32();
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f5a1f89789d3743a9a125b62cafc4d, type: 3}
   m_Name: Omega_options
   m_EditorClassIdentifier: 
-  houseSelected: 26
+  houseSelected: 20
   path: D:\RobotAtVirtualHome
   SunRotation: 175
   StateGeneralLight: 0
