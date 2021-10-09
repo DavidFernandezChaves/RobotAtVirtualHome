@@ -1,11 +1,9 @@
-﻿using ROSUnityCore;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 
 
 namespace RobotAtVirtualHome {
@@ -39,13 +37,13 @@ namespace RobotAtVirtualHome {
         #region Unity Functions
         private void Awake() {
             if (houses != null && houses.Count > 0) {
-
-                if (m_simulationOptions.houseSelected == 0) {
-                    m_simulationOptions.houseSelected = UnityEngine.Random.Range(1, houses.Count);
+                int houseSelected = m_simulationOptions.houseSelected;
+                if (houseSelected == 0) {
+                    houseSelected = UnityEngine.Random.Range(1, houses.Count);
                 }              
 
-                if (house = Instantiate(houses[m_simulationOptions.houseSelected - 1], transform).GetComponent<House>()) {
-                    path = Path.Combine(m_simulationOptions.path, "Home" + m_simulationOptions.houseSelected.ToString("D2"));
+                if (house = Instantiate(houses[houseSelected - 1], transform).GetComponent<House>()) {
+                    path = Path.Combine(m_simulationOptions.path, "Home" + houseSelected.ToString("D2"));
                     if (recordEnvironmentDatas) {                        
                         if (!Directory.Exists(path)) {
                             Directory.CreateDirectory(path);
@@ -83,8 +81,7 @@ namespace RobotAtVirtualHome {
                         + obj.Value.m_seed.ToString());
                 }
                 writer.Close();
-            }
-            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
+            }           
 
             StartCoroutine(LoadingEnvironment());
             
@@ -127,7 +124,7 @@ namespace RobotAtVirtualHome {
                 }
                 yield return null;
             }
-            
+            transform.GetComponent<NavMeshSurface>().BuildNavMesh();
             OnEnvironmentLoaded?.Invoke();
         }
 

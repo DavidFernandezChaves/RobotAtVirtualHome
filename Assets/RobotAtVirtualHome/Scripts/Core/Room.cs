@@ -100,7 +100,7 @@ namespace RobotAtVirtualHome {
                         d.SetDoor(false);
                         break;
                     case DoorStatus.Close:
-                        d.SetDoor(false);
+                        d.SetDoor(true);
                         break;
                     case DoorStatus.Radomly:
                         d.SetDoor(Random.value >= 0.5f);
