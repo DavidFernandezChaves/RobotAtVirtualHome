@@ -84,7 +84,7 @@ namespace RobotAtVirtualHome
         #region Private Functions
         private IEnumerator SendLaser(ROS ros)
         {
-            Log("Sending laser to ros.",LogLevel.Normal);
+            Log("Sending laser to ros.",LogLevel.Developer);
             while (ros.IsConnected())
             {
                 yield return new WaitForEndOfFrame();

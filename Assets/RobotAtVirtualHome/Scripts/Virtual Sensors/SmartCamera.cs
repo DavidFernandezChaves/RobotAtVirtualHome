@@ -31,6 +31,8 @@ public class SmartCamera : MonoBehaviour
     private Camera cameraMask;
     private EnvironmentManager virtualEnvironment;
     private Rect rect;
+    private Texture2D img_rgb;
+    private Texture2D img_d;
 
     #region Unity Functions
     private void Awake() {
@@ -50,6 +52,8 @@ public class SmartCamera : MonoBehaviour
         cameraDepth.depthTextureMode = DepthTextureMode.Depth;
         rect = new Rect(0, 0, imageSize.x, imageSize.y);
         renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
+        img_rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        img_d = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
     }
 
     public void Connected(ROS ros) {
@@ -77,37 +81,42 @@ public class SmartCamera : MonoBehaviour
 
     public Texture2D CaptureImage(ImageType type)
     {
-
-        Texture2D result = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-
         switch (type)
         {
             case ImageType.RGB:
                 cameraRgb.targetTexture = renderTexture;
                 cameraRgb.Render();
-                break;
+                RenderTexture.active = renderTexture;
+                img_rgb.ReadPixels(rect, 0, 0);
+                img_rgb.Apply();
+                cameraRgb.targetTexture = null;
+
+                OnNewImageTaken?.Invoke(type, img_rgb);
+                return img_rgb;
+                
             case ImageType.Depth:
-                result = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
                 cameraDepth.targetTexture = renderTexture;
                 cameraDepth.Render();
-                break;
+                RenderTexture.active = renderTexture;
+                img_d.ReadPixels(rect, 0, 0);
+                img_d.Apply();
+                cameraDepth.targetTexture = null;
+
+                OnNewImageTaken?.Invoke(type, img_d);
+                return img_rgb;
+                
 
             case ImageType.InstanceMask:
                 cameraMask.targetTexture = renderTexture;
                 cameraMask.Render();
-                break;
+                RenderTexture.active = renderTexture;
+                img_rgb.ReadPixels(rect, 0, 0);
+                img_rgb.Apply();
+                cameraMask.targetTexture = null;
+                OnNewImageTaken?.Invoke(type, img_rgb);
+                return img_rgb;                
         }
-
-        RenderTexture.active = renderTexture;
-        result.ReadPixels(rect, 0, 0);
-        result.Apply();
-
-        //cameraRgb.targetTexture = null;
-        //cameraDepth.targetTexture = null;
-        //cameraMask.targetTexture = null;
-
-        OnNewImageTaken?.Invoke(type, result);
-        return result;
+        return null;
     }
 
     #endregion
@@ -115,31 +124,22 @@ public class SmartCamera : MonoBehaviour
 
     #region Private Functions
     IEnumerator SendImages(ROS ros) {
-        //Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
         HeaderMsg _head;
-        CompressedImageMsg compressedImg;
+        Texture2D img;
         while (Application.isPlaying)
         {            
             if (ros.IsConnected())
             {
                 Log("Sending images to ros.", LogLevel.Developer);
-                //Color32[] pxs = CaptureImage(ImageType.RGB).GetPixels32();
-                //Color32[] pxsDepth = CaptureImage(ImageType.Depth).GetPixels32();
-
-                ////Compose img: RGBD
-                //for (int i = 0; i < pxs.Length; i++)
-                //{
-                //    pxs[i].a = pxsDepth[i].a;
-                //}
-
-                //rgb.SetPixels32(pxs);
-                //rgb.Apply();
-                //rgb = CaptureImage(ImageType.RGB);
-                _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);                
-                compressedImg = new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.RGB).EncodeToJPG());
-                ros.Publish(CameraRGB_pub.GetMessageTopic(), compressedImg);
-                compressedImg = new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.Depth).EncodeToJPG());
-                ros.Publish(CameraDepth_pub.GetMessageTopic(), compressedImg);
+                _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
+                img = CaptureImage(ImageType.RGB);
+                ros.Publish(CameraRGB_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", img.EncodeToJPG()));
+                img = null;
+                
+                yield return null;
+                img = CaptureImage(ImageType.Depth);
+                ros.Publish(CameraDepth_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", img.EncodeToJPG()));
+                img = null;
             }
             yield return new WaitForSeconds(ROSFrecuency);
         }
