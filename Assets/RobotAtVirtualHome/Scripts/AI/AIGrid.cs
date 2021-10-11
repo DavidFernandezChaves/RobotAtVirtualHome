@@ -162,33 +162,33 @@ namespace RobotAtVirtualHome {
                 yield return new WaitForEndOfFrame();
                 if (captureRGB)
                 {
-                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.jpg;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.png", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToJPG());
                 }
                 if (captureDepth)
                 {
-                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_depth.png;"
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_depth.jpg;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.png", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToJPG());
                 }
                 if (captureSemanticMask)
                 {
-                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_mask.png;"
+                    logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_mask.jpg;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);                    
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToJPG());
                 }
 
                 transform.rotation = Quaternion.Euler(0, i * (360 / photosPerNode), 0);

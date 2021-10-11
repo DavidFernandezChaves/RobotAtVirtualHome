@@ -31,8 +31,7 @@ public class SmartCamera : MonoBehaviour
     private Camera cameraMask;
     private EnvironmentManager virtualEnvironment;
     private Rect rect;
-    private Texture2D img_rgb;
-    private Texture2D img_d;
+    private Texture2D img;
 
     #region Unity Functions
     private void Awake() {
@@ -52,8 +51,7 @@ public class SmartCamera : MonoBehaviour
         cameraDepth.depthTextureMode = DepthTextureMode.Depth;
         rect = new Rect(0, 0, imageSize.x, imageSize.y);
         renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
-        img_rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-        img_d = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
+        img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
     }
 
     public void Connected(ROS ros) {
@@ -86,37 +84,28 @@ public class SmartCamera : MonoBehaviour
             case ImageType.RGB:
                 cameraRgb.targetTexture = renderTexture;
                 cameraRgb.Render();
-                RenderTexture.active = renderTexture;
-                img_rgb.ReadPixels(rect, 0, 0);
-                img_rgb.Apply();
-                cameraRgb.targetTexture = null;
-
-                OnNewImageTaken?.Invoke(type, img_rgb);
-                return img_rgb;
+                break;
                 
             case ImageType.Depth:
                 cameraDepth.targetTexture = renderTexture;
                 cameraDepth.Render();
-                RenderTexture.active = renderTexture;
-                img_d.ReadPixels(rect, 0, 0);
-                img_d.Apply();
-                cameraDepth.targetTexture = null;
+                break;
 
-                OnNewImageTaken?.Invoke(type, img_d);
-                return img_rgb;
-                
 
             case ImageType.InstanceMask:
                 cameraMask.targetTexture = renderTexture;
                 cameraMask.Render();
-                RenderTexture.active = renderTexture;
-                img_rgb.ReadPixels(rect, 0, 0);
-                img_rgb.Apply();
-                cameraMask.targetTexture = null;
-                OnNewImageTaken?.Invoke(type, img_rgb);
-                return img_rgb;                
+                break;
         }
-        return null;
+
+        RenderTexture.active = renderTexture;
+        img.ReadPixels(rect, 0, 0);
+        img.Apply();
+        cameraRgb.targetTexture = null;
+        cameraDepth.targetTexture = null;
+        cameraMask.targetTexture = null;
+        OnNewImageTaken?.Invoke(type, img);
+        return img;
     }
 
     #endregion

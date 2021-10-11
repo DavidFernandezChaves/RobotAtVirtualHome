@@ -137,9 +137,6 @@ namespace RobotAtVirtualHome {
 
         #endregion
 
-        #region Public Functions
-
-        #endregion
 
         #region Private Functions
         private IEnumerator DoOnGoal() {
@@ -184,23 +181,23 @@ namespace RobotAtVirtualHome {
                 agent.isStopped = true;
                 if (captureRGB)
                 {
-                    logImgWriter.WriteLine(index2.ToString() + "_rgb.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_rgb.jpg;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                             + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.png", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToJPG());
                 }
                 yield return null;
                 if (captureDepth)
                 {
-                    logImgWriter.WriteLine(index2.ToString() + "_depth.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_depth.jpg;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                     + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.png", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToJPG());
                 }
                 yield return null;
                 if (captureSemanticMask)
                 {
-                    logImgWriter.WriteLine(index2.ToString() + "_mask.png;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
+                    logImgWriter.WriteLine(index2.ToString() + "_mask.jpg;" + transform.position + ";" + transform.rotation.eulerAngles + ";"
                     + smartCamera.transform.position + ";" + smartCamera.transform.rotation.eulerAngles + ";" + currentRoom);
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.png", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToJPG());
                 }
                 if (captureScan)
                 {
