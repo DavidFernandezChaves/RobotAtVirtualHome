@@ -42,7 +42,7 @@ namespace RobotAtVirtualHome {
             }
 
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
-                filePath = FindObjectOfType<EnvironmentManager>().m_simulationOptions.path;
+                filePath = FindObjectOfType<EnvironmentManager>().path;
                 string tempPath = Path.Combine(filePath, "Grid");
                 int i = 0;
                 while (Directory.Exists(tempPath)) {
@@ -151,47 +151,46 @@ namespace RobotAtVirtualHome {
 
             if (captureScan) {
                 string data = "";
-                foreach (float d in laserScan.ranges) {
+                foreach (float d in laserScan.Scan()) {
                     data += d.ToString() + ";";
                 }
                 logScanWriter.WriteLine(index.ToString() + transform.position + ";" + transform.rotation.eulerAngles + ";" + data);
             }
 
-            byte[] bytes;
-            for (int i = 1; i <= photosPerNode; i++) {
-                yield return new WaitForSeconds(0.75f);
-                if (captureRGB) {
+            for (int i = 1; i <= photosPerNode; i++)
+            {
+                yield return new WaitForEndOfFrame();
+                if (captureRGB)
+                {
                     logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_rgb.png;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
-                        bytes = smartCamera.ImageRGB.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.png", bytes);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_rgb.png", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToPNG());
                 }
-                if (captureDepth) {
+                if (captureDepth)
+                {
                     logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_depth.png;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
                         + room);
-                    bytes = smartCamera.ImageDepth.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.png", bytes);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "depth.png", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToPNG());
                 }
-                if (captureSemanticMask) {
+                if (captureSemanticMask)
+                {
                     logImgWriter.WriteLine(index.ToString() + "_" + i.ToString() + "_mask.png;"
                         + transform.position.ToString("F6") + ";"
                         + transform.rotation.eulerAngles.ToString("F6") + ";"
                         + smartCamera.transform.localPosition.ToString("F6") + ";"
                         + smartCamera.transform.localRotation.eulerAngles.ToString("F6") + ";"
-                        + room);
-                    bytes = smartCamera.ImageMask.EncodeToPNG();
-                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", bytes);
-                }                
+                        + room);                    
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_" + i.ToString() + "_mask.png", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToPNG());
+                }
 
-                bytes = null;
                 transform.rotation = Quaternion.Euler(0, i * (360 / photosPerNode), 0);
             }
 

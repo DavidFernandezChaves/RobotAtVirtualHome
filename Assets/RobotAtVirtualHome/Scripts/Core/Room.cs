@@ -57,12 +57,8 @@ namespace RobotAtVirtualHome {
             TurnLights(simulationOptions.StateLights, lamps);
             SetDoors(simulationOptions.RandomStateDoor);
 
-            List<Material> materialsWall = new List<Material>();
-            foreach (PairForMaterials pair in simulationOptions.WallsMaterials.FindAll(pair => pair.roomType == roomType)) {
-                materialsWall.Add(pair.material);
-            }
-
-            if (materialsWall.Count == 0)
+            List<Material> materialsWall = simulationOptions.WallsMaterials.Find(pair => pair.roomType == roomType).materials;
+            if (materialsWall == null || materialsWall.Count == 0)
             {
                 materialsWall = Resources.LoadAll("Walls", typeof(Material)).Cast<Material>().ToList();
             }
@@ -76,13 +72,8 @@ namespace RobotAtVirtualHome {
                 Log("No wall painting found", LogLevel.Error, true);
             }
 
-            List<Material> materialsFloor = new List<Material>();
-            foreach (PairForMaterials pair in simulationOptions.FloorsMaterials.FindAll(pair => pair.roomType == roomType))
-            {
-                materialsFloor.Add(pair.material);
-            }
-
-            if (materialsFloor.Count == 0)
+            List<Material> materialsFloor = simulationOptions.FloorsMaterials.Find(pair => pair.roomType == roomType).materials;
+            if (materialsFloor == null || materialsFloor.Count == 0)
             {
                 materialsFloor = Resources.LoadAll("Floors", typeof(Material)).Cast<Material>().ToList();
             }
@@ -109,7 +100,7 @@ namespace RobotAtVirtualHome {
                         d.SetDoor(false);
                         break;
                     case DoorStatus.Close:
-                        d.SetDoor(false);
+                        d.SetDoor(true);
                         break;
                     case DoorStatus.Radomly:
                         d.SetDoor(Random.value >= 0.5f);

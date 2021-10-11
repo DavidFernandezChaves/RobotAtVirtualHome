@@ -8,29 +8,29 @@ using System;
 
 public class SmartCamera : MonoBehaviour
 {
+    public enum ImageType{RGB,Depth,InstanceMask }
+
     [Header("General")]
     [Tooltip("The log level to use")]
     public LogLevel LogLevel = LogLevel.Normal;
-
-    public bool mouseInteractive;
     
-    [Range(0.01f, 10)]
-    public float CaptureFrecuency = 0.5f;
+    [Tooltip("Size of images to be captured")]
     public Vector2Int imageSize;
 
     [Header("General")]
     public bool sendImagesToROS;
     [Range(0.1f,10)]
-    public float ROSFrecuency = 1;    
+    public float ROSFrecuency = 1;
 
-    public Texture2D ImageRGB { get; private set; }
-    public Texture2D ImageDepth { get; private set; }
-    public Texture2D ImageMask { get; private set; }
+    public Action<ImageType, Texture2D> OnNewImageTaken;
+
+    private RenderTexture renderTexture;
 
     private Camera cameraRgb;
     private Camera cameraDepth;
     private Camera cameraMask;
     private EnvironmentManager virtualEnvironment;
+    private Rect rect;
 
     #region Unity Functions
     private void Awake() {
@@ -47,20 +47,9 @@ public class SmartCamera : MonoBehaviour
             "Fx: " + cameraRgb.focalLength * (imageSize.x / cameraRgb.sensorSize.x) + "/"+
             "Fy: " + cameraRgb.focalLength * (imageSize.y / cameraRgb.sensorSize.y),LogLevel.Developer);
 
-
-        ImageRGB = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-        ImageDepth = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
-        ImageMask = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-
-        StartCoroutine(CaptureImage());
-    }
-
-    void Update() {
-        if (mouseInteractive && Input.GetMouseButtonDown(0)) {
-            Vector3 screenPoint = Input.mousePosition;
-            Log("Data of " + screenPoint.ToString() + ": " + GetSemanticType(screenPoint),LogLevel.Developer);
-            Log("Depth: " + ImageDepth.GetPixel((int)screenPoint.x, (int)screenPoint.y).ToString(),LogLevel.Developer);
-        }
+        cameraDepth.depthTextureMode = DepthTextureMode.Depth;
+        rect = new Rect(0, 0, imageSize.x, imageSize.y);
+        renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
     }
 
     public void Connected(ROS ros) {
@@ -84,69 +73,74 @@ public class SmartCamera : MonoBehaviour
         }
         return "None";
     }
+
+    public Texture2D CaptureImage(ImageType type)
+    {
+
+        Texture2D result = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+
+        switch (type)
+        {
+            case ImageType.RGB:
+                cameraRgb.targetTexture = renderTexture;
+                cameraRgb.Render();
+                break;
+            case ImageType.Depth:
+                result = new Texture2D(imageSize.x, imageSize.y, TextureFormat.Alpha8, false);
+                cameraDepth.targetTexture = renderTexture;
+                cameraDepth.Render();
+                break;
+
+            case ImageType.InstanceMask:
+                cameraMask.targetTexture = renderTexture;
+                cameraMask.Render();
+                break;
+        }
+
+        RenderTexture.active = renderTexture;
+        result.ReadPixels(rect, 0, 0);
+        result.Apply();
+
+        //cameraRgb.targetTexture = null;
+        //cameraDepth.targetTexture = null;
+        //cameraMask.targetTexture = null;
+
+        OnNewImageTaken?.Invoke(type, result);
+        return result;
+    }
+
     #endregion
 
 
     #region Private Functions
-    private IEnumerator CaptureImage() {
-        cameraDepth.depthTextureMode = DepthTextureMode.Depth;
-        Rect rect = new Rect(0, 0, imageSize.x, imageSize.y);
-        RenderTexture renderTextureRGB = new RenderTexture(imageSize.x, imageSize.y, 24);
-
-        while (Application.isPlaying) {
-            yield return new WaitForEndOfFrame();
-            cameraRgb.targetTexture = renderTextureRGB;
-            cameraRgb.Render();
-            RenderTexture.active = renderTextureRGB;
-            ImageRGB.ReadPixels(rect, 0, 0);
-            ImageRGB.Apply();
-            cameraRgb.targetTexture = null;
-
-            cameraDepth.targetTexture = renderTextureRGB;
-            cameraDepth.Render();
-            RenderTexture.active = renderTextureRGB;
-            ImageDepth.ReadPixels(rect, 0, 0);
-            ImageDepth.Apply();
-            cameraDepth.targetTexture = null;
-
-            cameraMask.targetTexture = renderTextureRGB;
-            cameraMask.Render();
-            RenderTexture.active = renderTextureRGB;
-            ImageMask.ReadPixels(rect, 0, 0);
-            ImageMask.Apply();
-            cameraMask.targetTexture = null;
-
-            RenderTexture.active = null; //Clean     
-
-            Destroy(renderTextureRGB); //Free memory
-            yield return new WaitForSeconds(CaptureFrecuency);
-        }
-    }
-
     IEnumerator SendImages(ROS ros) {
-        Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);     
-
-        while (Application.isPlaying) {
-            Log("Sending images to ros.", LogLevel.Normal);
-            if (ros.IsConnected()) {          
-
-                Color32[] pxs = ImageRGB.GetPixels32();
-                Color32[] pxsDepth = ImageDepth.GetPixels32();
+        Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        
+        while (Application.isPlaying)
+        {            
+            if (ros.IsConnected())
+            {
+                Log("Sending images to ros.", LogLevel.Developer);
+                Color32[] pxs = CaptureImage(ImageType.RGB).GetPixels32();
+                Color32[] pxsDepth = CaptureImage(ImageType.Depth).GetPixels32();
 
                 //Compose img: RGBD
-                for (int i = 0; i < pxs.Length; i++) {
+                for (int i = 0; i < pxs.Length; i++)
+                {
                     pxs[i].a = pxsDepth[i].a;
                 }
-                
+
                 rgb.SetPixels32(pxs);
                 rgb.Apply();
 
                 HeaderMsg _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
                 CompressedImageMsg compressedImg = new CompressedImageMsg(_head, "png", rgb.EncodeToPNG());
-                ros.Publish(CameraRGB_pub.GetMessageTopic(), compressedImg);                
+                ros.Publish(CameraRGB_pub.GetMessageTopic(), compressedImg);
             }
             yield return new WaitForSeconds(ROSFrecuency);
         }
+
+        yield return null;
     }
 
     private void Log(string _msg, LogLevel lvl, bool Warning = false)

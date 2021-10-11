@@ -105,21 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 3
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &8953130860606982329
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -240,21 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 4
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &8972152426535030805
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -379,21 +349,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 2
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &2765909560731430050
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1542,21 +1497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 3
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &1897932274764498664
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1689,21 +1629,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 0
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &3214193906281638700
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2025,21 +1950,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 1
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &6928996303409860165
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2157,21 +2067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 2
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &6791918893145488553
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2345,21 +2240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 2
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &8953382511027086738
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2476,21 +2356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   roomType: 4
-  randomStateDoor: 0
-  initialStateGeneralLight: 0
-  initialStateLights: 2
-  randomWallPainting: 1
-  randomFloorPainting: 1
-  randomObjectModel: 0
-  wallPaints:
-  - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
-  - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
-  - {fileID: 2100000, guid: 0569c1f87511a4441b9cfe69d9bbb33d, type: 2}
-  - {fileID: 2100000, guid: df2438781db1827498a4547161b11a25, type: 2}
-  - {fileID: 2100000, guid: 8ccd2aaed042ac54e998dec2b0ec281b, type: 2}
-  floorPaints:
-  - {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
-  - {fileID: 2100000, guid: 6d3e9cf547d1be44888295df177d9575, type: 2}
 --- !u!64 &8315385536472719005
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12106,6 +11971,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2460637221919918749}
     m_Modifications:
+    - target: {fileID: 3172097261749282918, guid: fce9b15eec6d849418cfed43e75588fe,
+        type: 3}
+      propertyPath: m_state
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3525551018394576410, guid: fce9b15eec6d849418cfed43e75588fe,
         type: 3}
       propertyPath: m_Layer

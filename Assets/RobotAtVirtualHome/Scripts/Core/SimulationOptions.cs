@@ -50,7 +50,7 @@ namespace RobotAtVirtualHome
     public struct PairForMaterials
     {
         public RoomType roomType;
-        public Material material;
+        public List<Material> materials;
     }
 
 }
