@@ -55,6 +55,7 @@ public class SmartCamera : MonoBehaviour
     public void Connected(ROS ros) {
         if (sendImagesToROS) {
             ros.RegisterPubPackage("CameraRGB_pub");
+            ros.RegisterPubPackage("CameraDepth_pub");
             StartCoroutine(SendImages(ros));
         }
     }
@@ -114,28 +115,31 @@ public class SmartCamera : MonoBehaviour
 
     #region Private Functions
     IEnumerator SendImages(ROS ros) {
-        Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-        
+        //Texture2D rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        HeaderMsg _head;
+        CompressedImageMsg compressedImg;
         while (Application.isPlaying)
         {            
             if (ros.IsConnected())
             {
                 Log("Sending images to ros.", LogLevel.Developer);
-                Color32[] pxs = CaptureImage(ImageType.RGB).GetPixels32();
-                Color32[] pxsDepth = CaptureImage(ImageType.Depth).GetPixels32();
+                //Color32[] pxs = CaptureImage(ImageType.RGB).GetPixels32();
+                //Color32[] pxsDepth = CaptureImage(ImageType.Depth).GetPixels32();
 
-                //Compose img: RGBD
-                for (int i = 0; i < pxs.Length; i++)
-                {
-                    pxs[i].a = pxsDepth[i].a;
-                }
+                ////Compose img: RGBD
+                //for (int i = 0; i < pxs.Length; i++)
+                //{
+                //    pxs[i].a = pxsDepth[i].a;
+                //}
 
-                rgb.SetPixels32(pxs);
-                rgb.Apply();
-
-                HeaderMsg _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
-                CompressedImageMsg compressedImg = new CompressedImageMsg(_head, "png", rgb.EncodeToPNG());
+                //rgb.SetPixels32(pxs);
+                //rgb.Apply();
+                //rgb = CaptureImage(ImageType.RGB);
+                _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);                
+                compressedImg = new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.RGB).EncodeToJPG());
                 ros.Publish(CameraRGB_pub.GetMessageTopic(), compressedImg);
+                compressedImg = new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.Depth).EncodeToJPG());
+                ros.Publish(CameraDepth_pub.GetMessageTopic(), compressedImg);
             }
             yield return new WaitForSeconds(ROSFrecuency);
         }

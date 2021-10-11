@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   recordEnvironmentDatas: 0
-  transparentRoof: 0
+  transparentRoof: 1
   m_simulationOptions: {fileID: 11400000, guid: ba738b152ca79a049a5e971044058da7,
     type: 2}
   houses:
@@ -387,7 +387,9 @@ MonoBehaviour:
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
+  m_BeforeStackBundles:
+  - assemblyQualifiedName: Aerobox.Rendering.PostProcessing.Flare, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_AfterStackBundles: []
 --- !u!1 &1231701452
 GameObject:
@@ -650,6 +652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: User
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143578909256583690, guid: 6960d435a2329184b8185a3ab3d3bc49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7092804192935383847, guid: 6960d435a2329184b8185a3ab3d3bc49,
         type: 3}
