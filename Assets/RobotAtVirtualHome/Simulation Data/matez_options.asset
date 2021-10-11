@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f5a1f89789d3743a9a125b62cafc4d, type: 3}
+  m_Name: matez_options
+  m_EditorClassIdentifier: 
+  houseSelected: 20
+  path: /home/matez/Unity/Semantic_Records/RobotAtVirtualHome/
+  SunRotation: 100
+  StateGeneralLight: 0
+  StateLights: 0
+  RandomStateDoor: 0
+  WallsMaterials:
+  - roomType: 0
+    material: {fileID: 2100000, guid: eaeaaf0b6ca020b449a8bca4725a1199, type: 2}
+  FloorsMaterials:
+  - roomType: 0
+    material: {fileID: 2100000, guid: 6a76e7af6b1ec1147a48ad88ee029051, type: 2}
+  ObjectsSeed:
+  - objectTag: 6
+    seed: 2
