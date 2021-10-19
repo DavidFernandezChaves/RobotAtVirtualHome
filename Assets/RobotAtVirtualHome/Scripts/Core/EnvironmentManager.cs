@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ROSUnityCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -28,14 +29,17 @@ namespace RobotAtVirtualHome {
 
         public event Action OnEnvironmentLoaded;
         public string path { get; private set; }
+        public House house { get; private set; }
 
+        public List<GameObject> agents { get; private set; }
 
-        private House house;        
         private StreamWriter writer;
 
 
         #region Unity Functions
         private void Awake() {
+            agents = new List<GameObject>();
+
             if (houses != null && houses.Count > 0) {
                 int houseSelected = m_simulationOptions.houseSelected;
                 if (houseSelected == 0) {
@@ -83,11 +87,7 @@ namespace RobotAtVirtualHome {
                 writer.Close();
             }           
 
-            StartCoroutine(LoadingEnvironment());
-            
-            //GameObject.Find("General Scripts").SendMessage("VirtualEnviromentLoaded", house.gameObject, SendMessageOptions.DontRequireReceiver);
-
-
+            StartCoroutine(LoadingEnvironment());            
         }
 
 
@@ -104,6 +104,24 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
+        private void CreateVirtualAgent()
+        {
+            if (house.virtualObjects.ContainsKey("Station_0"))
+            {
+                var origin = house.virtualObjects["Station_0"].transform.position;                
+
+                foreach (Agent r in m_simulationOptions.agentToInstantiate)
+                {
+                    Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, house.transform.parent).transform;
+                    agent.GetComponent<ROS>().robotName = r.name;
+                    agent.name = r.name;
+                    agent.GetComponent<ROS>().Connect(r.ip);
+                    agents.Add(agent.gameObject);
+                }
+            }
+            else { Log("This house don't have robot station", LogLevel.Error, true); }
+        }
+
         private IEnumerator LoadingEnvironment()
         {
             bool isLoading = true;
@@ -125,7 +143,8 @@ namespace RobotAtVirtualHome {
                 yield return null;
             }
             transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-            OnEnvironmentLoaded?.Invoke();
+            CreateVirtualAgent();
+            OnEnvironmentLoaded?.Invoke();            
         }
 
         private void Log(string _msg, LogLevel lvl, bool Warning = false)

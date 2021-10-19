@@ -104,12 +104,12 @@ namespace RobotAtVirtualHome {
 #if UNITY_EDITOR
         private void OnDrawGizmos() {
             if (Application.isPlaying && this.enabled && LogLevel >= LogLevel.Normal) {
-                Gizmos.color = Color.green;
+                Gizmos.color = new Color(0, 0.9f, 1, 0.3f);
                 foreach (Vector3 point in grid) {
                     Gizmos.DrawSphere(point, 0.1f);
                 }
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(agent.destination, 0.2f);
+                Gizmos.color = new Color(1, 0, 0.9f, 0.8f);
+                Gizmos.DrawSphere(agent.destination, 0.1f);
             }
         }
 #endif

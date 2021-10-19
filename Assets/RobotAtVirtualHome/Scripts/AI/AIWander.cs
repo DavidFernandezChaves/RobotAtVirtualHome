@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -23,9 +24,12 @@ namespace RobotAtVirtualHome {
         public bool captureSemanticMask;
         public bool captureScan;
 
+        public event Action OnEndRute;
+
         public List<Vector3> VisitPoints { get; private set; }
         public string currentRoom { get; private set; }
         public string filePath { get; private set; }
+
         private StreamWriter logImgWriter;
         private StreamWriter logScanWriter;
         private int index = 0;    
@@ -116,6 +120,7 @@ namespace RobotAtVirtualHome {
                             state = StatusMode.Finished;
                             Log("Finish", LogLevel.Normal);
                             GetComponent<AudioSource>().Play();
+                            OnEndRute?.Invoke();
                         }
                     }
                     break;
@@ -125,12 +130,12 @@ namespace RobotAtVirtualHome {
 #if UNITY_EDITOR
         private void OnDrawGizmos() {
             if (Application.isPlaying && this.enabled && LogLevel >= LogLevel.Normal) {
-                Gizmos.color = Color.green;
+                Gizmos.color = new Color(0, 0.9f, 1, 0.3f);
                 foreach (Vector3 point in VisitPoints) {
                     Gizmos.DrawSphere(point, 0.1f);
                 }
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(agent.destination, 0.2f);
+                Gizmos.color = new Color(1, 0, 0.9f, 0.8f);
+                Gizmos.DrawSphere(agent.destination, 0.1f);
             }
         }
 #endif

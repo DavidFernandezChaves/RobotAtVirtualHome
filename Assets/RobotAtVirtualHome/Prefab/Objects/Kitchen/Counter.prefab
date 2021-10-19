@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &1708810590289752462
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150,6 +152,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -174,6 +177,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &4061146563704321842
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -244,6 +248,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -268,6 +273,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &2828265565647026411
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -338,6 +344,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -362,6 +369,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &5051863702606148051
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -423,11 +431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8b6d3ebc641a045aad2bae0d18e137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 0
-  tags: 0800000011000000
+  LogLevel: 1
+  tags: 080000001100000022000000
   inheritedSeed: {fileID: 0}
   models:
   - {fileID: 4715246563936949878}
   - {fileID: 457287001198501813}
   - {fileID: 6615421665721732795}
   - {fileID: 5154501496862308033}
+  m_initialized: 0

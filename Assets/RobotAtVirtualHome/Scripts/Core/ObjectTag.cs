@@ -38,7 +38,7 @@
         Toilet,
         Toothbrush,
         Towel,
-        TV,
+        Tv,
         Untagged,
         Wall,
         Washbasin,

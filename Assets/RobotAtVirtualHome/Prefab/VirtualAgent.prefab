@@ -86,8 +86,8 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  cyclical: 1
-  randomSecuence: 1
+  cyclical: 0
+  randomSecuence: 0
   timeBetweenDataCapture: 0.5
   captureRGB: 0
   captureDepth: 0

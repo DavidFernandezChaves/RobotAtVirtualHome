@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,8 +9,6 @@ namespace RobotAtVirtualHome
     [CreateAssetMenu(menuName = "GameData/AppareanceOptions", order = 1)]
     public class SimulationOptions : ScriptableObject
     {
-
-
         [Tooltip("House to be loaded. 0 for random.")]
         [Range(0, 30)]
         public int houseSelected = 0;
@@ -28,7 +27,7 @@ namespace RobotAtVirtualHome
         [Tooltip("Set the status of the doors")]
         public DoorStatus RandomStateDoor;
 
-        [Header("Materials")]
+        [Header("Customization")]
         [Tooltip("Set up a set of materials with which the walls of each type of room will be painted.")]
         public List<PairForMaterials> WallsMaterials;
         [Tooltip("Set up a set of materials with which the floors of each type of room will be painted.")]
@@ -37,6 +36,10 @@ namespace RobotAtVirtualHome
         [SerializeField]
         [Tooltip("Choose an object model according to the object type. Use the <= 0 to choose it randomly.")]
         public List<PairForSeed> ObjectsSeed;
+
+        [Header("Virtual Agents")]
+        [Tooltip("Insert the prefab of the robots you want to load at the start of the simulation")]
+        public List<Agent> agentToInstantiate;
     }
 
     [Serializable]
@@ -51,6 +54,20 @@ namespace RobotAtVirtualHome
     {
         public RoomType roomType;
         public List<Material> materials;
+    }
+
+    [Serializable]
+    public struct Agent
+    {
+        public string name;
+        public string ip;
+        public GameObject prefab;
+        public Agent(string name, string ip, string root)
+        {
+            this.name = name;
+            this.ip = ip;
+            this.prefab = (GameObject)AssetDatabase.LoadAssetAtPath(root, typeof(GameObject));
+        }
     }
 
 }

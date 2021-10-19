@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f5a1f89789d3743a9a125b62cafc4d, type: 3}
   m_Name: Omega_options
   m_EditorClassIdentifier: 
-  houseSelected: 5
+  houseSelected: 20
   path: D:\RobotAtVirtualHome
-  SunRotation: 175
+  SunRotation: 170
   StateGeneralLight: 0
   StateLights: 2
   RandomStateDoor: 3
   WallsMaterials: []
   FloorsMaterials: []
-  ObjectsSeed:
-  - objectTag: 6
-    seed: 0
+  ObjectsSeed: []
+  agentToInstantiate:
+  - name: VirtualAgent
+    ip: 192.168.1.136
+    prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
