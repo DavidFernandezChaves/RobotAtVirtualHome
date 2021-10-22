@@ -1,0 +1,61 @@
+House Selected;20
+Sun Rotation;170
+Room;Bathroom_1;wall_ base_material 8;floor_wood 2
+Room;Bedroom_1;wall_ base_material 5;floor_wood 3
+Room;KitchenLivingRoom_1;wall_ base_material 2;floor_wood 2
+ ;id;seed;mode;color;room;roomType;globalPosition;rotation;tags
+-;Door_0;1;True;RGBA(0.441, 0.766, 0.488, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.1, 1.1, 2.0);(0.0, 90.0, 0.0);Door
+-;Wall_0;0;-;RGBA(0.817, 0.337, 0.675, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.1, 1.9, 2.0);(360.0, 180.0, 180.0);Wall
+-;Wall_1;0;-;RGBA(0.571, 0.793, 0.718, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.5, 1.9, 2.0);(360.0, 180.0, 180.0);Wall
+-;Counter_0;2;-;RGBA(0.501, 0.487, 0.382, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.9, 0.8, 0.0);(270.0, 90.0, 0.0);Counter;KitchenFurniture;Table
+-;KitchenFurniture_0;3;-;RGBA(0.607, 0.890, 0.342, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.8, 0.0, -0.2);(270.0, 0.0, 0.0);KitchenFurniture
+-;Standard_0;1;-;RGBA(0.530, 0.049, 0.537, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-2.0, 0.0, 1.8);(270.0, 270.0, 0.0);Standard
+-;Refrigerator_0;1;-;RGBA(0.079, 0.604, 0.241, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.9, 0.0, 0.7);(270.0, 270.0, 0.0);Refrigerator
+-;WashingMachine_0;0;-;RGBA(0.671, 0.444, 0.334, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-2.2, 0.0, 0.0);(0.0, 270.0, 0.0);WashingMachine
+-;Cabinet_0;3;-;RGBA(0.340, 0.710, 0.139, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.8, 0.9, -1.6);(270.0, 0.0, 0.0);Cabinet
+-;Burner_0;0;-;RGBA(0.246, 0.143, 0.651, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-2.7, 0.8, -1.5);(0.0, 270.0, 0.0);Burner
+-;KitchenFurniture_1;3;-;RGBA(0.858, 0.993, 0.776, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-2.7, 0.0, -1.6);(270.0, 90.0, 0.0);KitchenFurniture
+-;Chair_0;3;-;RGBA(0.341, 0.836, 0.080, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.7, 0.0, 1.6);(270.0, 120.0, 0.0);Chair
+-;Standard_1;2;-;RGBA(0.653, 0.302, 0.254, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.2, 0.4, -1.7);(0.0, 90.0, 0.0);Standard
+-;Tv_0;0;-;RGBA(0.343, 0.878, 0.308, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-4.7, 0.7, -1.5);(0.0, 0.0, 0.0);Tv
+-;Table_0;2;-;RGBA(0.305, 0.248, 0.631, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-6.0, 0.0, -1.4);(270.0, 0.0, 0.0);Table
+-;Sofa_0;3;-;RGBA(0.326, 0.708, 0.457, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.1, 0.0, 1.4);(270.0, 0.0, 0.0);Sofa;Armchair;Chair
+-;KitchenFurniture_2;3;-;RGBA(0.123, 0.295, 0.821, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.9, 0.0, -1.6);(270.0, 0.0, 0.0);KitchenFurniture
+-;Counter_1;2;-;RGBA(0.487, 0.792, 0.382, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.9, 0.8, -1.6);(270.0, 0.0, 0.0);Counter;KitchenFurniture;Table
+-;Sink_0;1;-;RGBA(0.112, 0.231, 0.858, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.8, 0.0, -0.9);(270.0, 180.0, 0.0);Sink
+-;KitchenFurniture_3;3;-;RGBA(0.978, 0.343, 0.470, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.8, 0.0, -0.9);(270.0, 180.0, 0.0);KitchenFurniture
+-;KitchenFurniture_4;3;-;RGBA(0.392, 0.957, 0.007, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-1.8, 0.0, -1.0);(270.0, 0.0, 0.0);KitchenFurniture
+-;Counter_3;2;-;RGBA(0.939, 0.806, 0.821, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.5, 0.8, -0.8);(270.0, 90.0, 0.0);Counter;KitchenFurniture;Table
+-;Chair_1;3;-;RGBA(0.097, 0.901, 0.274, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.7, 0.0, -1.6);(270.0, 359.9, 0.0);Chair
+-;Chair_2;3;-;RGBA(0.980, 0.772, 0.626, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.7, 0.0, -0.9);(270.0, 2.9, 0.0);Chair
+-;Chair_3;3;-;RGBA(0.517, 0.484, 0.207, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.7, 0.0, -0.2);(270.0, 1.0, 0.0);Chair
+-;Chair_4;3;-;RGBA(0.819, 0.734, 0.961, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-6.1, 0.0, -1.6);(270.0, 271.1, 0.0);Chair
+-;Chair_5;3;-;RGBA(0.549, 0.627, 0.132, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-6.1, 0.0, -1.1);(270.0, 87.9, 0.0);Chair
+-;Chair_6;3;-;RGBA(0.934, 0.709, 0.906, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.7, 0.0, -1.4);(270.0, 179.7, 0.0);Chair
+-;Picture_0;0;-;RGBA(0.935, 0.576, 0.208, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-4.3, 1.8, 1.9);(270.0, 0.0, 0.0);Picture
+-;Picture_1;1;-;RGBA(0.884, 0.281, 0.883, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-6.4, 1.8, 0.1);(270.0, 270.0, 0.0);Picture
+-;Picture_2;2;-;RGBA(0.178, 0.533, 0.062, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.7, 1.8, -1.9);(270.0, 180.0, 0.0);Picture
+-;Picture_3;3;-;RGBA(0.273, 0.628, 0.751, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.3, 1.8, -1.9);(270.0, 180.0, 0.0);Picture
+-;Station_0;1;-;RGBA(0.866, 0.482, 0.686, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-3.0, 0.0, 1.6);(0.0, 0.0, 0.0);Station
+-;Light_0;1;True;RGBA(0.341, 0.578, 0.058, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-2.7, 2.8, -0.5);(270.0, 0.0, 0.0);Light
+-;Light_1;1;True;RGBA(0.551, 0.924, 0.169, 1.000);KitchenLivingRoom_1;KitchenLivingRoom;(-5.1, 2.8, -0.1);(270.0, 0.0, 0.0);Light
+-;Light_2;0;True;RGBA(0.536, 0.987, 0.278, 1.000);Bedroom_1;Bedroom;(1.8, 2.8, 0.0);(270.0, 0.0, 0.0);Light
+-;Door_1;1;False;RGBA(0.384, 0.271, 0.623, 1.000);Bedroom_1;Bedroom;(0.0, 1.1, 1.5);(0.0, 0.0, 0.0);Door
+-;Wall_2;0;-;RGBA(0.267, 0.864, 0.985, 1.000);Bedroom_1;Bedroom;(3.0, 1.9, -0.3);(360.0, 90.0, 180.0);Wall
+-;Closet_0;1;-;RGBA(0.320, 0.168, 0.701, 1.000);Bedroom_1;Bedroom;(1.9, 0.0, 1.6);(270.0, 0.0, 0.0);Closet;Cabinet
+-;Bed_0;0;-;RGBA(0.006, 0.113, 0.845, 1.000);Bedroom_1;Bedroom;(1.7, 0.0, -0.9);(270.0, 180.0, 0.0);Bed
+-;Nightstand_0;2;-;RGBA(0.233, 0.107, 0.429, 1.000);Bedroom_1;Bedroom;(0.7, 0.0, -1.6);(270.0, 90.0, 0.0);Nightstand;Standard
+-;Lamp_0;0;True;RGBA(0.933, 0.964, 0.824, 1.000);Bedroom_1;Bedroom;(0.7, 0.5, -1.7);(270.0, 116.1, 0.0);Lamp
+-;Chair_7;0;-;RGBA(0.280, 0.319, 0.315, 1.000);Bedroom_1;Bedroom;(2.6, 0.0, 0.8);(270.0, 180.0, 0.0);Chair
+-;Nightstand_1;2;-;RGBA(0.042, 0.942, 0.039, 1.000);Bedroom_1;Bedroom;(2.6, 0.0, -1.6);(270.0, 90.0, 0.0);Nightstand;Standard
+-;Lamp_1;0;False;RGBA(0.555, 0.520, 0.085, 1.000);Bedroom_1;Bedroom;(2.7, 0.5, -1.7);(270.0, 73.2, 0.0);Lamp
+-;Light_3;1;True;RGBA(0.212, 0.540, 0.902, 1.000);Bathroom_1;Bathroom;(-0.8, 2.8, -0.3);(270.0, 0.0, 0.0);Light
+-;Door_2;1;False;RGBA(0.517, 0.152, 0.745, 1.000);Bathroom_1;Bathroom;(-0.8, 1.1, 1.0);(0.0, 90.0, 0.0);Door
+-;ShowerCabin_0;0;-;RGBA(0.670, 0.496, 0.237, 1.000);Bathroom_1;Bathroom;(-0.1, 0.0, 0.4);(270.0, 270.0, 0.0);ShowerCabin
+-;Toilet_0;0;-;RGBA(0.289, 0.101, 0.602, 1.000);Bathroom_1;Bathroom;(-0.2, 0.0, -0.9);(270.0, 0.0, 0.0);Toilet
+-;Washbasin_0;0;-;RGBA(0.754, 0.751, 0.992, 1.000);Bathroom_1;Bathroom;(-1.1, 0.0, -0.9);(270.0, 180.0, 0.0);Washbasin
+-;Cup_0;0;-;RGBA(0.553, 0.000, 0.689, 1.000);Bathroom_1;Bathroom;(-1.7, 0.0, -1.2);(270.0, 80.0, 0.0);Cup
+-;Toothbrush_0;0;-;RGBA(0.342, 0.931, 0.502, 1.000);Bathroom_1;Bathroom;(-1.3, 1.1, -1.3);(270.0, 340.0, 0.0);Toothbrush
+-;Drying_0;1;-;RGBA(0.590, 0.423, 0.019, 1.000);Bathroom_1;Bathroom;(0.1, 0.1, -0.6);(270.0, 0.0, 0.0);Drying
+-;Towel_0;2;-;RGBA(0.839, 0.172, 0.977, 1.000);Bathroom_1;Bathroom;(0.1, 1.9, -0.6);(270.0, 0.0, 0.0);Towel
+-;Mirror_0;1;-;RGBA(0.394, 0.160, 0.164, 1.000);Bathroom_1;Bathroom;(-1.4, 1.7, -0.9);(270.0, 270.0, 0.0);Mirror

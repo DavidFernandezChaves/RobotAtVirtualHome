@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ namespace RobotAtVirtualHome {
         public List<GameObject> agents { get; private set; }
 
         private StreamWriter writer;
+        private int houseSelected;
 
 
         #region Unity Functions
@@ -41,7 +43,7 @@ namespace RobotAtVirtualHome {
             agents = new List<GameObject>();
 
             if (houses != null && houses.Count > 0) {
-                int houseSelected = m_simulationOptions.houseSelected;
+                houseSelected = m_simulationOptions.houseSelected;
                 if (houseSelected == 0) {
                     houseSelected = UnityEngine.Random.Range(1, houses.Count);
                 }              
@@ -65,28 +67,8 @@ namespace RobotAtVirtualHome {
         private void Start()
         {
             house.SetTransparentRoof(transparentRoof);
-            house.LoadHouse(m_simulationOptions);
-
+            house.LoadHouse();
             transform.GetChild(0).rotation = Quaternion.Euler(m_simulationOptions.SunRotation, 0, 0);
-
-            if (recordEnvironmentDatas)
-            {
-                writer = new StreamWriter(path + "/VirtualObjects.csv", true);
-                writer.WriteLine("id;color;room;roomType;type;globalPosition;rotation;seed");
-                foreach (KeyValuePair<string, VirtualObject> obj in house.virtualObjects)
-                {
-                    writer.WriteLine(obj.Key.ToString() + ";"
-                        + house.semanticColors[obj.Key].ToString() + ";"
-                        + obj.Value.room.transform.name.ToString() + ";"
-                        + obj.Value.room.roomType.ToString() + ";"
-                        + obj.Value.tags[0].ToString() + ";"
-                        + obj.Value.transform.position.ToString() + ";"
-                        + obj.Value.transform.rotation.eulerAngles.ToString() + ";"
-                        + obj.Value.m_seed.ToString());
-                }
-                writer.Close();
-            }           
-
             StartCoroutine(LoadingEnvironment());            
         }
 
@@ -104,13 +86,14 @@ namespace RobotAtVirtualHome {
         #endregion
 
         #region Private Functions
-        private void CreateVirtualAgent()
+        private void VirtualAgentsIntanciation()
         {
-            if (house.virtualObjects.ContainsKey("Station_0"))
+            VirtualObject station = house.virtualObjects.Find(obj => obj.tags.Contains(ObjectTag.Station));
+            if (station != null)
             {
-                var origin = house.virtualObjects["Station_0"].transform.position;                
+                var origin = station.transform.position;                
 
-                foreach (Agent r in m_simulationOptions.agentToInstantiate)
+                foreach (Agent r in m_simulationOptions.agentsToInstantiate)
                 {
                     Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, house.transform.parent).transform;
                     agent.GetComponent<ROS>().robotName = r.name;
@@ -120,6 +103,17 @@ namespace RobotAtVirtualHome {
                 }
             }
             else { Log("This house don't have robot station", LogLevel.Error, true); }
+        }
+
+        private void UserInstanciation()
+        {
+            VirtualObject station = house.virtualObjects.Find(obj => obj.tags.Contains(ObjectTag.Station));
+            if (m_simulationOptions.userPrefab != null && station != null)
+            {
+                var origin = station.transform.position + new Vector3(0,1,0);
+
+                Transform agent = Instantiate(m_simulationOptions.userPrefab, origin, Quaternion.identity, house.transform.parent).transform;
+            }
         }
 
         private IEnumerator LoadingEnvironment()
@@ -140,10 +134,136 @@ namespace RobotAtVirtualHome {
                 {
                     isLoading = true;
                 }
-                yield return null;
+                yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForEndOfFrame();
             transform.GetComponent<NavMeshSurface>().BuildNavMesh();
-            CreateVirtualAgent();
+
+            if (m_simulationOptions.simulationLog != null)
+            {
+                using (StringReader sr = new StringReader(m_simulationOptions.simulationLog.text))
+                {
+                    string line;
+                    string[] values;                    
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        values = line.Split(';');
+                        switch (values[0])
+                        {
+                            case "House Selected":
+                                if (!values[1].Equals(houseSelected.ToString()))
+                                {
+                                    sr.ReadToEnd();
+                                    Log("The selected house does not match the house in the entered log file.", LogLevel.Normal, true);
+                                }
+                                break;
+                            case "Sun Rotation":
+                                transform.GetChild(0).rotation = Quaternion.Euler(float.Parse(values[1]), 0, 0);
+                                break;
+                            case "Room":
+                                Room room = GameObject.Find(values[1]).GetComponent<Room>();
+                                if (room != null)
+                                {
+                                    room.PaintWall((Material)Resources.Load("Walls/" + values[2], typeof(Material)));
+                                    room.PaintFloor((Material)Resources.Load("Floors/" + values[3], typeof(Material)));
+                                }
+                                else
+                                {
+                                    Log("Room " + values[1] + " not found.", LogLevel.Error, true);
+                                }
+                                break;
+                            case "-":
+                                try
+                                {                                    
+                                    VirtualObject vo = house.virtualObjects.Find(obj => obj.m_id.Equals(values[1]));
+                                    vo.SetSeed(int.Parse(values[2]));
+                                    if (vo.tags.Contains(ObjectTag.Light) || vo.tags.Contains(ObjectTag.Lamp) || vo.tags.Contains(ObjectTag.Lighter))
+                                    {
+                                        vo.GetComponentInChildren<Light>().enabled = Boolean.Parse(values[3]);
+                                    }
+                                    else if (vo.tags.Contains(ObjectTag.Door))
+                                    {
+                                        vo.GetComponent<Door>().SetDoor(Boolean.Parse(values[3]));
+                                    }                                    
+                                }
+                                catch
+                                {
+                                    Log("Object " + values[1] + " not found.", LogLevel.Error, true);
+                                }
+                                break;
+                        }
+                    }
+
+                }
+
+            }
+
+            if (recordEnvironmentDatas)
+            {
+                writer = new StreamWriter(path + "/EnviromentLog.csv", true);
+
+                writer.WriteLine("House Selected" + ";" + houseSelected.ToString());
+                writer.WriteLine("Sun Rotation" + ";" + m_simulationOptions.SunRotation.ToString());
+
+                foreach (Room room in FindObjectsOfType<Room>())
+                {
+                    writer.WriteLine("Room;"+room.transform.name+";"+room.wallMaterial.name + ";" + room.floorMaterial.name);
+                }
+
+                    writer.WriteLine(" ;id;seed;mode;color;room;roomType;globalPosition;rotation;tags");
+                StringBuilder line = new StringBuilder();
+                foreach (VirtualObject obj in house.virtualObjects)
+                {
+                    if (obj.isActiveAndEnabled)
+                    {
+                        line = new StringBuilder();
+                        line.Append("-");
+                        line.Append(";");
+                        line.Append(obj.m_id.ToString());
+                        line.Append(";");
+                        line.Append(obj.m_seed.ToString());
+                        line.Append(";");
+
+                        if (obj.tags.Contains(ObjectTag.Light))
+                        {
+                            line.Append(obj.GetComponentInChildren<Light>().enabled.ToString());
+                        }
+                        else if (obj.tags.Contains(ObjectTag.Lamp) || obj.tags.Contains(ObjectTag.Lighter))
+                        {
+                            line.Append(obj.GetComponentInChildren<Light>().enabled.ToString());
+                        }
+                        else if (obj.tags.Contains(ObjectTag.Door))
+                        {
+                            line.Append(obj.GetComponent<Door>().m_state.ToString());
+                        }
+                        else
+                        {
+                            line.Append("-");
+                        }
+
+                        line.Append(";");
+                        line.Append(house.semanticColors[obj.m_id].ToString());
+                        line.Append(";");
+                        line.Append(obj.room.transform.name.ToString());
+                        line.Append(";");
+                        line.Append(obj.room.roomType.ToString());
+                        line.Append(";");
+                        line.Append(obj.transform.position.ToString());
+                        line.Append(";");
+                        line.Append(obj.transform.rotation.eulerAngles.ToString());
+                        foreach (ObjectTag ot in obj.tags)
+                        {
+                            line.Append(";");
+                            line.Append(ot.ToString());
+                        }
+                        writer.WriteLine(line);
+                    }
+                }
+                writer.Close();
+            }
+
+            VirtualAgentsIntanciation();
+            UserInstanciation();
             OnEnvironmentLoaded?.Invoke();            
         }
 

@@ -9,22 +9,23 @@ namespace RobotAtVirtualHome {
         public LogLevel LogLevel = LogLevel.Normal;
 
         public List<Room> rooms { get; private set; }
-        public Dictionary<string, VirtualObject> virtualObjects;
+        public List<VirtualObject> virtualObjects;
         public Dictionary<string,Color> semanticColors { get; private set; }
         private Transform roof;
+        private SimulationOptions simulationOptions;
 
         #region Unity Functions
         private void Awake() {
             rooms = new List<Room>();
-            virtualObjects = new Dictionary<string, VirtualObject>();
+            virtualObjects = new List<VirtualObject>();
             semanticColors = new Dictionary<string, Color>();
+            simulationOptions = FindObjectOfType<EnvironmentManager>().m_simulationOptions;
         }
         #endregion
 
         #region Public Functions
-        public void LoadHouse(SimulationOptions simulationOptions)
+        public void LoadHouse()
         {
-
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform editingTransform = transform.GetChild(i);
@@ -45,11 +46,11 @@ namespace RobotAtVirtualHome {
 
         public string RegisterVirtualObject(VirtualObject virtualObject) {
             int i = 0;
-            while (virtualObjects.ContainsKey(virtualObject.tags[0].ToString() + "_" + i)) {
+            while (virtualObjects.Find(obj => obj.m_id == virtualObject.tags[0].ToString() + "_" + i)) {
                 i++;
             }
             var name = virtualObject.tags[0].ToString() + "_" + i;            
-            virtualObjects.Add(name, virtualObject);
+            virtualObjects.Add(virtualObject);
 
             Color color;
             do {
@@ -57,6 +58,50 @@ namespace RobotAtVirtualHome {
             } while (semanticColors.ContainsValue(color));
 
             semanticColors.Add(name, color);
+
+            if (virtualObject.tags.Contains(ObjectTag.Lamp)|| virtualObject.tags.Contains(ObjectTag.Lighter))
+            {
+                bool result = false;
+                switch (simulationOptions.StateLights)
+                {
+                    case LightStatus.On:
+                        result = true;
+                        break;
+                    case LightStatus.Off:
+                        result = false;
+                        break;
+                    case LightStatus.Radomly:
+                        result = Random.value >= 0.5f;
+                        break;
+                }
+
+                foreach (Light l in virtualObject.GetComponentsInChildren(typeof(Light), true))
+                {
+                    l.enabled = result;
+                }
+            }
+
+            if (virtualObject.tags.Contains(ObjectTag.Light))
+            {
+                bool result = false;
+                switch (simulationOptions.StateGeneralLight)
+                {
+                    case LightStatus.On:
+                        result = true;
+                        break;
+                    case LightStatus.Off:
+                        result = false;
+                        break;
+                    case LightStatus.Radomly:
+                        result = Random.value >= 0.5f;
+                        break;
+                }
+
+                foreach (Light l in virtualObject.GetComponentsInChildren(typeof(Light), true))
+                {
+                    l.enabled = result;
+                }
+            }
 
             return name;
         }

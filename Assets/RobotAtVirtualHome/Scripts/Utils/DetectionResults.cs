@@ -158,7 +158,7 @@ namespace RobotAtVirtualHome.Utils
         #region Private Functions
         private void GetDetectableObjects()
         {
-            List<VirtualObject> objectsInTheHouse = m_enviromentManager.house.virtualObjects.Values.ToList();
+            List<VirtualObject> objectsInTheHouse = new List<VirtualObject>(m_enviromentManager.house.virtualObjects);
             foreach(string objectClass in m_ontologySystem.objectClassInOntology)
             {
                 try

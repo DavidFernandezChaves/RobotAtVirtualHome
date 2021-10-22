@@ -14,17 +14,16 @@ namespace RobotAtVirtualHome {
         public RoomType roomType;
 
         [SerializeField]
-        public List<Light> generalLights { get; private set; }
-        [SerializeField]
         public List<Door> doors { get; private set; }
+
         [SerializeField]
-        public List<Light> lamps { get; private set; }
+        public Material wallMaterial { get; private set; }
+        [SerializeField]
+        public Material floorMaterial { get; private set; }
+
 
         #region Unity Functions
         private void Awake() {
-
-            generalLights = new List<Light>();
-            lamps = new List<Light>();
             doors = new List<Door>();
         }
 
@@ -36,28 +35,11 @@ namespace RobotAtVirtualHome {
             SendMessage("SetRoomType", roomType.ToString(),SendMessageOptions.DontRequireReceiver);
 
 
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Transform editingTransform = transform.GetChild(i);
-
-                //General Light Case
-                Light light = editingTransform.GetComponent<Light>();
-                if (light != null)
-                {
-                    generalLights.Add(light);
-                    editingTransform.name = "Light_" + generalLights.Count();
-                }
-            }
-
-            lamps = GetComponentsInChildren<Light>(true).ToList();
-            generalLights.ForEach(l => lamps.Remove(l));
             doors = GetComponentsInChildren<Door>().ToList();
 
-            TurnLights(simulationOptions.StateGeneralLight, generalLights);
-            TurnLights(simulationOptions.StateLights, lamps);
             SetDoors(simulationOptions.RandomStateDoor);
 
-            List<Material> materialsWall = simulationOptions.WallsMaterials.Find(pair => pair.roomType == roomType).materials;
+            List<Material> materialsWall = simulationOptions.WallsMaterialsByRoomType.Find(pair => pair.roomType == roomType).materials;
             if (materialsWall == null || materialsWall.Count == 0)
             {
                 materialsWall = Resources.LoadAll("Walls", typeof(Material)).Cast<Material>().ToList();
@@ -72,7 +54,7 @@ namespace RobotAtVirtualHome {
                 Log("No wall painting found", LogLevel.Error, true);
             }
 
-            List<Material> materialsFloor = simulationOptions.FloorsMaterials.Find(pair => pair.roomType == roomType).materials;
+            List<Material> materialsFloor = simulationOptions.FloorsMaterialsByRoomType.Find(pair => pair.roomType == roomType).materials;
             if (materialsFloor == null || materialsFloor.Count == 0)
             {
                 materialsFloor = Resources.LoadAll("Floors", typeof(Material)).Cast<Material>().ToList();
@@ -109,25 +91,6 @@ namespace RobotAtVirtualHome {
             }
         }
 
-        public void TurnLights(LightStatus state, List<Light> lights) {
-            foreach(Light l in lights)
-            {
-                switch (state)
-                {
-                    case LightStatus.On:
-                        l.enabled = true;
-                        break;
-                    case LightStatus.Off:
-                        l.enabled = false;
-                        break;
-                    case LightStatus.Radomly:
-                        l.enabled = Random.value >= 0.5f;
-                        break;
-                }
-            }
-        }
-
-
         public void PaintWall(Material paint) {
             var mats = GetComponent<MeshRenderer>().materials;
             if (mats[0].name.ToLower().Contains("wall")) {
@@ -136,6 +99,7 @@ namespace RobotAtVirtualHome {
                 mats[1] = paint;
             }            
             GetComponent<MeshRenderer>().materials = mats;
+            wallMaterial = paint;
         }
 
         public void PaintFloor(Material paint) {
@@ -146,6 +110,7 @@ namespace RobotAtVirtualHome {
                 mats[1] = paint;
             }
             GetComponent<MeshRenderer>().materials = mats;
+            floorMaterial = paint;
         }
         #endregion
 

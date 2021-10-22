@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 931527486158493165}
   - component: {fileID: 931527486158493167}
   - component: {fileID: -9195802655526172168}
+  - component: {fileID: -4847498876063428212}
   - component: {fileID: 3039054764102594731}
   - component: {fileID: 931527486158493160}
   - component: {fileID: 5696814597877837170}
@@ -119,6 +120,30 @@ MonoBehaviour:
   captureDepth: 1
   captureSemanticMask: 1
   captureScan: 1
+--- !u!114 &-4847498876063428212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931527486158493203}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e494ac19078144997d4f79017806c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LogLevel: 1
+  state: 0
+  sendPathToROS: 0
+  pathType: 0
+  rOSFrecuency: 1
+  cyclical: 0
+  randomSecuence: 0
+  timeBetweenDataCapture: 0.5
+  captureRGB: 0
+  captureDepth: 0
+  captureSemanticMask: 0
+  captureScan: 0
 --- !u!114 &3039054764102594731
 MonoBehaviour:
   m_ObjectHideFlags: 0

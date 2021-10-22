@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16f5a1f89789d3743a9a125b62cafc4d, type: 3}
-  m_Name: Omega_options
+  m_Name: Default
   m_EditorClassIdentifier: 
-  houseSelected: 20
-  path: D:\RobotAtVirtualHome
-  SunRotation: 170
+  houseSelected: 0
+  path: C:\
+  SunRotation: 100
   StateGeneralLight: 0
   StateLights: 2
   RandomStateDoor: 3
-  WallsMaterials: []
-  FloorsMaterials: []
-  ObjectsSeed: []
-  agentToInstantiate:
+  WallsMaterialsByRoomType: []
+  FloorsMaterialsByRoomType: []
+  specifySeedByObjectType: []
+  userPrefab: {fileID: 1143578909256583690, guid: 6960d435a2329184b8185a3ab3d3bc49,
+    type: 3}
+  agentsToInstantiate:
   - name: VirtualAgent
-    ip: 192.168.1.136
+    ip: localhost
     prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
+  simulationLog: {fileID: 0}

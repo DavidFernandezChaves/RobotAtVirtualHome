@@ -19,6 +19,7 @@ namespace RobotAtVirtualHome {
         [Header("Preloading models")]
         public GameObject[] models;
 
+        public string m_id { get; private set; }
         public int m_seed { get; private set; }
         public Room room { get; private set; }
 
@@ -33,6 +34,9 @@ namespace RobotAtVirtualHome {
             if(models == null || models.Length == 0) {
                 Log("Unassigned model", LogLevel.Normal);
             }
+
+            m_id = FindObjectOfType<House>().RegisterVirtualObject(this);
+            transform.name = m_id;
         }
 
         void Start() {
@@ -44,34 +48,35 @@ namespace RobotAtVirtualHome {
             {
                 if (inheritedSeed.m_initialized)
                 {
-                    SetModel(inheritedSeed.m_seed);
+                    SetSeed(inheritedSeed.m_seed);
                 }
-                inheritedSeed.OnObjectModelChanged += SetModel;                              
+                inheritedSeed.OnObjectModelChanged += SetSeed;                              
             }
             else
             {
-                m_seed = FindObjectOfType<EnvironmentManager>().m_simulationOptions.ObjectsSeed.Find(pair => tags.Contains(pair.objectTag)).seed;
+                m_seed = FindObjectOfType<EnvironmentManager>().m_simulationOptions.specifySeedByObjectType.Find(pair => tags.Contains(pair.objectTag)).seed;
                 if (m_seed <= 0)
                 {
                     m_seed = UnityEngine.Random.Range(1, models.Length + 1);
                 }
 
-                SetModel(m_seed-1);
+                SetSeed(m_seed-1);
             }
-
-            transform.name = FindObjectOfType<House>().RegisterVirtualObject(this);
+            
             var renders = GetComponentsInChildren<Renderer>();
             foreach(Renderer r in renders) {
                 r.material.SetColor("_UnlitColor", FindObjectOfType<House>().semanticColors[name]);
             }
             m_initialized = true;
+
+            room = gameObject.GetComponentInParent<Room>();
         }
 
         private void OnDestroy()
         {
             if (inheritedSeed)
             {
-                inheritedSeed.OnObjectModelChanged -= SetModel;
+                inheritedSeed.OnObjectModelChanged -= SetSeed;
             }
         }
         #endregion
@@ -81,7 +86,7 @@ namespace RobotAtVirtualHome {
             return models[m_seed].transform;
         }
 
-        public void SetModel(int seed)
+        public void SetSeed(int seed)
         {
             if (models.Length == 0)
                 return;

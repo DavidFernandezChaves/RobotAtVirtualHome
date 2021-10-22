@@ -29,17 +29,23 @@ namespace RobotAtVirtualHome
 
         [Header("Customization")]
         [Tooltip("Set up a set of materials with which the walls of each type of room will be painted.")]
-        public List<PairForMaterials> WallsMaterials;
+        public List<PairForMaterials> WallsMaterialsByRoomType;
         [Tooltip("Set up a set of materials with which the floors of each type of room will be painted.")]
-        public List<PairForMaterials> FloorsMaterials;
+        public List<PairForMaterials> FloorsMaterialsByRoomType;
 
         [SerializeField]
         [Tooltip("Choose an object model according to the object type. Use the <= 0 to choose it randomly.")]
-        public List<PairForSeed> ObjectsSeed;
+        public List<PairForSeed> specifySeedByObjectType;
 
-        [Header("Virtual Agents")]
+        [Header("Startup Intances")]
         [Tooltip("Insert the prefab of the robots you want to load at the start of the simulation")]
-        public List<Agent> agentToInstantiate;
+        public GameObject userPrefab;
+        [Tooltip("Insert the prefab of the robots you want to load at the start of the simulation")]
+        public List<Agent> agentsToInstantiate;
+
+        [Header("Replicity")]
+        public TextAsset simulationLog;
+
     }
 
     [Serializable]

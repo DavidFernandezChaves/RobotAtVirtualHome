@@ -44,6 +44,7 @@
         Washbasin,
         WashingMachine,
         Window,
-        Station
+        Station,
+        Light
     };
 }

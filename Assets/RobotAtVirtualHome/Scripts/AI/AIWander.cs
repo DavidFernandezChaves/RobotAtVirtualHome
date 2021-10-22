@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,20 +35,17 @@ namespace RobotAtVirtualHome {
         private StreamWriter logScanWriter;
         private int index = 0;    
         private int index2 = 0;
-        private float speed;
 
         #region Unity Functions
         void Start() {
             VisitPoints = new List<Vector3>();
 
-            var rooms = FindObjectsOfType<Room>();
+            var house = FindObjectOfType<House>();
 
-            foreach (Room r in rooms) {
-                foreach (Light l in r.generalLights) {
-                    var point = l.transform.position;
-                    point.y = 0;
-                    VisitPoints.Add(point);
-                }
+            foreach (VirtualObject light in house.virtualObjects.FindAll(obj => obj.tags.Contains(ObjectTag.Light))) {
+                var point = light.transform.position;
+                point.y = 0;
+                VisitPoints.Add(point);
             }
             
             if (captureRGB || captureDepth || captureSemanticMask || captureScan) {
@@ -147,6 +145,7 @@ namespace RobotAtVirtualHome {
         private IEnumerator DoOnGoal() {
             yield return new WaitForSeconds(1);
             state = StatusMode.Walking;
+            agent.isStopped = false;
         }
 
         private bool GetNextGoal(out Vector3 result) {
