@@ -38,14 +38,11 @@ namespace RobotAtVirtualHome
 
         public Action<double[]> OnScanTaken;
 
-        private int layerMask;
+        public LayerMask layerMask;
 
         #region Unity Functions
         private void Start()
         {
-            // This would cast rays only against colliders in layer N.
-            // But instead we want to collide against everything except layer N. The ~ operator does this, it inverts a bitmask.
-            layerMask = ~((1 << 1) | 1 << 2 | 1 << 10);
             int samples = (int)((angleMax - angleMin) / angleIncrement);
             ranges = new double[samples];
         }
