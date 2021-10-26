@@ -1,16 +1,14 @@
 <div align="center">
-  <img src="https://github.com/DavidFernandezChaves/RobotAtVirtualHome/blob/main/Assets/Resources/RobotAtVirtualHome/Images/RobotAtVirtualHome.gif?raw=true" alt="ViMantic" width="400" height="200"/>
+  <img src="https://github.com/DavidFernandezChaves/RobotAtVirtualHome/blob/main/Assets/RobotAtVirtualHome/Textures/RobotAtVirtualHome.gif?raw=true" alt="ViMantic" width="400" height="200"/>
 </div>
 
 # Introduction
 Robot@VirtualHome consists of a set of tools that can instantiate, change the appearance of, and provide knowledge from up to 30 virtual houses. Each of these has been designed out of real houses' resources (plans, images, point clouds, etc.) hosted on [Idealista](www.idealista.com), a popular real estate website in Spain. Objects appearing in real houses have also been replicated using virtual objects. These are 3D models of the same type (\eg chair, table, microwave, etc.) as the objects found in the real environment and which are placed in the equivalent location to the position where the objects they recreate are. All these objects, as well as all the rooms, have been manually labeled in order to also provide ground truth information about the types of the elements they imitate, hence augmenting the geometric and appearance information with semantic knowledge.
 
-![Head Image](./Assets/Resources/RobotAtVirtualHome/Images/ImgExample.png)
+![Head Image](./Assets/RobotAtVirtualHome/Textures/ImgExample.png)
   
 ## How to use?
 This work has been developed in Unity 2020.3.14 (2020 and later versions should be compatible). To start using this ecosystem, you need to have [Unity](https://unity3d.com/es/get-unity/download)  installed and download the project.
-
-To lighten the load of git, the heavy files have been extracted so you should [download this](https://mega.nz/file/b9wjhArS#Eb3u50DcJxt60C6wpzv7r1wvZx0WawwtN77nvdrMhwo) folder in: "RobotAtVirtualHome/Assets/RobotAtVirtualHome" so that the path is: "RobotAtVirtualHome/Assets/RobotAtVirtualHome/ExternalResources".
 
 Then you only have to open the scene located in: "Assets/RobotAtVirtualHome/Scenes/RobotAtVirtualHome".
   
