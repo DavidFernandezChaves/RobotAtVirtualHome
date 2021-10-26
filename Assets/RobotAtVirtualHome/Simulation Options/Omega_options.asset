@@ -21,10 +21,9 @@ MonoBehaviour:
   WallsMaterialsByRoomType: []
   FloorsMaterialsByRoomType: []
   specifySeedByObjectType: []
-  userPrefab: {fileID: 1143578909256583690, guid: 6960d435a2329184b8185a3ab3d3bc49,
-    type: 3}
+  userPrefab: {fileID: 0}
   agentsToInstantiate:
   - name: VirtualAgent
-    ip: localhost
+    ip: 192.168.1.136
     prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
   simulationLog: {fileID: 4900000, guid: d435a5a261a8ced4cb12e4cf06731cca, type: 3}

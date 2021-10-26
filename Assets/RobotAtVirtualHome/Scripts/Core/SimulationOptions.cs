@@ -44,6 +44,7 @@ namespace RobotAtVirtualHome
         public List<Agent> agentsToInstantiate;
 
         [Header("Replicity")]
+        [Tooltip("You can replicate a previous simulation by inserting the generated \"EnviromentLog\" file in the SimulationsLog folder and then dragging it here.")]
         public TextAsset simulationLog;
 
     }

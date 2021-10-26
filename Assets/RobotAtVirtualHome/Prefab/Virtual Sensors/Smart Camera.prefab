@@ -443,8 +443,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   imageSize: {x: 1366, y: 768}
+  DepthMethod: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2305
   sendImagesToROS: 1
-  ROSFrecuency: 1
+  ROSFrecuency: 2
 --- !u!114 &8029640737421032612
 MonoBehaviour:
   m_ObjectHideFlags: 0

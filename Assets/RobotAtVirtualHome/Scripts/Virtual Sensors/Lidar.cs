@@ -82,7 +82,8 @@ namespace RobotAtVirtualHome
                         ray = new Ray(transform.position,  angle * transform.forward);
                         if (Physics.Raycast(ray, out RaycastHit raycastHit, maximumDistance, layerMask))
                         {
-                            Color c = new Color(1f, 1f, 1f, raycastHit.distance/ (maximumDistance));
+                            float value = raycastHit.distance / (maximumDistance);
+                            Color c = new Color(value, value, value);
                             ranges.SetPixel(hPx, vPx, c);                            
                         }
                     }
@@ -96,7 +97,7 @@ namespace RobotAtVirtualHome
 
                 if (saveData)
                 {
-                    File.WriteAllBytes(filePath + "/scan " + index.ToString() + ".png", ranges.EncodeToPNG());
+                    File.WriteAllBytes(filePath + "/scan " + index.ToString() + ".pjg", ranges.EncodeToJPG());
                     index++;
                 }
 
