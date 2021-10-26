@@ -9,8 +9,6 @@ using System;
 public class SmartCamera : MonoBehaviour
 {
 
-    public enum DepthType { Approximate, Precise  }
-
     public enum ImageType{RGB,Depth,InstanceMask }
 
     [Header("General")]
@@ -20,15 +18,13 @@ public class SmartCamera : MonoBehaviour
     [Tooltip("Size of images to be captured")]
     public Vector2Int imageSize;
 
-    [Tooltip("The approximate method uses shaders to calculate depth, but is limited in accuracy. The precise method is more expensive to calculate but uses raytracing to obtain the exact depth.")]
-    public DepthType DepthMethod;
-
     [Tooltip("Layers that the cameras will be able to see")]
     public LayerMask layerMask;
 
     [Header("ROS")]
     public bool sendImagesToROS;
-    [Range(0.1f,10)]
+    [Tooltip("Frequency at which a new image is sent to ROS in Hz")]
+    [Range(0.1f,5)]
     public float ROSFrecuency = 1;
 
     public Action<ImageType, Texture2D> OnNewImageTaken;
@@ -63,8 +59,7 @@ public class SmartCamera : MonoBehaviour
 
         cameraDepth.depthTextureMode = DepthTextureMode.Depth;
         rect = new Rect(0, 0, imageSize.x, imageSize.y);
-        renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
-        img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);        
     }
 
     public void Connected(ROS ros) {
@@ -92,52 +87,34 @@ public class SmartCamera : MonoBehaviour
 
     public Texture2D CaptureImage(ImageType type)
     {
-        if(type == ImageType.Depth && DepthMethod == DepthType.Precise)
+        switch (type)
         {
-            Ray ray;
-            img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-            for (int hPx = 0; hPx < imageSize.x; hPx++)
-            {
-                for (int vPx = 0; vPx < imageSize.y; vPx++)
-                {
-                    ray = cameraDepth.ScreenPointToRay(new Vector3(hPx,vPx,0));
-                    if (Physics.Raycast(ray, out RaycastHit raycastHit, cameraDepth.farClipPlane, layerMask))
-                    {
-                        float value = raycastHit.distance / (cameraDepth.farClipPlane);
-                        img.SetPixel(hPx, vPx, new Color(value, value, value));
-                    }
-                }
+            case ImageType.RGB:
+                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+                cameraRgb.targetTexture = renderTexture;
+                cameraRgb.Render();
+                break;
 
-            }
+            case ImageType.Depth:
+                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.R16, false);
+                cameraDepth.targetTexture = renderTexture;
+                cameraDepth.Render();
+                break;
+
+
+            case ImageType.InstanceMask:
+                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+                cameraMask.targetTexture = renderTexture;
+                cameraMask.Render();
+                break;
         }
-        else
-        {
-            switch (type)
-            {
-                case ImageType.RGB:
-                    cameraRgb.targetTexture = renderTexture;
-                    cameraRgb.Render();
-                    break;
 
-                case ImageType.Depth:
-                    cameraDepth.targetTexture = renderTexture;
-                    cameraDepth.Render();
-                    break;
+        RenderTexture.active = renderTexture;
+        img.ReadPixels(rect, 0, 0);
 
-
-                case ImageType.InstanceMask:
-                    cameraMask.targetTexture = renderTexture;
-                    cameraMask.Render();
-                    break;
-            }
-
-            RenderTexture.active = renderTexture;
-            img.ReadPixels(rect, 0, 0);
-            
-            cameraRgb.targetTexture = null;
-            cameraDepth.targetTexture = null;
-            cameraMask.targetTexture = null;
-        }
+        cameraRgb.targetTexture = null;
+        cameraDepth.targetTexture = null;
+        cameraMask.targetTexture = null;
         img.Apply();
         OnNewImageTaken?.Invoke(type, img);
         return img;
@@ -145,25 +122,20 @@ public class SmartCamera : MonoBehaviour
 
     #endregion
 
-
     #region Private Functions
     IEnumerator SendImages(ROS ros) {
         HeaderMsg _head;
-        Texture2D img;
+        Log("Sending images to ros.", LogLevel.Developer);
         while (Application.isPlaying)
         {            
             if (ros.IsConnected())
-            {
-                Log("Sending images to ros.", LogLevel.Developer);
+            {                
                 _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
                 ros.Publish(CameraRGB_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.RGB).EncodeToJPG()));
-                img = null;
-                
-                //yield return new WaitForEndOfFrame();
+                yield return null;
                 ros.Publish(CameraDepth_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.Depth).EncodeToJPG()));
-                img = null;
             }
-            yield return new WaitForSeconds(ROSFrecuency);
+            yield return new WaitForSeconds(1/ROSFrecuency);
         }
         yield return null;
     }

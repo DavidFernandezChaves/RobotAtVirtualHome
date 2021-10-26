@@ -13,17 +13,7 @@ namespace RobotAtVirtualHome {
         [Tooltip("The log level to use")]
         public LogLevel LogLevel = LogLevel.Normal;
 
-        [Tooltip("Uses a virtual user object to visit the scene")]
-        public GameObject userPrefab;
-
-        private EnvironmentManager environmentManager;
-
         #region Unity Functions
-        private void Awake()
-        {
-            environmentManager = FindObjectOfType<EnvironmentManager>();
-            environmentManager.OnEnvironmentLoaded += VirtualEnviromentLoaded;
-        }
         void Start() {
             var ontologyManager = GetComponent<OntologySystem>();
             if(ontologyManager != null)
@@ -32,21 +22,6 @@ namespace RobotAtVirtualHome {
             
         }
 
-        private void OnDestroy()
-        {
-            environmentManager.OnEnvironmentLoaded -= VirtualEnviromentLoaded;
-        }
-        #endregion
-
-        #region Public Functions
-        public void VirtualEnviromentLoaded() {
-            if (userPrefab != null)
-            {
-                userPrefab.SetActive(true);
-                userPrefab.transform.position = new Vector3(0, 4, 0);
-                userPrefab.transform.rotation = Quaternion.Euler(0, 0, -45);
-            }
-        }
         #endregion
 
         #region Private Functions

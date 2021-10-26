@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using Unity.AI.Navigation;
@@ -147,7 +148,7 @@ namespace RobotAtVirtualHome {
                     string[] values;                    
                     while ((line = sr.ReadLine()) != null)
                     {
-                        values = line.Split(';');
+                        values = line.Split(',');
                         switch (values[0])
                         {
                             case "House Selected":
@@ -202,15 +203,15 @@ namespace RobotAtVirtualHome {
             {
                 writer = new StreamWriter(path + "/EnviromentLog.csv", true);
 
-                writer.WriteLine("House Selected" + ";" + houseSelected.ToString());
-                writer.WriteLine("Sun Rotation" + ";" + m_simulationOptions.SunRotation.ToString());
+                writer.WriteLine("House Selected" + "," + houseSelected.ToString());
+                writer.WriteLine("Sun Rotation" + "," + m_simulationOptions.SunRotation.ToString());
 
                 foreach (Room room in FindObjectsOfType<Room>())
                 {
-                    writer.WriteLine("Room;"+room.transform.name+";"+room.wallMaterial.name + ";" + room.floorMaterial.name);
+                    writer.WriteLine("Room,"+room.transform.name+","+room.wallMaterial.name + "," + room.floorMaterial.name);
                 }
 
-                    writer.WriteLine(" ;id;seed;mode;color;room;roomType;globalPosition;rotation;tags");
+                writer.WriteLine(" ,Id,Seed,Mode,ColorR,ColorG,ColorB,Room,RoomType,XGlobalPosition,YGlobalPosition,ZGlobalPosition,XRotation,YRotation,ZRotation,Tags");
                 StringBuilder line = new StringBuilder();
                 foreach (VirtualObject obj in house.virtualObjects)
                 {
@@ -218,11 +219,11 @@ namespace RobotAtVirtualHome {
                     {
                         line = new StringBuilder();
                         line.Append("-");
-                        line.Append(";");
-                        line.Append(obj.m_id.ToString());
-                        line.Append(";");
-                        line.Append(obj.m_seed.ToString());
-                        line.Append(";");
+                        line.Append(",");
+                        line.Append(obj.m_id.ToString(CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(obj.m_seed.ToString(CultureInfo.InvariantCulture));
+                        line.Append(",");
 
                         if (obj.tags.Contains(ObjectTag.Light))
                         {
@@ -241,19 +242,31 @@ namespace RobotAtVirtualHome {
                             line.Append("-");
                         }
 
-                        line.Append(";");
-                        line.Append(house.semanticColors[obj.m_id].ToString());
-                        line.Append(";");
+                        line.Append(",");
+                        line.Append(house.semanticColors[obj.m_id].r.ToString());
+                        line.Append(",");
+                        line.Append(house.semanticColors[obj.m_id].g.ToString());
+                        line.Append(",");
+                        line.Append(house.semanticColors[obj.m_id].b.ToString());
+                        line.Append(",");
                         line.Append(obj.room.transform.name.ToString());
-                        line.Append(";");
+                        line.Append(",");
                         line.Append(obj.room.roomType.ToString());
-                        line.Append(";");
-                        line.Append(obj.transform.position.ToString());
-                        line.Append(";");
-                        line.Append(obj.transform.rotation.eulerAngles.ToString());
+                        line.Append(",");
+                        line.Append(((double) obj.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(((double)obj.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(((double)obj.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(((double)obj.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(((double)obj.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
+                        line.Append(",");
+                        line.Append(((double)obj.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
                         foreach (ObjectTag ot in obj.tags)
                         {
-                            line.Append(";");
+                            line.Append(",");
                             line.Append(ot.ToString());
                         }
                         writer.WriteLine(line);

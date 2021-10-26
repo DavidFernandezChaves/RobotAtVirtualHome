@@ -648,7 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogLevel: 1
-  userPrefab: {fileID: 0}
 --- !u!114 &1701356813
 MonoBehaviour:
   m_ObjectHideFlags: 0
