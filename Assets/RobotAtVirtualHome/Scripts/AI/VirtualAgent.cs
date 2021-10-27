@@ -31,18 +31,11 @@ namespace RobotAtVirtualHome {
         public PathType pathType = PathType.Beacons;
         public float rOSFrecuency = 1;
 
-        protected SmartCamera smartCamera;
-        protected LaserScanner laserScan;
         protected NavMeshAgent agent;
 
         #region Unity Functions
         protected void Awake() {
             agent = GetComponent<NavMeshAgent>();
-            smartCamera = GetComponentInChildren<SmartCamera>();
-            laserScan = GetComponentInChildren<LaserScanner>();
-            if (smartCamera == null) {
-                Log("Smart camera not found",LogLevel.Error,true);
-            }
         }
         #endregion
 
