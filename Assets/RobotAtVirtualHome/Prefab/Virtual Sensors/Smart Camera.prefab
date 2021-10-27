@@ -447,7 +447,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2305
   sendImagesToROS: 1
-  ROSFrecuency: 2
+  ROSFrecuency: 1
 --- !u!114 &8029640737421032612
 MonoBehaviour:
   m_ObjectHideFlags: 0

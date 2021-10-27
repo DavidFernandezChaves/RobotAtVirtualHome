@@ -63,7 +63,7 @@ namespace RobotAtVirtualHome {
                 SetSeed(m_seed-1);
             }
             
-            var renders = GetComponentsInChildren<Renderer>();
+            var renders = GetComponentsInChildren<Renderer>(true);
             foreach(Renderer r in renders) {
                 r.material.SetColor("_UnlitColor", FindObjectOfType<House>().semanticColors[name]);
             }

@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -196,14 +194,14 @@ namespace RobotAtVirtualHome {
                 if (randomSecuence) {
                     result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
                 } else {
-                    index++;
-                    if (index >= VisitPoints.Count) {
-                        index = 0;
+                    index2++;
+                    if (index2 >= VisitPoints.Count) {
+                        index2 = 0;
                     }
-                    result = VisitPoints[index];
+                    result = VisitPoints[index2];
                 }
             } else {
-                VisitPoints.RemoveAt(index);
+                VisitPoints.RemoveAt(index2);
                 if (VisitPoints.Count == 0) {
                     return false;
                 }
@@ -211,197 +209,67 @@ namespace RobotAtVirtualHome {
                 if (randomSecuence) {
                     result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
                 } else {
-                    result = VisitPoints[index];
+                    result = VisitPoints[index2];
                 }
             }
             return true;
         }
 
         private IEnumerator CaptureData()
-        {
-            StringBuilder line = new StringBuilder();
+        {            
             while (state != StatusMode.Finished)
             {
-
-                yield return new WaitForEndOfFrame();
-                
                 agent.isStopped = true;
+                yield return new WaitForEndOfFrame();
+                string robotTransform = GetTransformString();
                 if (captureRGB)
                 {
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_rgb.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToJPG());
-                    line = new StringBuilder();
-                    line.Append(index2.ToString());
-                    line.Append("_rgb.jpg,");
-                    line.Append(((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(currentRoom);
-                    logImgWriter.WriteLine(line);
+                    logImgWriter.WriteLine(index.ToString()+ "_rgb.jpg,"+
+                                robotTransform + "," +
+                                smartCamera.GetTransformString() + "," +
+                                currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_rgb.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.RGB).EncodeToJPG());                    
                 }
-                yield return null;
                 if (captureDepth)
                 {
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_depth.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToJPG());
-                    line = new StringBuilder();
-                    line.Append(index2.ToString());
-                    line.Append("_depth.jpg,");
-                    line.Append(((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(currentRoom);
-                    logImgWriter.WriteLine(line);
+                    logImgWriter.WriteLine(index.ToString() + "_depth.png," +
+                                robotTransform + "," +
+                                smartCamera.GetTransformString() + "," +
+                                currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_depth.png", smartCamera.CaptureImage(SmartCamera.ImageType.Depth).EncodeToPNG());
                 }
-                yield return null;
                 if (captureSemanticMask)
                 {
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_mask.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToJPG());
-                    line = new StringBuilder();
-                    line.Append(index2.ToString());
-                    line.Append("_mask.jpg,");
-                    line.Append(((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)smartCamera.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(currentRoom);
-                    logImgWriter.WriteLine(line);
+                    logImgWriter.WriteLine(index.ToString() + "_mask.jpg," +
+                                robotTransform + "," +
+                                smartCamera.GetTransformString() + "," +
+                                currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_mask.jpg", smartCamera.CaptureImage(SmartCamera.ImageType.InstanceMask).EncodeToJPG());                   
                 }
-                yield return null;
                 if (captureScan)
-                {                   
-                    line = new StringBuilder();
-                    line.Append(index2.ToString());
-                    line.Append("_mask.jpg,");
-                    line.Append(((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)laserScan.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(currentRoom);
+                {
+                    string data = "";
                     foreach (float d in laserScan.Scan())
                     {
-                        line.Append(d.ToString("F15", CultureInfo.InvariantCulture));
-                        line.Append(",");
+                        data += "," + d.ToString("F15", CultureInfo.InvariantCulture);
                     }
-                    logScanWriter.WriteLine(line);
+                    logScanWriter.WriteLine(index.ToString() +
+                                robotTransform + "," +
+                                laserScan.GetTransformString() + "," +
+                                currentRoom +
+                                data);
                 }
-                yield return null;
                 if (captureLidar)
                 {
-                    File.WriteAllBytes(filePath + "/" + index2.ToString() + "_lidar.jpg", lidar.Scan().EncodeToJPG());
-                    line = new StringBuilder();
-                    line.Append(index2.ToString());
-                    line.Append("_lidar.jpg,");
-                    line.Append(((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.position.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.position.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.position.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(((double)lidar.transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture));
-                    line.Append(",");
-                    line.Append(currentRoom);
-                    logLidarWriter.WriteLine(line);
-                }                
+                    logLidarWriter.WriteLine(index.ToString() + "_lidar.png," +
+                                robotTransform + "," +
+                                lidar.GetTransformString() + "," +
+                                currentRoom);
+                    File.WriteAllBytes(filePath + "/" + index.ToString() + "_lidar.png", lidar.Scan().EncodeToPNG());
+                }
 
                 agent.isStopped = false;
-                index2++;
+                index++;
                 yield return new WaitForSeconds(timeBetweenDataCapture);
             }
         }

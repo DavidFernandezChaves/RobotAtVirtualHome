@@ -5,6 +5,7 @@ using ROSUnityCore;
 using UnityEngine;
 using RobotAtVirtualHome;
 using System;
+using System.Globalization;
 
 public class SmartCamera : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class SmartCamera : MonoBehaviour
     private Camera cameraMask;
     private EnvironmentManager virtualEnvironment;
     private Rect rect;
-    private Texture2D img;
+    private Texture2D img_rgb;
+    private Texture2D img_depth;
 
     #region Unity Functions
     private void Awake() {
@@ -59,9 +61,13 @@ public class SmartCamera : MonoBehaviour
 
         cameraDepth.depthTextureMode = DepthTextureMode.Depth;
         rect = new Rect(0, 0, imageSize.x, imageSize.y);
-        renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);        
+        renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
+        img_rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+        img_depth = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RG16, false);
     }
+    #endregion
 
+    #region Public Functions
     public void Connected(ROS ros) {
         if (sendImagesToROS) {
             ros.RegisterPubPackage("CameraRGB_pub");
@@ -90,34 +96,48 @@ public class SmartCamera : MonoBehaviour
         switch (type)
         {
             case ImageType.RGB:
-                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
+                
                 cameraRgb.targetTexture = renderTexture;
                 cameraRgb.Render();
-                break;
+                RenderTexture.active = renderTexture;
+                img_rgb.ReadPixels(rect, 0, 0);
+                cameraRgb.targetTexture = null;
+                img_rgb.Apply();
+                OnNewImageTaken?.Invoke(type, img_rgb);
+                return img_rgb;
 
             case ImageType.Depth:
-                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.R16, false);
                 cameraDepth.targetTexture = renderTexture;
                 cameraDepth.Render();
-                break;
-
+                RenderTexture.active = renderTexture;
+                img_depth.ReadPixels(rect, 0, 0);
+                cameraDepth.targetTexture = null;
+                img_depth.Apply();
+                OnNewImageTaken?.Invoke(type, img_depth);
+                return img_depth;
 
             case ImageType.InstanceMask:
-                img = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
                 cameraMask.targetTexture = renderTexture;
                 cameraMask.Render();
-                break;
+                RenderTexture.active = renderTexture;
+                img_rgb.ReadPixels(rect, 0, 0);
+                cameraMask.targetTexture = null;
+                img_rgb.Apply();
+                OnNewImageTaken?.Invoke(type, img_rgb);
+                return img_rgb;
         }
 
-        RenderTexture.active = renderTexture;
-        img.ReadPixels(rect, 0, 0);
+        return null;
+    }
 
-        cameraRgb.targetTexture = null;
-        cameraDepth.targetTexture = null;
-        cameraMask.targetTexture = null;
-        img.Apply();
-        OnNewImageTaken?.Invoke(type, img);
-        return img;
+    public string GetTransformString()
+    {
+        return ((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                ((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                ((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                ((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                ((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                ((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture);
     }
 
     #endregion
@@ -133,7 +153,7 @@ public class SmartCamera : MonoBehaviour
                 _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
                 ros.Publish(CameraRGB_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.RGB).EncodeToJPG()));
                 yield return null;
-                ros.Publish(CameraDepth_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.Depth).EncodeToJPG()));
+                ros.Publish(CameraDepth_pub.GetMessageTopic(), new CompressedImageMsg(_head, "png", CaptureImage(ImageType.Depth).EncodeToPNG()));
             }
             yield return new WaitForSeconds(1/ROSFrecuency);
         }

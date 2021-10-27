@@ -5,6 +5,7 @@ using ROSUnityCore.ROSBridgeLib.std_msgs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
@@ -50,6 +51,16 @@ namespace RobotAtVirtualHome {
                     StartCoroutine(SendInterpolatedPathToROS(ros));
                 }
             }
+        }
+
+        public string GetTransformString()
+        {
+            return ((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture);
         }
         #endregion
 

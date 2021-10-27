@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace RobotAtVirtualHome
         [Tooltip("Size of images to be captured")]
         public Vector2Int imageSize;
 
-        [Tooltip("The angle above and below the horizontal will be half of the specified angle")]
-        public float fieldOfViewAngle;
+        [Tooltip("Upper vertical viewing angle with respect to the horizontal.")]
+        [Range(0,180)]
+        public float upperViewingAngle;
+        [Tooltip("Bottom vertical viewing angle with respect to the horizontal.")]
+        [Range(0, -180)]
+        public float bottomViewingAngle;
 
         [Tooltip("Maximum detection distance")]
         public float maximumDistance = 100000;
@@ -37,20 +42,28 @@ namespace RobotAtVirtualHome
         #region Public Functions
         public Texture2D Scan()
         {
-            Ray ray;
+            ranges = new Texture2D(imageSize.x, imageSize.y, TextureFormat.R16, false);
+            float angleY;
+            float angleZ;
+            Vector3 target;
+            float distance;
             for (int hPx = 0; hPx < imageSize.x; hPx++)
             {
                 for (int vPx = 0; vPx < imageSize.y; vPx++)
                 {
-                    Quaternion angle = Quaternion.Euler(0,
-                                                        -90 + hPx * (360 / (float)imageSize.x),
-                                                        vPx * (fieldOfViewAngle / (float)imageSize.y) - (fieldOfViewAngle / 2));
 
-                    ray = new Ray(transform.position, angle * transform.forward);
-                    if (Physics.Raycast(ray, out RaycastHit raycastHit, maximumDistance, layerMask))
-                    {                        
-                        Color c = new Color(raycastHit.distance / maximumDistance, raycastHit.distance / maximumDistance, raycastHit.distance / maximumDistance, 1f);
-                        ranges.SetPixel(hPx, vPx, c);
+                    angleY = (-90f + hPx * (360f / imageSize.x))* Mathf.Deg2Rad;
+                    angleZ = (vPx * ((upperViewingAngle - bottomViewingAngle) / imageSize.y) + bottomViewingAngle) * Mathf.Deg2Rad;
+
+
+                    target = new Vector3((float)(Mathf.Cos(angleZ)*Mathf.Sin(angleY)),
+                                                (float)Mathf.Sin(angleZ),
+                                                (float)(Mathf.Cos(angleY)* Mathf.Cos(angleZ)));
+                   
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(target), out RaycastHit raycastHit, maximumDistance, layerMask))
+                    {
+                        distance = raycastHit.distance / maximumDistance;
+                        ranges.SetPixel(hPx, vPx, new Color(distance, distance, distance, 1f));
                     }
                 }
             }
@@ -58,6 +71,17 @@ namespace RobotAtVirtualHome
             OnScanTaken?.Invoke(ranges);
             return ranges;
         }
+
+        public string GetTransformString()
+        {
+            return ((double)transform.position.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.position.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.position.z).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.x).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.y).ToString("F15", CultureInfo.InvariantCulture) + "," +
+                    ((double)transform.rotation.eulerAngles.z).ToString("F15", CultureInfo.InvariantCulture);
+        }
+        
         #endregion
 
         #region Private Functions

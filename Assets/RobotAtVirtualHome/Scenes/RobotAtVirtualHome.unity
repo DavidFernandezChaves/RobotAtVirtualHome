@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 1701356811}
   - component: {fileID: 1701356815}
   - component: {fileID: 1701356809}
+  - component: {fileID: 1701356816}
   - component: {fileID: 1701356814}
   m_Layer: 9
   m_Name: General Scripts
@@ -628,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   minPixelsMask: 1000
-  deepRange: {x: 1, y: 6}
+  deepRange: {x: 1, y: 10}
   thresholdMatchSameSype: 4
   thresholdMatchDiffType: 2
   prefDetectedObject: {fileID: 1095422640751484, guid: 98c8dfbbab4a5e746bb2c0111b400211,
@@ -710,6 +711,22 @@ MonoBehaviour:
     ClassInVirtualEnvironment: 6
   - ClassInOntology: Sink
     ClassInVirtualEnvironment: 41
+--- !u!114 &1701356816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701356808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde3e95ece03a924e8c296a7b90c91e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vob1: {fileID: 0}
+  vob2: {fileID: 0}
+  Mide: 0
+  Ordena: 0
 --- !u!1 &2047795872
 GameObject:
   m_ObjectHideFlags: 0
