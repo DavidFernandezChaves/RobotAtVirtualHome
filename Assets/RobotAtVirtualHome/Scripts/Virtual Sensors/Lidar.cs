@@ -52,12 +52,12 @@ namespace RobotAtVirtualHome
                 {
 
                     angle = Quaternion.AngleAxis(-90f + hPx * (360f / imageSize.x), transform.up) 
-                        * Quaternion.AngleAxis(vPx * ((upperViewingAngle - bottomViewingAngle) / imageSize.y) + bottomViewingAngle, transform.right);
+                        * Quaternion.AngleAxis(-vPx * ((upperViewingAngle - bottomViewingAngle) / imageSize.y) - bottomViewingAngle, transform.right);
 
                     if (Physics.Raycast(transform.position, angle * transform.forward, out RaycastHit raycastHit, maximumDistance, layerMask))
                     {
                         distance = raycastHit.distance / maximumDistance;
-                        ranges.SetPixel(hPx, imageSize.y-vPx, new Color(distance, distance, distance, 1f));
+                        ranges.SetPixel(hPx, vPx, new Color(distance, distance, distance, 1f));
                     }
                 }
             }
