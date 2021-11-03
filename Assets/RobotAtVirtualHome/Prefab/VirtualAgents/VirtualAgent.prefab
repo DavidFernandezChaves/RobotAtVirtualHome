@@ -92,10 +92,10 @@ MonoBehaviour:
   randomSecuence: 0
   timeBetweenDataCapture: 2
   captureRGB: 0
-  captureDepth: 0
+  captureDepth: 1
   captureSemanticMask: 0
   captureScan: 0
-  captureLidar: 0
+  captureLidar: 1
 --- !u!114 &-9195802655526172168
 MonoBehaviour:
   m_ObjectHideFlags: 0

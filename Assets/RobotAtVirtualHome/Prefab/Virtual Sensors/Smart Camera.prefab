@@ -443,6 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   imageSize: {x: 1280, y: 1024}
+  depthAccuracy: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 2305
