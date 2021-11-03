@@ -11,6 +11,7 @@ public class SmartCamera : MonoBehaviour
 {
 
     public enum ImageType{RGB,Depth,InstanceMask }
+    public enum PrecisionMode {Fast, Accurate}
 
     [Header("General")]
     [Tooltip("The log level to use")]
@@ -19,6 +20,9 @@ public class SmartCamera : MonoBehaviour
     [Tooltip("Size of images to be captured")]
     public Vector2Int imageSize;
 
+    [Tooltip("With the fast method the precision per pixel is 8 bits while with the accurate mode each pixel is represented by 16 bits")]
+    public PrecisionMode depthAccuracy;
+
     [Tooltip("Layers that the cameras will be able to see")]
     public LayerMask layerMask;
 
@@ -26,7 +30,7 @@ public class SmartCamera : MonoBehaviour
     public bool sendImagesToROS;
     [Tooltip("Frequency at which a new image is sent to ROS in Hz")]
     [Range(0.1f,5)]
-    public float ROSFrecuency = 1;
+    public float ROSFrecuency = 1;    
 
     public Action<ImageType, Texture2D> OnNewImageTaken;
 
@@ -63,7 +67,7 @@ public class SmartCamera : MonoBehaviour
         rect = new Rect(0, 0, imageSize.x, imageSize.y);
         renderTexture = new RenderTexture(imageSize.x, imageSize.y, 24);
         img_rgb = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RGBA32, false);
-        img_depth = new Texture2D(imageSize.x, imageSize.y, TextureFormat.RG16, false);
+        img_depth = new Texture2D(imageSize.x, imageSize.y, TextureFormat.R16, false);
     }
     #endregion
 
@@ -107,12 +111,34 @@ public class SmartCamera : MonoBehaviour
                 return img_rgb;
 
             case ImageType.Depth:
-                cameraDepth.targetTexture = renderTexture;
-                cameraDepth.Render();
-                RenderTexture.active = renderTexture;
-                img_depth.ReadPixels(rect, 0, 0);
-                cameraDepth.targetTexture = null;
-                img_depth.Apply();
+                switch (depthAccuracy)
+                {
+                    case PrecisionMode.Accurate:
+                        float distance;
+                        for (int hPx = 0; hPx < imageSize.x; hPx++)
+                        {
+                            for (int vPx = 0; vPx < imageSize.y; vPx++)
+                            { 
+
+                                if (Physics.Raycast(cameraDepth.ScreenPointToRay(new Vector3(hPx, vPx, 0)), out RaycastHit raycastHit, cameraDepth.farClipPlane, layerMask))
+                                {
+                                    distance = raycastHit.distance / cameraDepth.farClipPlane;
+                                    img_depth.SetPixel(hPx, vPx, new Color(distance, distance, distance, 1f));
+                                }
+                            }
+                        }
+                        break;
+
+                    case PrecisionMode.Fast:
+                        cameraDepth.targetTexture = renderTexture;
+                        cameraDepth.Render();
+                        RenderTexture.active = renderTexture;
+                        img_depth.ReadPixels(rect, 0, 0);
+                        cameraDepth.targetTexture = null;
+                        img_depth.Apply();
+                        break;
+                }
+
                 OnNewImageTaken?.Invoke(type, img_depth);
                 return img_depth;
 

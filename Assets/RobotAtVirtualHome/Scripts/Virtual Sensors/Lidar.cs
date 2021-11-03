@@ -43,24 +43,18 @@ namespace RobotAtVirtualHome
         public Texture2D Scan()
         {
             ranges = new Texture2D(imageSize.x, imageSize.y, TextureFormat.R16, false);
-            float angleY;
-            float angleZ;
-            Vector3 target;
+
             float distance;
+            Quaternion angle;
             for (int hPx = 0; hPx < imageSize.x; hPx++)
             {
                 for (int vPx = 0; vPx < imageSize.y; vPx++)
                 {
 
-                    angleY = (-90f + hPx * (360f / imageSize.x))* Mathf.Deg2Rad;
-                    angleZ = (vPx * ((upperViewingAngle - bottomViewingAngle) / imageSize.y) + bottomViewingAngle) * Mathf.Deg2Rad;
+                    angle = Quaternion.AngleAxis(-90f + hPx * (360f / imageSize.x), transform.up) 
+                        * Quaternion.AngleAxis(-vPx * ((upperViewingAngle - bottomViewingAngle) / imageSize.y) - bottomViewingAngle, transform.right);
 
-
-                    target = new Vector3((float)(Mathf.Cos(angleZ)*Mathf.Sin(angleY)),
-                                                (float)Mathf.Sin(angleZ),
-                                                (float)(Mathf.Cos(angleY)* Mathf.Cos(angleZ)));
-                   
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(target), out RaycastHit raycastHit, maximumDistance, layerMask))
+                    if (Physics.Raycast(transform.position, angle * transform.forward, out RaycastHit raycastHit, maximumDistance, layerMask))
                     {
                         distance = raycastHit.distance / maximumDistance;
                         ranges.SetPixel(hPx, vPx, new Color(distance, distance, distance, 1f));
