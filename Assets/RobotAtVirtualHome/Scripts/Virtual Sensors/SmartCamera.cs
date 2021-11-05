@@ -115,14 +115,14 @@ public class SmartCamera : MonoBehaviour
                 {
                     case PrecisionMode.Accurate:
                         float distance;
+                        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cameraDepth);
                         for (int hPx = 0; hPx < imageSize.x; hPx++)
                         {
                             for (int vPx = 0; vPx < imageSize.y; vPx++)
                             { 
-
                                 if (Physics.Raycast(cameraDepth.ScreenPointToRay(new Vector3(hPx, vPx, 0)), out RaycastHit raycastHit, cameraDepth.farClipPlane, layerMask))
                                 {
-                                    distance = raycastHit.distance / cameraDepth.farClipPlane;
+                                    distance = (Math.Abs(planes[4].GetDistanceToPoint(raycastHit.point)) + cameraDepth.nearClipPlane) / cameraDepth.farClipPlane;
                                     img_depth.SetPixel(hPx, vPx, new Color(distance, distance, distance, 1f));
                                 }
                             }

@@ -592,6 +592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}
+      propertyPath: LogLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
+        type: 3}
       propertyPath: imageSize.x
       value: 640
       objectReference: {fileID: 0}
