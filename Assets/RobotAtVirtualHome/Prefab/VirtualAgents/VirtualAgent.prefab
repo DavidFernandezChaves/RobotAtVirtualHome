@@ -92,10 +92,10 @@ MonoBehaviour:
   randomSecuence: 0
   timeBetweenDataCapture: 2
   captureRGB: 0
-  captureDepth: 1
+  captureDepth: 0
   captureSemanticMask: 0
   captureScan: 0
-  captureLidar: 1
+  captureLidar: 0
 --- !u!114 &-9195802655526172168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmartCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
+        type: 3}
+      propertyPath: depthAccuracy
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5b8e66e4d3d7584e9120efa5c4e60ae, type: 3}
