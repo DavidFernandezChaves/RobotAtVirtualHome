@@ -470,46 +470,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 931527486158493164}
     m_Modifications:
-    - target: {fileID: 374665925179294947, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: field of view
-      value: 45.781105
-      objectReference: {fileID: 0}
-    - target: {fileID: 374665925179294947, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_FocalLength
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 374665925179294947, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 374665925179294947, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.y
-      value: 15.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 997881708052751438, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: field of view
-      value: 45.781105
-      objectReference: {fileID: 0}
-    - target: {fileID: 997881708052751438, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_FocalLength
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 997881708052751438, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 997881708052751438, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.y
-      value: 15.2
-      objectReference: {fileID: 0}
     - target: {fileID: 4382376901228219170, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}
       propertyPath: m_RootOrder
@@ -565,26 +525,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 5679651137246048223, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: field of view
-      value: 45.781105
-      objectReference: {fileID: 0}
-    - target: {fileID: 5679651137246048223, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_FocalLength
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5679651137246048223, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 5679651137246048223, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
-        type: 3}
-      propertyPath: m_SensorSize.y
-      value: 15.2
-      objectReference: {fileID: 0}
     - target: {fileID: 7205881389748370572, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}
       propertyPath: m_Name
@@ -633,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 4635886726084542720, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
@@ -688,11 +628,6 @@ PrefabInstance:
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7794650173162641940, guid: c17c7ba979b8cea4b8aea192924c6851,
-        type: 3}
-      propertyPath: sendScanToROS
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -773,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 8488520537215157886, guid: 30f878a482dac944d9d971eb6f3774ba,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30f878a482dac944d9d971eb6f3774ba, type: 3}
