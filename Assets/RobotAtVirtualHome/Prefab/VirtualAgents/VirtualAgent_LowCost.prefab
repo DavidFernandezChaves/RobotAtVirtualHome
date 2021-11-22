@@ -88,14 +88,14 @@ MonoBehaviour:
   sendPathToROS: 0
   pathType: 0
   rOSFrecuency: 1
-  cyclical: 0
-  randomSecuence: 0
+  cyclical: 1
+  randomSecuence: 1
   timeBetweenDataCapture: 2
   captureRGB: 0
-  captureDepth: 1
+  captureDepth: 0
   captureSemanticMask: 0
   captureScan: 0
-  captureLidar: 1
+  captureLidar: 0
 --- !u!114 &-9195802655526172168
 MonoBehaviour:
   m_ObjectHideFlags: 0

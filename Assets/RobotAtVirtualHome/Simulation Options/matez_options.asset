@@ -25,5 +25,5 @@ MonoBehaviour:
   agentsToInstantiate:
   - name: VirtualAgent
     ip: localhost
-    prefab: {fileID: 931527486158493203, guid: 60b6c9f65ab28894e907f78df833e023, type: 3}
+    prefab: {fileID: 931527486158493203, guid: 7a569518db1635e7889f75ee5ee3f16e, type: 3}
   simulationLog: {fileID: 0}
