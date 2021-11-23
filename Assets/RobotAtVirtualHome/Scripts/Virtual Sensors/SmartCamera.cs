@@ -178,8 +178,8 @@ public class SmartCamera : MonoBehaviour
             {                
                 _head = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), transform.name);
                 ros.Publish(CameraRGB_pub.GetMessageTopic(), new CompressedImageMsg(_head, "jpeg", CaptureImage(ImageType.RGB).EncodeToJPG()));
-                yield return null;
                 ros.Publish(CameraDepth_pub.GetMessageTopic(), new CompressedImageMsg(_head, "png", CaptureImage(ImageType.Depth).EncodeToPNG()));
+                yield return null;
             }
             yield return new WaitForSeconds(1/ROSFrecuency);
         }

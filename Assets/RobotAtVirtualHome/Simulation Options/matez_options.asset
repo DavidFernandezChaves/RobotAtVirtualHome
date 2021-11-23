@@ -26,4 +26,4 @@ MonoBehaviour:
   - name: VirtualAgent
     ip: localhost
     prefab: {fileID: 931527486158493203, guid: 7a569518db1635e7889f75ee5ee3f16e, type: 3}
-  simulationLog: {fileID: 0}
+  simulationLog: {fileID: 4900000, guid: d435a5a261a8ced4cb12e4cf06731cca, type: 3}
