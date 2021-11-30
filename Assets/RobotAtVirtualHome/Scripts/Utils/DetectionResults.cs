@@ -89,7 +89,7 @@ namespace RobotAtVirtualHome.Utils
             StartCoroutine(Compare());
         }
 
-        public float SimilarityBetweenobjects(GameObject groundtruth, SemanticObject detection)
+        public float DiscreteIoU(GameObject groundtruth, SemanticObject detection)
         {
             var gtRotation = groundtruth.transform.rotation;
             var gtPosition = groundtruth.transform.position;
@@ -112,12 +112,24 @@ namespace RobotAtVirtualHome.Utils
             }
 
 
-            float minZ = corners.OrderBy(corner => corner.z).First().z;
-            float maxZ = corners.OrderBy(corner => corner.z).Last().z;
+            float minZ = corners[0].z;
+            float maxZ = corners[0].z;
+
+            for (int i = 1; i < corners.Count; i++)
+            {
+                if (corners[i].z < minZ)
+                {
+                    minZ = corners[i].z;
+                }
+                if (corners[i].z > maxZ)
+                {
+                    maxZ = corners[i].z;
+                }
+            }
             float inside = 0;
             float total = 0;
             float angle = Mathf.Atan2(corners[3].y - corners[0].y, corners[3].x - corners[0].x);
-            float x, y = 0;
+            float x, y;
 
             for (float d = 0; d <= Vector3.Distance(corners[0], corners[3]); d += m_geometricAccuracy)
             {
@@ -135,10 +147,12 @@ namespace RobotAtVirtualHome.Utils
                     }
                 }
             }
-            float union = (total - inside) * Mathf.Pow(m_geometricAccuracy, 3) + bound.size.x * bound.size.y * bound.size.z;
-            Debug.Log("IoU - "+detection.Id+ ": " + inside * Mathf.Pow(m_geometricAccuracy, 3) / union);
+            float IoU = inside * Mathf.Pow(m_geometricAccuracy, 3) 
+                / ((total - inside) * Mathf.Pow(m_geometricAccuracy, 3) + bound.size.x * bound.size.y * bound.size.z);
+            
+            Debug.Log("IoU ["+detection.Id+ "-" + groundtruth.name + "]: " + IoU);
 
-            return inside * Mathf.Pow(m_geometricAccuracy, 3) / union;
+            return IoU;
         }
 
         public static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
@@ -153,7 +167,7 @@ namespace RobotAtVirtualHome.Utils
             List<VirtualObject> objectsDetected = new List<VirtualObject>();
             int TP = 0, FP = 0, FN = 0;
             float averageDistance = 0;
-            float averageOccupancyRate = 0;
+            float averageIoU = 0;
 
             float distance = 0;
             ObjectTag objectTag;
@@ -177,8 +191,8 @@ namespace RobotAtVirtualHome.Utils
                         foreach (VirtualObject virtualObject in m_detectableObjects)
                         {
                             if (virtualObject.tags.Contains(objectTag))
-                            {
-                                distance = Vector3.Distance(virtualObject.transform.position, so.Position);
+                            {                                
+                                distance = Vector3.Distance(BoundUtils.GetBounds(virtualObject.GetComponentsInChildren<Transform>()).center, so.Position);
                                 if (distance <= bestDistance)
                                 {
                                     bestMatch = virtualObject;
@@ -194,7 +208,7 @@ namespace RobotAtVirtualHome.Utils
                             TP++;
                             objectsDetected.Add(bestMatch);
                             averageDistance += bestDistance;
-                            averageOccupancyRate += SimilarityBetweenobjects(bestMatch.gameObject,so);
+                            averageIoU += DiscreteIoU(bestMatch.gameObject,so);
                         }
                         else
                         {
@@ -210,7 +224,7 @@ namespace RobotAtVirtualHome.Utils
                 yield return null;
             }
             averageDistance /= objectsDetected.Count;
-            averageOccupancyRate /= TP;
+            averageIoU /= TP;
             FN = m_detectableObjects.Count - objectsDetected.Count;
             //---------------------------------
 
@@ -226,7 +240,7 @@ namespace RobotAtVirtualHome.Utils
 
             Log("Average Distance: " + averageDistance.ToString(), LogLevel.Normal);
 
-            Log("Average occupancy rate: "+ averageOccupancyRate, LogLevel.Normal);
+            Log("Average IoU: "+ averageIoU, LogLevel.Normal);
 
             yield return null;
         }

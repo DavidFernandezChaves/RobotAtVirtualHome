@@ -51,8 +51,6 @@ public class ScriptTest : MonoBehaviour
 
             var gtRotation = groundtruth.transform.rotation;
             var gtPosition = groundtruth.transform.position;
-            var boundcenter = BoundUtils.GetBounds(groundtruth.GetComponentsInChildren<Transform>()).center;
-            var desplazamiento = gtPosition - boundcenter;
             groundtruth.transform.rotation = Quaternion.Euler(0,0,0);
             groundtruth.transform.position = Vector3.zero;            
 
@@ -82,7 +80,7 @@ public class ScriptTest : MonoBehaviour
             Vector3 c5 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[5].position;
             Vector3 c7 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[7].position;
 
-            Vector3 center = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Position;
+
             Gizmos.color = Color.gray;
             Gizmos.DrawSphere(c2, 0.1f);
             Gizmos.color = Color.green;
@@ -134,7 +132,7 @@ public class ScriptTest : MonoBehaviour
             if (Mide)
             {
                 Mide = false;
-                StartCoroutine(mide(corners,bound));                
+                StartCoroutine(IoU(corners,bound));                
             }
             Gizmos.DrawSphere(refPose, 0.01f);
             //groundtruth.transform.rotation = gtRotation;
@@ -147,7 +145,7 @@ public class ScriptTest : MonoBehaviour
         return rotation * (point - pivot) + pivot;
     }
 
-    private IEnumerator mide(List<Vector3> c, Bounds bound)
+    private IEnumerator IoU(List<Vector3> c, Bounds bound)
     {
         float minZ = c[0].z;
         float maxZ = c[0].z;
