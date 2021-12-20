@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949812d6ee2e44344a478ff81105acb2, type: 3}
   m_Name: 
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5e494ac19078144997d4f79017806c6, type: 3}
   m_Name: 
@@ -184,10 +184,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 0.25
+  m_Speed: 0.15
   m_Acceleration: 1
   avoidancePriority: 50
-  m_AngularSpeed: 25
+  m_AngularSpeed: 20
   m_StoppingDistance: 0.01
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -529,6 +529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmartCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
+        type: 3}
+      propertyPath: ROSFrecuency
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8244464800012263865, guid: f5b8e66e4d3d7584e9120efa5c4e60ae,
         type: 3}

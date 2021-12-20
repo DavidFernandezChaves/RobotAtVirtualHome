@@ -69,9 +69,9 @@ namespace RobotAtVirtualHome {
         }
 
         private void Start()
-        {
-            house.SetTransparentRoof(transparentRoof);
+        {            
             house.LoadHouse();
+            house.SetTransparentRoof(transparentRoof);
             transform.GetChild(0).rotation = Quaternion.Euler(m_simulationOptions.SunRotation, 0, 0);
             StartCoroutine(LoadingEnvironment());            
         }
