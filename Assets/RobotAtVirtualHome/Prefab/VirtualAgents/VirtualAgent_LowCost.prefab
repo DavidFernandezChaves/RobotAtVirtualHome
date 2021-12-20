@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949812d6ee2e44344a478ff81105acb2, type: 3}
   m_Name: 
@@ -87,7 +87,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   cyclical: 1
   randomSecuence: 1
   timeBetweenDataCapture: 2
@@ -112,7 +114,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   minRange: {x: -100, y: -100}
   maxRange: {x: 100, y: 100}
   cellSize: 0.5
@@ -139,7 +143,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   cyclical: 0
   randomSecuence: 0
   timeBetweenDataCapture: 0.5
@@ -164,7 +170,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   mainSpeed: 0.5
   angularSpeed: 0.5
   factorSpeed: 2
@@ -570,6 +578,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 931527486158493164}
     m_Modifications:
+    - target: {fileID: 2381658882718352974, guid: c17c7ba979b8cea4b8aea192924c6851,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4635886726084542720, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_Name
@@ -578,7 +591,7 @@ PrefabInstance:
     - target: {fileID: 4635886726084542720, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4928525980581639572, guid: c17c7ba979b8cea4b8aea192924c6851,
         type: 3}
@@ -634,6 +647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794650173162641940, guid: c17c7ba979b8cea4b8aea192924c6851,
+        type: 3}
+      propertyPath: ROSFrecuency
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c17c7ba979b8cea4b8aea192924c6851, type: 3}

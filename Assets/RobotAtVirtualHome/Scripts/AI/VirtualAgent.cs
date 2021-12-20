@@ -30,7 +30,11 @@ namespace RobotAtVirtualHome {
         [Header("Path to ROS")]
         public bool sendPathToROS;
         public PathType pathType = PathType.Beacons;
-        public float rOSFrecuency = 1;
+        public float rOSFrecuencyPath = 1;
+
+        [Header("Odometry to ROS")]
+        public bool sendOdometryToROS;
+        public float rOSFrecuencyOdometry = 1;
 
         protected NavMeshAgent agent;
 
@@ -50,6 +54,11 @@ namespace RobotAtVirtualHome {
                 } else {
                     StartCoroutine(SendInterpolatedPathToROS(ros));
                 }
+            }
+            if (enabled && sendOdometryToROS) {
+                Log("Sending odometry to ROS.",LogLevel.Normal);
+                ros.RegisterPubPackage("Odometry_pub");
+                StartCoroutine(SendOdometryToROS(ros));
             }
         }
 
@@ -85,7 +94,7 @@ namespace RobotAtVirtualHome {
                     PathMsg pathmsg = new PathMsg(globalHead, poses);
                     ros.Publish(Path_pub.GetMessageTopic(), pathmsg);
                 }
-                yield return new WaitForSeconds(rOSFrecuency);
+                yield return new WaitForSeconds(rOSFrecuencyPath);
             }
         }
 
@@ -156,7 +165,30 @@ namespace RobotAtVirtualHome {
                         ros.Publish(Path_pub.GetMessageTopic(), pathmsg);
                     }
                 }
-                yield return new WaitForSeconds(rOSFrecuency);
+                yield return new WaitForSeconds(rOSFrecuencyPath);
+            }
+        }
+
+        // Send Odometry to ROS
+        private IEnumerator SendOdometryToROS(ROS ros) {
+            while (Application.isPlaying) {
+                if (ros.IsConnected()) {
+
+                    double[] covariance_pose = new double[36];
+
+					for (int i = 0; i < covariance_pose.Length; i++) {
+						covariance_pose[i] = 0.0f;
+					}
+                    
+                    HeaderMsg globalHead = new HeaderMsg(0, new TimeMsg(DateTime.Now.Second, 0), "map");
+                    PoseWithCovarianceMsg pose = new PoseWithCovarianceMsg(new PoseMsg(new PointMsg(transform.position, true), new QuaternionMsg(transform.rotation, true)),
+                                                                            covariance_pose);
+                    TwistWithCovarianceMsg twist = new TwistWithCovarianceMsg(new TwistMsg(new Vector3Msg(agent.velocity, true), new Vector3Msg(0.0f, 0.0f, 0.0f)), covariance_pose);
+                    
+                    OdometryMsg odometrymsg = new OdometryMsg(globalHead, "odom", pose, twist);
+                    ros.Publish(Odometry_pub.GetMessageTopic(), odometrymsg);
+                }
+                yield return new WaitForSeconds(rOSFrecuencyOdometry);
             }
         }
 

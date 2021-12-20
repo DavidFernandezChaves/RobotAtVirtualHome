@@ -18,12 +18,21 @@ MonoBehaviour:
   StateGeneralLight: 0
   StateLights: 0
   RandomStateDoor: 3
-  WallsMaterialsByRoomType: []
+  WallsMaterialsByRoomType:
+  - roomType: 8
+    materials:
+    - {fileID: 2100000, guid: deb94f06304cfbd47a7158885278779b, type: 2}
+  - roomType: 3
+    materials:
+    - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
+  - roomType: 2
+    materials:
+    - {fileID: 2100000, guid: f00b33b6b91f057429b09ca6cc7abc05, type: 2}
   FloorsMaterialsByRoomType: []
   specifySeedByObjectType: []
   userPrefab: {fileID: 0}
   agentsToInstantiate:
-  - name: VirtualAgent
+  - name: base_link
     ip: localhost
     prefab: {fileID: 931527486158493203, guid: 7a569518db1635e7889f75ee5ee3f16e, type: 3}
-  simulationLog: {fileID: 4900000, guid: d435a5a261a8ced4cb12e4cf06731cca, type: 3}
+  simulationLog: {fileID: 0}

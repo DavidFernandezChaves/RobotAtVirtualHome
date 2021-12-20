@@ -35,6 +35,9 @@ namespace RobotAtVirtualHome {
 
         public List<GameObject> agents { get; private set; }
 
+        [SerializeField]
+        private Transform odom;
+
         private StreamWriter writer;
         private int houseSelected;
 
@@ -96,7 +99,10 @@ namespace RobotAtVirtualHome {
 
                 foreach (Agent r in m_simulationOptions.agentsToInstantiate)
                 {
-                    Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, house.transform.parent).transform;
+                    if (odom == null) {
+                        odom = house.transform.parent;
+                    }
+                    Transform agent = Instantiate(r.prefab, origin, Quaternion.identity, odom).transform;
                     agent.GetComponent<ROS>().robotName = r.name;
                     agent.name = r.name;
                     agent.GetComponent<ROS>().Connect(r.ip);
