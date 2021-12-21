@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749017, g: 0.48531127, b: 0.5655861, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -227,7 +227,7 @@ MonoBehaviour:
   LogLevel: 1
   recordEnvironmentDatas: 0
   transparentRoof: 1
-  m_simulationOptions: {fileID: 11400000, guid: ba738b152ca79a049a5e971044058da7,
+  m_simulationOptions: {fileID: 11400000, guid: d35d21382a060af4f9b292acb0739a4f,
     type: 2}
   houses:
   - {fileID: 5591509399737963863, guid: b500168d03a878741afa66af528f124d, type: 3}
@@ -260,6 +260,7 @@ MonoBehaviour:
   - {fileID: 7016719146016694467, guid: 5ec817929a3b7674093ec5c791459cd4, type: 3}
   - {fileID: 6082542048185358924, guid: 84b33884f43aa6c429b88c4d09414145, type: 3}
   - {fileID: 355009211327281689, guid: 75a77525beb9c5248b9c37676f9cb245, type: 3}
+  odom: {fileID: 1517856489}
 --- !u!4 &238323567
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +274,7 @@ Transform:
   m_Children:
   - {fileID: 1333401735}
   - {fileID: 2047795873}
+  - {fileID: 1517856489}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -556,6 +558,49 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
+--- !u!1 &1517856488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517856489}
+  - component: {fileID: 1517856490}
+  m_Layer: 0
+  m_Name: odom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1517856489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517856488}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.1662033, y: -1.3397732, z: 2.246365}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 238323567}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517856490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517856488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9648e1208c34ba4c9a27f25983ef30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1701356808
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogLevel: 1
   m_maxDistance: 1
+  m_geometricAccuracy: 0.1
   m_minDetections: 3
   m_enviromentManager: {fileID: 238323566}
   m_classMatching:
@@ -735,6 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundtruth: {fileID: 0}
+  detection: {fileID: 0}
+  distanceToMeasure: 0
   vob1: {fileID: 0}
   vob2: {fileID: 0}
   Mide: 0
