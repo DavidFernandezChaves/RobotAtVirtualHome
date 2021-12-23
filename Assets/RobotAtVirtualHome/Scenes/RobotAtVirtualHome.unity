@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.43749017, g: 0.48531127, b: 0.5655861, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -229,6 +229,7 @@ MonoBehaviour:
   transparentRoof: 1
   m_simulationOptions: {fileID: 11400000, guid: d35d21382a060af4f9b292acb0739a4f,
     type: 2}
+  root: {fileID: 0}
   houses:
   - {fileID: 5591509399737963863, guid: b500168d03a878741afa66af528f124d, type: 3}
   - {fileID: 2505263735248533966, guid: 78cfc527f8044a94f8fb4af17a7594a1, type: 3}
@@ -260,11 +261,6 @@ MonoBehaviour:
   - {fileID: 7016719146016694467, guid: 5ec817929a3b7674093ec5c791459cd4, type: 3}
   - {fileID: 6082542048185358924, guid: 84b33884f43aa6c429b88c4d09414145, type: 3}
   - {fileID: 355009211327281689, guid: 75a77525beb9c5248b9c37676f9cb245, type: 3}
-<<<<<<< Updated upstream
-  odom: {fileID: 1517856489}
-=======
-  odom: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!4 &238323567
 Transform:
   m_ObjectHideFlags: 0
@@ -617,7 +613,6 @@ GameObject:
   - component: {fileID: 1701356812}
   - component: {fileID: 1701356813}
   - component: {fileID: 1701356811}
-  - component: {fileID: 1701356815}
   - component: {fileID: 1701356809}
   - component: {fileID: 1701356814}
   m_Layer: 9
@@ -725,44 +720,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!114 &1701356815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701356808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df591fc9f2606c44cb9c31dc6079c1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recordResults: 1
-  LogLevel: 1
-<<<<<<< Updated upstream
-  m_maxDistance: 1
-=======
->>>>>>> Stashed changes
-  m_geometricAccuracy: 0.1
-  m_minDetections: 3
-  m_minCertainty: 0.3
-  m_enviromentManager: {fileID: 238323566}
-  m_classMatching:
-  - ClassInOntology: Tvmonitor
-    ClassInVirtualEnvironment: 38
-  - ClassInOntology: Diningtable
-    ClassInVirtualEnvironment: 34
-  - ClassInOntology: Dining_Table
-    ClassInVirtualEnvironment: 34
-  - ClassInOntology: Couch
-    ClassInVirtualEnvironment: 0
-  - ClassInOntology: Bench
-    ClassInVirtualEnvironment: 6
-  - ClassInOntology: Sink
-    ClassInVirtualEnvironment: 41
-  - ClassInOntology: Dining
-    ClassInVirtualEnvironment: 34
-  m_semappingTest: {fileID: 1715551630}
 --- !u!1 &1715551627
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,9 +730,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1715551629}
   - component: {fileID: 1715551628}
+  - component: {fileID: 1715551631}
   - component: {fileID: 1715551630}
   m_Layer: 0
-  m_Name: Tests
+  m_Name: Experiments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -833,6 +791,40 @@ MonoBehaviour:
   detections: []
   limit: 0.3
   checkAgain: 0
+--- !u!114 &1715551631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715551627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df591fc9f2606c44cb9c31dc6079c1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recordResults: 1
+  LogLevel: 1
+  m_geometricAccuracy: 0.1
+  m_minDetections: 3
+  m_minCertainty: 0.3
+  m_enviromentManager: {fileID: 238323566}
+  m_classMatching:
+  - ClassInOntology: Tvmonitor
+    ClassInVirtualEnvironment: 38
+  - ClassInOntology: Diningtable
+    ClassInVirtualEnvironment: 34
+  - ClassInOntology: Dining_Table
+    ClassInVirtualEnvironment: 34
+  - ClassInOntology: Couch
+    ClassInVirtualEnvironment: 0
+  - ClassInOntology: Bench
+    ClassInVirtualEnvironment: 6
+  - ClassInOntology: Sink
+    ClassInVirtualEnvironment: 41
+  - ClassInOntology: Dining
+    ClassInVirtualEnvironment: 34
+  m_semappingTest: {fileID: 1715551630}
 --- !u!1 &2047795872
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,7 +835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2047795873}
   m_Layer: 0
-  m_Name: Objects
+  m_Name: Detections
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

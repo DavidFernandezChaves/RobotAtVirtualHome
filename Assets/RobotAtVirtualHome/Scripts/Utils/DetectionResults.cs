@@ -9,7 +9,6 @@ using ViMantic;
 
 namespace RobotAtVirtualHome.Utils
 {
-    [RequireComponent(typeof(VirtualObjectSystem), typeof(OntologySystem))]
     public class DetectionResults : MonoBehaviour
     {
         [Serializable]
@@ -66,7 +65,7 @@ namespace RobotAtVirtualHome.Utils
         #region Unity Functions
         private void Awake()
         {
-            m_ontologySystem = GetComponent<OntologySystem>();
+            m_ontologySystem = FindObjectOfType<OntologySystem>();
             m_detectableObjects = new List<VirtualObject>();
         }
 
