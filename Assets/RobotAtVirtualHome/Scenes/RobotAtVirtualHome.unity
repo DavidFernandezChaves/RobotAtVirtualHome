@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1333401734}
-  m_IndirectSpecularColor: {r: 0.43749028, g: 0.48531085, b: 0.5655851, a: 1}
+  m_IndirectSpecularColor: {r: 0.43749017, g: 0.4853112, b: 0.56558603, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -229,7 +229,7 @@ MonoBehaviour:
   transparentRoof: 1
   m_simulationOptions: {fileID: 11400000, guid: d35d21382a060af4f9b292acb0739a4f,
     type: 2}
-  root: {fileID: 0}
+  root: {fileID: 1517856489}
   houses:
   - {fileID: 5591509399737963863, guid: b500168d03a878741afa66af528f124d, type: 3}
   - {fileID: 2505263735248533966, guid: 78cfc527f8044a94f8fb4af17a7594a1, type: 3}
