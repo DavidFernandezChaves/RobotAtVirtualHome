@@ -12,6 +12,7 @@
 /[Aa]ssets/RobotAtVirtualHome/ExternalResources/
 /[Ee]xternalResources/
 /.vs
+/[Aa]ssets/Results/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -78,3 +79,4 @@ crashlytics-build.properties
 Releases/
 
 *.ply
+*.meta
