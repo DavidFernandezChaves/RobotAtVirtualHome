@@ -260,7 +260,11 @@ MonoBehaviour:
   - {fileID: 7016719146016694467, guid: 5ec817929a3b7674093ec5c791459cd4, type: 3}
   - {fileID: 6082542048185358924, guid: 84b33884f43aa6c429b88c4d09414145, type: 3}
   - {fileID: 355009211327281689, guid: 75a77525beb9c5248b9c37676f9cb245, type: 3}
+<<<<<<< Updated upstream
   odom: {fileID: 1517856489}
+=======
+  odom: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!4 &238323567
 Transform:
   m_ObjectHideFlags: 0
@@ -733,10 +737,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df591fc9f2606c44cb9c31dc6079c1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recordResults: 1
   LogLevel: 1
+<<<<<<< Updated upstream
   m_maxDistance: 1
+=======
+>>>>>>> Stashed changes
   m_geometricAccuracy: 0.1
   m_minDetections: 3
+  m_minCertainty: 0.3
   m_enviromentManager: {fileID: 238323566}
   m_classMatching:
   - ClassInOntology: Tvmonitor
@@ -751,6 +760,9 @@ MonoBehaviour:
     ClassInVirtualEnvironment: 6
   - ClassInOntology: Sink
     ClassInVirtualEnvironment: 41
+  - ClassInOntology: Dining
+    ClassInVirtualEnvironment: 34
+  m_semappingTest: {fileID: 1715551630}
 --- !u!1 &1715551627
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715551629}
   - component: {fileID: 1715551628}
+  - component: {fileID: 1715551630}
   m_Layer: 0
   m_Name: Tests
   m_TagString: Untagged
@@ -785,8 +798,11 @@ MonoBehaviour:
   distanceToMeasure: 0
   vob1: {fileID: 0}
   vob2: {fileID: 0}
+  volumetric: 0
   Mide: 0
   Ordena: 0
+  sustituye: 0
+  points: []
 --- !u!4 &1715551629
 Transform:
   m_ObjectHideFlags: 0
@@ -801,6 +817,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715551630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715551627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1016a7d1c51b084fb536bd2b374ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultFile: {fileID: 4900000, guid: d0c07621443fb5542b4f26a01fda2513, type: 3}
+  detections: []
+  limit: 0.3
+  checkAgain: 0
 --- !u!1 &2047795872
 GameObject:
   m_ObjectHideFlags: 0

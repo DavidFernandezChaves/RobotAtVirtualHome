@@ -15,13 +15,33 @@ public class ScriptTest : MonoBehaviour
 
     public VirtualObjectBox vob1;
     public VirtualObjectBox vob2;
+    public bool volumetric = false;
     public bool Mide = false;
     public bool Ordena = false;
+
+    public bool sustituye = false;
+    public List<Vector3> points;
 
     private Vector3 refPose;
 
     private void OnDrawGizmos()
     {
+        if(points!=null && points.Count > 0)
+        {
+            Gizmos.color = Color.yellow;
+            Vector3 temp=Vector3.zero; 
+            foreach(Vector3 t in points)
+            {
+                Gizmos.DrawSphere(t, 0.1f);
+                if(temp != Vector3.zero)
+                {
+                    Gizmos.DrawLine(temp, t);
+                }
+                temp = t;
+            }
+        }
+
+
         if (vob1 != null && vob2 != null)
         {
             List<SemanticObject.Corner> ref1 = vob1.semanticObject.Corners;
@@ -65,66 +85,18 @@ public class ScriptTest : MonoBehaviour
             corners.Add(detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[2].position);
             corners.Add(detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[3].position);
 
+            if(sustituye)
+            {
+                corners = new List<Vector3>(points);
+            }
+
             for(int i = 0; i<corners.Count;i++)
             {
                 corners[i] -= gtPosition;
                 corners[i] = RotatePointAroundPivot(corners[i], Vector3.zero, Quaternion.Inverse(gtRotation));
+                Gizmos.color = new Color(i%2, i%3, i%4);
+                Gizmos.DrawSphere(corners[i], 0.1f);
             }
-
-            Vector3 c2 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[2].position;
-            Vector3 c6 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[6].position;
-            Vector3 c0 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[0].position;
-            Vector3 c1 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[1].position;
-            Vector3 c3 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[3].position;
-            Vector3 c4 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[4].position;
-            Vector3 c5 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[5].position;
-            Vector3 c7 = detection.GetComponentInChildren<VirtualObjectBox>().semanticObject.Corners[7].position;
-
-
-            Gizmos.color = Color.gray;
-            Gizmos.DrawSphere(c2, 0.1f);
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(c6, 0.1f);
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(c2, c6);
-
-            c2 -= gtPosition;
-            c6 -= gtPosition;
-            c0 -= gtPosition;
-            c1 -= gtPosition;
-            c3 -= gtPosition;
-            c4 -= gtPosition;
-            c5 -= gtPosition;
-            c7 -= gtPosition;
-
-
-            c2 = RotatePointAroundPivot(c2, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c6 = RotatePointAroundPivot(c6, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c0 = RotatePointAroundPivot(c0, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c1 = RotatePointAroundPivot(c1, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c3 = RotatePointAroundPivot(c3, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c4 = RotatePointAroundPivot(c4, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c5 = RotatePointAroundPivot(c5, Vector3.zero, Quaternion.Inverse(gtRotation));
-            c7 = RotatePointAroundPivot(c7, Vector3.zero, Quaternion.Inverse(gtRotation));
-
-            Gizmos.color = Color.gray;
-            Gizmos.DrawSphere(c0, 0.1f);
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(c3, 0.1f);
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(c1, 0.1f);
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(c0, c1);
-
-            
-            Gizmos.DrawSphere(c0, 0.05f);
-            Gizmos.DrawSphere(c1, 0.05f);
-            Gizmos.DrawSphere(c2, 0.05f);
-            Gizmos.DrawSphere(c3, 0.05f);
-            Gizmos.DrawSphere(c4, 0.05f);
-            Gizmos.DrawSphere(c5, 0.05f);
-            Gizmos.DrawSphere(c6, 0.05f);
-            Gizmos.DrawSphere(c7, 0.05f);
 
             groundtruth.transform.rotation = gtRotation;
             groundtruth.transform.position = gtPosition;
@@ -147,11 +119,11 @@ public class ScriptTest : MonoBehaviour
 
     private IEnumerator IoU(List<Vector3> c, Bounds bound)
     {
-        float minZ = c[0].z;
-        float maxZ = c[0].z;
-
-        for (int i=1;i<c.Count;i++){ 
-            if(c[i].z < minZ)
+        float minZ = Mathf.Infinity;
+        float maxZ = -Mathf.Infinity;
+        
+        for (int i=1;i<c.Count;i++){
+            if (c[i].z < minZ)
             {
                 minZ = c[i].z;
             }
@@ -171,20 +143,44 @@ public class ScriptTest : MonoBehaviour
             {
                 x = c[0].x + d2*Mathf.Cos(angle-Mathf.PI/2) + d * Mathf.Cos(angle);
                 y = c[0].y + d2 * Mathf.Sin(angle - Mathf.PI / 2) + d * Mathf.Sin(angle);
-                for (float z = minZ; z <= maxZ; z += distanceToMeasure)
+                if (volumetric)
                 {
-                    if (bound.Contains(new Vector3(x, y, z)))
+                    for (float z = minZ; z <= maxZ; z += distanceToMeasure)
+                    {
+                        if (bound.Contains(new Vector3(x, y, z)))
+                        {
+                            inside++;
+                        }
+                        total++;
+                        refPose = new Vector3(x, y, z);
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    if (bound.Contains(new Vector3(x, y, 0)))
                     {
                         inside++;
                     }
                     total++;
-                    //refPose = new Vector3(x, y, z);                    
-                    //yield return null;
+                    refPose = new Vector3(x, y, 0);
+                    yield return null;
                 }
+
             }
         }
-        float union =(total - inside) * Mathf.Pow(distanceToMeasure, 3)+bound.size.x* bound.size.y* bound.size.z;
-        Debug.Log("IoU: " + inside*Mathf.Pow(distanceToMeasure,3)/union);
+        float iou = 0;
+        if (volumetric)
+        {
+            iou = inside * Mathf.Pow(distanceToMeasure, 3) 
+                / ((total - inside) * Mathf.Pow(distanceToMeasure, 3) + bound.size.x * bound.size.y * bound.size.z);
+        }
+        else
+        {
+            iou = (inside * Mathf.Pow(distanceToMeasure, 2)) 
+                / ((total - inside) * Mathf.Pow(distanceToMeasure, 2) + bound.size.x * bound.size.y);
+        }
+        Debug.Log("IoU: " + iou);
         yield return null;
     }
 

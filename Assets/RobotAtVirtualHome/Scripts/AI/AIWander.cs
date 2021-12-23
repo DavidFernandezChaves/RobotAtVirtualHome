@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotAtVirtualHome.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,8 +14,9 @@ namespace RobotAtVirtualHome {
     public class AIWander : VirtualAgent {
 
         [Header("Behaviour")]
-        public bool cyclical;
-        public bool randomSecuence;
+        [Range(1, 100)]
+        public int nCycles;
+        public bool random;
 
         [Header("Capture Data")]
         [Tooltip("Time between data capture")]
@@ -105,6 +107,10 @@ namespace RobotAtVirtualHome {
 
                 if (captureLidar)
                 {
+                    var lidarConfigWriter = new StreamWriter(filePath + "/LidarCfg.txt", true);
+                    lidarConfigWriter.WriteLine("Resolution (width, height) [px], Vertical FOV (upper, lower) [º], Max distance [m]");
+                    lidarConfigWriter.WriteLine(lidar.imageSize[0] + ", " + lidar.imageSize[1] + ", " + lidar.upperViewingAngle + ", " + lidar.bottomViewingAngle + ", " + lidar.maximumDistance);
+                    lidarConfigWriter.Close();
                     logLidarWriter = new StreamWriter(filePath + "/LogLidar.csv", true);
                     logLidarWriter.WriteLine("ScanID,XRobotPosition,YRobotPosition,ZRobotPosition,YRobotRotation,ZRobotRotation,XLidarPosition,YLidarPosition,ZLidarPosition,XLidarRotation,YLidarRotation,ZLidarRotation,Room");
                 }
@@ -155,12 +161,28 @@ namespace RobotAtVirtualHome {
                             state = StatusMode.Loading;
                             StartCoroutine(DoOnGoal());
                         } else {
-                            state = StatusMode.Finished;
-                            Log("Finish", LogLevel.Normal);
-                            GetComponent<AudioSource>().Play();
-                            OnEndRute?.Invoke();
+                            if (nCycles > 0)
+                            {
+                                Debug.Break();
+                                nCycles--;
+                                index2 = -1;
+                                GetComponent<AudioSource>().Play();
+                                FindObjectOfType<DetectionResults>().CalculateResults();
+                                
+                            }
+                            else
+                            {
+                                state = StatusMode.Finished;
+                                Log("Finish", LogLevel.Normal);
+                                GetComponent<AudioSource>().Play();
+                                FindObjectOfType<DetectionResults>().CalculateResults();
+                                OnEndRute?.Invoke();
+                            }                            
                         }
                     }
+                    break;
+                case StatusMode.Starting:
+                    Start();
                     break;
             }
         }
@@ -190,28 +212,21 @@ namespace RobotAtVirtualHome {
 
         private bool GetNextGoal(out Vector3 result) {
             result = Vector3.zero;
-            if (cyclical) {
-                if (randomSecuence) {
-                    result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
-                } else {
-                    index2++;
-                    if (index2 >= VisitPoints.Count) {
-                        index2 = 0;
-                    }
-                    result = VisitPoints[index2];
-                }
-            } else {
-                VisitPoints.RemoveAt(index2);
-                if (VisitPoints.Count == 0) {
+            if (random)
+            {
+                result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
+                return true;
+            }
+            else
+            {
+                index2++;
+                if (index2 >= VisitPoints.Count)
+                {
                     return false;
                 }
-
-                if (randomSecuence) {
-                    result = VisitPoints[UnityEngine.Random.Range(0, VisitPoints.Count)];
-                } else {
-                    result = VisitPoints[index2];
-                }
+                result = VisitPoints[index2];
             }
+
             return true;
         }
 

@@ -100,6 +100,10 @@ namespace RobotAtVirtualHome {
 
                 if (captureLidar)
                 {
+                    var lidarConfigWriter = new StreamWriter(filePath + "/LidarCfg.txt", true);
+                    lidarConfigWriter.WriteLine("Resolution (width, height) [px], Vertical FOV (upper, lower) [º], Max distance [m]");
+                    lidarConfigWriter.WriteLine(lidar.imageSize[0] + ", " + lidar.imageSize[1] + ", " + lidar.upperViewingAngle + ", " + lidar.bottomViewingAngle + ", " + lidar.maximumDistance);
+                    lidarConfigWriter.Close();
                     logLidarWriter = new StreamWriter(filePath + "/LogLidar.csv", true);
                     logLidarWriter.WriteLine("ScanID,XRobotPosition,YRobotPosition,ZRobotPosition,YRobotRotation,ZRobotRotation,XLidarPosition,YLidarPosition,ZLidarPosition,XLidarRotation,YLidarRotation,ZLidarRotation,Room");
                 }

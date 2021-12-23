@@ -16,7 +16,7 @@ namespace RobotAtVirtualHome {
 
     public class VirtualAgent : MonoBehaviour {
 
-        public enum StatusMode { Loading, Walking, Turning, Finished }
+        public enum StatusMode {Starting, Loading, Walking, Turning, Finished }
         public enum PathType { Beacons, Interpolated }
 
         [Header("General")]
@@ -24,7 +24,7 @@ namespace RobotAtVirtualHome {
         public LogLevel LogLevel = LogLevel.Normal;
 
         [SerializeField]
-        protected StatusMode state;
+        protected StatusMode state = StatusMode.Starting;
 
 
         [Header("Path to ROS")]

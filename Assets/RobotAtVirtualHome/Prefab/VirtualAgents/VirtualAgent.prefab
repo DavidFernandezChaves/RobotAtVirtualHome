@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949812d6ee2e44344a478ff81105acb2, type: 3}
   m_Name: 
@@ -87,10 +87,12 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
-  cyclical: 0
-  randomSecuence: 0
-  timeBetweenDataCapture: 2
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
+  nCycles: 5
+  random: 0
+  timeBetweenDataCapture: 1
   captureRGB: 0
   captureDepth: 0
   captureSemanticMask: 0
@@ -112,7 +114,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   minRange: {x: -100, y: -100}
   maxRange: {x: 100, y: 100}
   cellSize: 0.5
@@ -130,7 +134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931527486158493203}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5e494ac19078144997d4f79017806c6, type: 3}
   m_Name: 
@@ -139,7 +143,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   cyclical: 0
   randomSecuence: 0
   timeBetweenDataCapture: 0.5
@@ -164,7 +170,9 @@ MonoBehaviour:
   state: 0
   sendPathToROS: 0
   pathType: 0
-  rOSFrecuency: 1
+  rOSFrecuencyPath: 1
+  sendOdometryToROS: 0
+  rOSFrecuencyOdometry: 1
   mainSpeed: 0.5
   angularSpeed: 0.5
   factorSpeed: 2
@@ -184,7 +192,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 0.15
+  m_Speed: 0.2
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 20
